@@ -3,11 +3,11 @@ package graph;
 import java.util.HashMap;
 public class Node {
     private int value;
-    private String location;
-    private HashMap<String,Node> edges;
+    private Point location;
+    private HashMap<Point,Node> edges;
     private  int degree;
 
-    public Node(int value,String location){
+    public Node(int value,Point location){
         if (location==null)return;
         this.value = value;
         this.location=location;
@@ -17,10 +17,10 @@ public class Node {
     public int getValue(){
         return this.value;
     }
-    public  String  getLocation(){
+    public  Point  getLocation(){
         return this.location;
     }
-    public HashMap<String,Node> getEdges(){
+    public HashMap<Point,Node> getEdges(){
         return this.edges;
     }
     public void addEdge(Node neighbour){
@@ -35,6 +35,7 @@ public class Node {
         this.edges.remove(neighbour.getLocation());
     }
     public String toString(){
-        return String.format("%s",this.location);
+        return String.format("%s",this.location.toString());
     }
+
 }

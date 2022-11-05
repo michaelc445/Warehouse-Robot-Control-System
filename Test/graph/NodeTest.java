@@ -10,28 +10,33 @@ class NodeTest {
 
     @Test
     void getValue() {
-        Node test = new Node(0, "0,0");
+        Point p1 = new Point(0,0);
+
+        Node test = new Node(0, p1);
         assertEquals(test.getValue(), 0);
     }
 
     @Test
     void removeEdge() {
-        Node node1 = new Node(1, "0,0");
-        Node node2 = new Node(2, "0,1");
-        Node node3 = new Node(3, "0,2");
+        Point p1 = new Point(0,0);
+        Point p2 = new Point(0,1);
+        Point p3 = new Point(0,2);
+        Node node1 = new Node(1, p1);
+        Node node2 = new Node(2, p2);
+        Node node3 = new Node(3, p3);
         node1.addEdge(node2);
         node2.addEdge(node1);
         node2.addEdge(node3);
         node3.addEdge(node2);
         node2.removeEdge(node3);
 
-        HashMap<String, Node> node1Expected = new HashMap<>();
-        node1Expected.put("0,1", node2);
-        HashMap<String, Node> node2Expected = new HashMap<>();
-        node2Expected.put("0,0", node1);
+        HashMap<Point, Node> node1Expected = new HashMap<>();
+        node1Expected.put(p2, node2);
+        HashMap<Point, Node> node2Expected = new HashMap<>();
+        node2Expected.put(p1, node1);
 
-        HashMap<String, Node> node3Expected = new HashMap<>();
-        node3Expected.put("0,1", node2);
+        HashMap<Point, Node> node3Expected = new HashMap<>();
+        node3Expected.put(p2, node2);
 
         assertEquals(node1Expected, node1.getEdges());
         assertEquals(node2Expected, node2.getEdges());
@@ -40,27 +45,32 @@ class NodeTest {
 
     @Test
     void testToString() {
-        Node test = new Node(0, "1,0");
+        Point location = new Point(1,0);
+        Node test = new Node(0, location);
         assertEquals(test.toString(), "1,0");
     }
 
     @Test
     void getLocation() {
-        Node test = new Node(0, "1,0");
-        assertEquals(test.getLocation(), "1,0");
+        Point p1 = new Point(1,0);
+        Node test = new Node(0, p1);
+        assertEquals(test.getLocation(), p1);
     }
 
     @Test
     void getEdges() {
-        Node node1 = new Node(1, "0,0");
-        Node node2 = new Node(2, "0,1");
+        Point p1 = new Point(0,0);
+        Point p2 = new Point(0,1);
+
+        Node node1 = new Node(1, p1);
+        Node node2 = new Node(2, p2);
         node1.addEdge(node2);
         node2.addEdge(node1);
 
-        HashMap<String, Node> node1Expected = new HashMap<>();
-        node1Expected.put("0,1", node2);
-        HashMap<String, Node> node2Expected = new HashMap<>();
-        node2Expected.put("0,0", node1);
+        HashMap<Point, Node> node1Expected = new HashMap<>();
+        node1Expected.put(p2, node2);
+        HashMap<Point, Node> node2Expected = new HashMap<>();
+        node2Expected.put(p1, node1);
 
         assertEquals(node1Expected, node1.getEdges());
         assertEquals(node2Expected, node2.getEdges());
@@ -68,15 +78,18 @@ class NodeTest {
 
     @Test
     void addEdge() {
-        Node node1 = new Node(1, "0,0");
-        Node node2 = new Node(2, "0,1");
+        Point p1 = new Point(0,0);
+        Point p2 = new Point(0,1);
+
+        Node node1 = new Node(1, p1);
+        Node node2 = new Node(2, p2);
         node1.addEdge(node2);
         node2.addEdge(node1);
 
-        HashMap<String, Node> node1Expected = new HashMap<>();
-        node1Expected.put("0,1", node2);
-        HashMap<String, Node> node2Expected = new HashMap<>();
-        node2Expected.put("0,0", node1);
+        HashMap<Point, Node> node1Expected = new HashMap<>();
+        node1Expected.put(p2, node2);
+        HashMap<Point, Node> node2Expected = new HashMap<>();
+        node2Expected.put(p1, node1);
 
         assertEquals(node1Expected, node1.getEdges());
         assertEquals(node2Expected, node2.getEdges());
@@ -84,9 +97,12 @@ class NodeTest {
 
     @Test
     void getDegree() {
-        Node testNode1 = new Node(0, "1,0");
-        Node testNode2 = new Node(1, "2,0");
-        Node testNode3 = new Node(0, "3,0");
+        Point p1 = new Point(1,0);
+        Point p2 = new Point(2,0);
+        Point p3 = new Point(3,0);
+        Node testNode1 = new Node(0, p1);
+        Node testNode2 = new Node(1, p2);
+        Node testNode3 = new Node(0, p3);
 
         testNode1.addEdge(testNode2);
         testNode1.addEdge(testNode3);

@@ -6,7 +6,7 @@ import java.io.FileReader;
 import java.util.*;
 
 public class Graph {
-    private final HashMap<String,Node> vertices;
+    private final HashMap<Point,Node> vertices;
     private int[][] map;
     public Graph(String fileName,boolean directed) throws Exception {
         this.vertices = new HashMap<>();
@@ -48,31 +48,31 @@ public class Graph {
     public void createDirected(int[][] inputMap){
 
     }
-    public  HashMap<String,Node> getVertices(){
+    public  HashMap<Point,Node> getVertices(){
         return this.vertices;
     }
-    void addNode(Node mainNode, int i, int j, int val){
-        String down = String.format("%d,%d",i,j);
-        if  (this.vertices.containsKey(down)){
-            mainNode.addEdge(this.vertices.get(down));
+    void addNode(Node mainNode, int y, int x, int val){
+        Point  location = new Point(x,y);
+        if  (this.vertices.containsKey(location)){
+            mainNode.addEdge(this.vertices.get(location));
         }else{
-            Node downNode = new Node(val,down);
-            mainNode.addEdge(downNode);
-            this.vertices.put(down,downNode);
+            Node otherNode = new Node(val,location);
+            mainNode.addEdge(otherNode);
+            this.vertices.put(location,otherNode);
         }
     }
     public void createUndirected(int[][] inputMap){
-        String name;
+
         for(int i =0; i< inputMap.length; i++){
             for (int j = 0; j < inputMap[i].length;j++){
-                name = String.format("%d,%d",i,j);
+                Point point  =new Point(j,i);
                 Node temp;
                 int val =inputMap[i][j];
-                if (!this.vertices.containsKey(name)){
-                    temp = new Node(val,name);
-                    this.vertices.put(name,temp);
+                if (!this.vertices.containsKey(point)){
+                    temp = new Node(val,point);
+                    this.vertices.put(point,temp);
                 }else{
-                    temp = this.vertices.get(name);
+                    temp = this.vertices.get(point);
                 }
                 if (val == 1){
                     if (i-1 >=0 && inputMap[i-1][j]==0){
@@ -86,24 +86,20 @@ public class Graph {
                 //up
                 if (i-1 >= 0 ){
                     int upVal =inputMap[i-1][j];
-                    //System.out.println("up");
                     this.addNode(temp,i-1,j,upVal);
                 }
                 //down
                 if (i+1 < inputMap.length){
-                    //System.out.println("down");
                     int downVal =inputMap[i+1][j];
                     this.addNode(temp,i+1,j,downVal);
                 }
                 //left
                 if (j-1 >= 0  &&  inputMap[i][j-1]!=1){
-                    //System.out.println("left");
                     int leftVal =inputMap[i][j-1];
                     this.addNode(temp,i,j-1,leftVal);
                 }
                 //right
                 if (j+1 < inputMap[i].length  &&  inputMap[i][j+1]!=1){
-                    //System.out.println("right");
                     int rightVal =inputMap[i][j+1];
                     this.addNode(temp,i,j+1,rightVal);
                 }
@@ -115,11 +111,11 @@ public class Graph {
     public int[][] getMap(){
         return this.map;
     }
-    public ArrayList<String> dijkstra(Node start, Node  end){
+    public ArrayList<Point> dijkstra(Node start, Node  end){
         if (start==null  || end==null){
             return null;
         }
-        String  find = end.getLocation();
+        Point find = end.getLocation();
         PriorityQueue<PQItem> pq = new PriorityQueue<>();
         HashMap<Node,Node> path = new HashMap<>();
         HashMap<Node,Boolean>  explored  =  new HashMap<>();
@@ -134,7 +130,7 @@ public class Graph {
         return null;
     }
     private void exploreNode(Node start,PriorityQueue<PQItem> pq,HashMap<Node,Node> path,HashMap<Node,Boolean> explored,int cost){
-        for (Map.Entry<String,Node> pair : start.getEdges().entrySet()){
+        for (Map.Entry<Point,Node> pair : start.getEdges().entrySet()){
             if(explored.containsKey(pair.getValue())){
                 continue;
             }
@@ -144,15 +140,15 @@ public class Graph {
             path.put(pair.getValue(),start);
         }
     }
-    public Node getNode(String location){
+    public Node getNode(Point location){
         if  (this.vertices.containsKey(location)) {
             return this.vertices.get(location);
         }
         return null;
     }
-    private ArrayList<String> getPath(Node start, Node end, HashMap<Node,Node> path){
+    private ArrayList<Point> getPath(Node start, Node end, HashMap<Node,Node> path){
 
-        ArrayList<String> resultPath = new ArrayList<>();
+        ArrayList<Point> resultPath = new ArrayList<>();
 
         if (start.getLocation().equals(end.getLocation())){
             return resultPath;
