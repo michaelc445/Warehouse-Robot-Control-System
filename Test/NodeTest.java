@@ -73,4 +73,20 @@ class NodeTest {
         assertEquals(node2Expected,node2.getEdges());
         assertEquals(node3Expected,node3.getEdges());
     }
+
+    @Test
+    void getDegree() {
+        Node testNode1 =  new Node(0,"1,0");
+        Node testNode2 =  new Node(1,"2,0");
+        Node testNode3 =  new Node(0,"3,0");
+
+        testNode1.addEdge(testNode2);
+        testNode1.addEdge(testNode3);
+        testNode3.addEdge(testNode1);
+
+        assertEquals(testNode1.getDegree(),2);
+        assertEquals(testNode2.getDegree(),0);
+        assertEquals(testNode3.getDegree(),1);
+
+    }
 }

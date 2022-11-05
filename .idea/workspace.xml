@@ -2,13 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5dafaf29-34b9-46fd-8806-9e9da26dcb83" name="Changes" comment="create project">
-      <change afterPath="$PROJECT_DIR$/Test/GraphTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Test/NodeTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Test/TestMaps/testMap.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Graph.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Node.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/team_software.iml" beforeDir="false" afterPath="$PROJECT_DIR$/team_software.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/GraphTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Test/GraphTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/NodeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Test/NodeTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/TestMaps/testMap.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Test/TestMaps/testMap.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Graph.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Node.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,6 +50,8 @@
     "WebServerToolWindowFactoryState": "false",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "last_opened_file_path": "C:/Users/Michael/IdeaProjects/team_software",
+    "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2"
@@ -64,11 +65,32 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.All in team_software">
+  <component name="RunManager" selected="JUnit.GraphTest">
     <configuration name="All in team_software" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="team_software" />
       <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GraphTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="team_software" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="GraphTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GraphTest.createUndirected" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="team_software" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="GraphTest" />
+      <option name="METHOD_NAME" value="createUndirected" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -83,42 +105,30 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="NodeTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="NodeTest.getDegree" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="team_software" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="NodeTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="NodeTest.getEdges" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="team_software" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="NodeTest" />
-      <option name="METHOD_NAME" value="getEdges" />
+      <option name="METHOD_NAME" value="getDegree" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="NodeTest.removeEdge" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="team_software" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="NodeTest" />
-      <option name="METHOD_NAME" value="removeEdge" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+    <list>
+      <item itemvalue="JUnit.GraphTest" />
+      <item itemvalue="JUnit.All in team_software" />
+      <item itemvalue="JUnit.GraphTest.createUndirected" />
+      <item itemvalue="JUnit.GraphTest.parseFile" />
+      <item itemvalue="JUnit.NodeTest.getDegree" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.GraphTest" />
         <item itemvalue="JUnit.All in team_software" />
+        <item itemvalue="JUnit.NodeTest.getDegree" />
         <item itemvalue="JUnit.GraphTest.parseFile" />
-        <item itemvalue="JUnit.NodeTest" />
-        <item itemvalue="JUnit.NodeTest.removeEdge" />
-        <item itemvalue="JUnit.NodeTest.getEdges" />
+        <item itemvalue="JUnit.GraphTest.createUndirected" />
       </list>
     </recent_temporary>
   </component>
@@ -131,7 +141,9 @@
       <option name="presentableId" value="Default" />
       <updated>1665164072760</updated>
       <workItem from="1665164073946" duration="1360000" />
-      <workItem from="1665235423279" duration="8155000" />
+      <workItem from="1665235423279" duration="9424000" />
+      <workItem from="1667426126381" duration="10481000" />
+      <workItem from="1667656502449" duration="764000" />
     </task>
     <task id="LOCAL-00001" summary="create project">
       <created>1665164156632</created>
@@ -140,7 +152,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665164156632</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="create project">
+      <created>1665247563017</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1665247563017</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -157,7 +176,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="michael_test" />
+                        <option value="origin/michael_test" />
                       </list>
                     </value>
                   </entry>
@@ -168,9 +187,32 @@
         </entry>
       </map>
     </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="origin/master" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="michael_test" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="create project" />
     <option name="LAST_COMMIT_MESSAGE" value="create project" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/team_software$All_in_team_software.ic" NAME="All in team_software Coverage Results" MODIFIED="1667657034900" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
