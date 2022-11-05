@@ -2,12 +2,13 @@ package graph;
 
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class GraphTest {
     @Test
     void parseFile() throws Exception{
-        //ArrayList<String[]>  expected = new ArrayList<>();
         String fileName = "Test/TestMaps/testMap.csv";
         Graph testGraph  = new Graph(fileName,true);
         int[][] expected = {
@@ -34,22 +35,46 @@ class GraphTest {
     void createUndirected()   throws Exception {
         String fileName = "Test/TestMaps/testMap.csv";
         Graph  testGraph  = new Graph(fileName,false);
-        int[][] got = testGraph.parseFile(fileName);
-        for(int i =0; i< got.length; i++) {
-            for (int j = 0; j < got[i].length; j++) {
+        int[][] expected  = {{2,3,3,3,3,3,2},
+                {2,1,1,2,1,1,2},
+                {2,1,1,2,1,1,2},
+                {3,4,4,4,4,4,3},
+                {2,1,1,2,1,1,2},
+                {2,1,1,2,1,1,2},
+                {2,3,3,3,3,3,2}};
+        for(int i =0; i< expected.length; i++) {
+            for (int j = 0; j < expected[i].length; j++) {
                 String name = String.format("%d,%d",i,j);
-                System.out.print(testGraph.getVertices().get(name).getDegree()+",");
+                assertEquals(testGraph.getVertices().get(name).getDegree(),expected[i][j]);
             }
-            System.out.print("\n");
         }
     }
 
     @Test
-    void getVertices() {
+    void getVertices() throws Exception {
+        String fileName = "Test/TestMaps/testMap.csv";
+        Graph  testGraph  = new Graph(fileName,false);
+        int[][] map = testGraph.getMap();
+        int  expectedSize = map.length*map[0].length;
+        HashMap<String,Node> vertices = testGraph.getVertices();
+        assertEquals(vertices.size(),expectedSize);
+        for  (int i =0; i < map.length;i++){
+            for(int j =0; j < map[i].length;j++){
+                String name = String.format("%d,%d",i,j);
+                assertNotNull(vertices.get(name));
+            }
+        }
     }
 
     @Test
-    void addNode() {
+    void addNode() throws Exception {
+        String fileName = "Test/TestMaps/testMap.csv";
+        Graph  testGraph  = new Graph(fileName,false);
+        int size = testGraph.getVertices().size();
+        Node node = testGraph.getNode("0,0");
+        testGraph.addNode(node,-1,-1,4);
+        assertEquals(testGraph.getVertices().size(),size+1);
+        assertNotNull(testGraph.getNode("-1,-1"));
     }
 
     @Test

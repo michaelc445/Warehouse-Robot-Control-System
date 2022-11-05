@@ -51,7 +51,7 @@ public class Graph {
     public  HashMap<String,Node> getVertices(){
         return this.vertices;
     }
-    public void addNode(Node mainNode,int i,int j, int val){
+    void addNode(Node mainNode, int i, int j, int val){
         String down = String.format("%d,%d",i,j);
         if  (this.vertices.containsKey(down)){
             mainNode.addEdge(this.vertices.get(down));
@@ -112,7 +112,9 @@ public class Graph {
 
         }
     }
-
+    public int[][] getMap(){
+        return this.map;
+    }
     public ArrayList<String> dijkstra(Node start, Node  end){
         if (start==null  || end==null){
             return null;
