@@ -1,5 +1,11 @@
 package stock;
 
-public class WarehouseStock {
+import java.util.HashMap;
 
+public class WarehouseStock {
+    private HashMap<String,String> locations;
+
+    public WarehouseStock(String filename){
+
+    }
 }
