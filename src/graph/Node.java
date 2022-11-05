@@ -1,3 +1,5 @@
+package graph;
+
 import java.util.HashMap;
 public class Node {
     private int value;
@@ -22,7 +24,7 @@ public class Node {
         return this.edges;
     }
     public void addEdge(Node neighbour){
-        if (neighbour==null || neighbour ==this)return;
+        if (neighbour==null || neighbour ==this || this.edges.containsKey(neighbour.getLocation()))return;
         this.edges.put(neighbour.getLocation(),neighbour);
         this.degree+=1;
     }
@@ -31,5 +33,8 @@ public class Node {
     }
     public void removeEdge(Node neighbour){
         this.edges.remove(neighbour.getLocation());
+    }
+    public String toString(){
+        return String.format("%s",this.location);
     }
 }

@@ -1,5 +1,7 @@
-import org.junit.jupiter.api.Test;
+package graph;
 
+import org.junit.jupiter.api.Test;
+import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 class GraphTest {
@@ -7,7 +9,7 @@ class GraphTest {
     void parseFile() throws Exception{
         //ArrayList<String[]>  expected = new ArrayList<>();
         String fileName = "Test/TestMaps/testMap.csv";
-        Graph  testGraph  = new Graph(fileName,true);
+        Graph testGraph  = new Graph(fileName,true);
         int[][] expected = {
                 {0,0,0,0,0,0,0},
                 {0,1,1,0,1,1,0},
@@ -50,5 +52,31 @@ class GraphTest {
     void addNode() {
     }
 
+    @Test
+    void dijkstra() throws Exception {
+        String fileName = "Test/TestMaps/testMap.csv";
+        Graph  testGraph  = new Graph(fileName,false);
+        Node node1 = testGraph.getNode("0,0");
+        Node node2 =  testGraph.getNode("5,4");
+        ArrayList<String>  got  = testGraph.dijkstra(node1,node2);
 
+        ArrayList<String> expected   =  new ArrayList<>();
+        expected.add("0,0");
+        expected.add("1,0");
+        expected.add("2,0");
+        expected.add("3,0");
+        expected.add("4,0");
+        expected.add("5,0");
+        expected.add("6,0");
+        expected.add("6,1");
+        expected.add("6,2");
+        expected.add("6,3");
+        expected.add("6,4");
+        expected.add("5,4");
+        assertEquals(got,expected);
+        //node not in graph
+        Node node3 = testGraph.getNode("-1,4");
+        got = testGraph.dijkstra(node1,node3);
+        assertNull(got);
+    }
 }

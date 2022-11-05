@@ -1,18 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5dafaf29-34b9-46fd-8806-9e9da26dcb83" name="Changes" comment="create project">
+    <list default="true" id="5dafaf29-34b9-46fd-8806-9e9da26dcb83" name="Changes" comment="Added dijkstra and fixed some things.">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/graph/NodeTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/graph/PQItemTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/graph/PQItem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/stock/WarehouseStock.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/GraphTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Test/GraphTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/NodeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Test/NodeTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/TestMaps/testMap.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Test/TestMaps/testMap.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Graph.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Node.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/GraphTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Test/graph/GraphTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/NodeTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/graph/Graph.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/graph/Node.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/team_software.iml" beforeDir="false" afterPath="$PROJECT_DIR$/team_software.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageOptionsProvider">
+    <option name="myAddOrReplace" value="0" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -47,9 +55,11 @@
     "Repository.Attach.Sources": "false",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "last_directory_selection": "C:/Users/Michael/IdeaProjects/team_software/Test/graph",
     "last_opened_file_path": "C:/Users/Michael/IdeaProjects/team_software",
     "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Modules",
@@ -61,74 +71,102 @@
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="graph" />
+    </key>
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="graph" />
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.GraphTest">
+  <component name="RunManager" selected="JUnit.PQItemTest.testCompareTo">
     <configuration name="All in team_software" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="team_software" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GraphTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="NodeTest.getEdges" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="team_software" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="GraphTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="GraphTest.createUndirected" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="team_software" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="GraphTest" />
-      <option name="METHOD_NAME" value="createUndirected" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="graph.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="graph" />
+      <option name="MAIN_CLASS_NAME" value="graph.NodeTest" />
+      <option name="METHOD_NAME" value="getEdges" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GraphTest.parseFile" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="PQItemTest.compareTo" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="team_software" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="GraphTest" />
-      <option name="METHOD_NAME" value="parseFile" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="graph.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="graph" />
+      <option name="MAIN_CLASS_NAME" value="graph.PQItemTest" />
+      <option name="METHOD_NAME" value="compareTo" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="NodeTest.getDegree" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="PQItemTest.testCompareTo" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="team_software" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="NodeTest" />
-      <option name="METHOD_NAME" value="getDegree" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="graph.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="graph" />
+      <option name="MAIN_CLASS_NAME" value="graph.PQItemTest" />
+      <option name="METHOD_NAME" value="testCompareTo" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PQItemTest.testToString" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="team_software" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="graph.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="graph" />
+      <option name="MAIN_CLASS_NAME" value="graph.PQItemTest" />
+      <option name="METHOD_NAME" value="testToString" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.GraphTest" />
+      <item itemvalue="JUnit.all_packages" />
       <item itemvalue="JUnit.All in team_software" />
-      <item itemvalue="JUnit.GraphTest.createUndirected" />
-      <item itemvalue="JUnit.GraphTest.parseFile" />
-      <item itemvalue="JUnit.NodeTest.getDegree" />
+      <item itemvalue="JUnit.PQItemTest.compareTo" />
+      <item itemvalue="JUnit.PQItemTest.testCompareTo" />
+      <item itemvalue="JUnit.PQItemTest.testToString" />
+      <item itemvalue="JUnit.NodeTest.getEdges" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.GraphTest" />
+        <item itemvalue="JUnit.PQItemTest.testCompareTo" />
+        <item itemvalue="JUnit.PQItemTest.testToString" />
         <item itemvalue="JUnit.All in team_software" />
-        <item itemvalue="JUnit.NodeTest.getDegree" />
-        <item itemvalue="JUnit.GraphTest.parseFile" />
-        <item itemvalue="JUnit.GraphTest.createUndirected" />
+        <item itemvalue="JUnit.PQItemTest.compareTo" />
+        <item itemvalue="JUnit.NodeTest.getEdges" />
       </list>
     </recent_temporary>
   </component>
@@ -143,7 +181,7 @@
       <workItem from="1665164073946" duration="1360000" />
       <workItem from="1665235423279" duration="9424000" />
       <workItem from="1667426126381" duration="10481000" />
-      <workItem from="1667656502449" duration="764000" />
+      <workItem from="1667656502449" duration="15697000" />
     </task>
     <task id="LOCAL-00001" summary="create project">
       <created>1665164156632</created>
@@ -159,7 +197,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665247563017</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="create project">
+      <created>1667657337591</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1667657337591</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -210,9 +255,15 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="create project" />
-    <option name="LAST_COMMIT_MESSAGE" value="create project" />
+    <MESSAGE value="Added dijkstra and fixed some things." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added dijkstra and fixed some things." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/team_software$All_in_team_software.ic" NAME="All in team_software Coverage Results" MODIFIED="1667657034900" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/team_software$all_packages.ic" NAME="all_packages Coverage Results" MODIFIED="1667672014354" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>graph.*</FILTER>
+      <FILTER>stock.*</FILTER>
+      <FILTER>display.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/team_software$All_in_team_software.ic" NAME="All in team_software Coverage Results" MODIFIED="1667671790243" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
