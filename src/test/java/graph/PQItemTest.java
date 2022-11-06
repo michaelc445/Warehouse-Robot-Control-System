@@ -1,5 +1,6 @@
 package graph;
 
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -13,7 +14,7 @@ class PQItemTest {
         Node to = new Node(0,p1);
         Node from = new Node(1,p2);
         PQItem test = new PQItem(0,to,from);
-        assertEquals(test.getCost(),0);
+        assertEquals(test.cost(),0);
     }
 
     @Test
@@ -23,7 +24,7 @@ class PQItemTest {
         Node to = new Node(0,p1);
         Node from = new Node(1,p2);
         PQItem test = new PQItem(0,to,from);
-        assertEquals(test.getNext(),to);
+        assertEquals(test.next(),to);
     }
 
     @Test
@@ -33,7 +34,7 @@ class PQItemTest {
         Node to = new Node(0,p1);
         Node from = new Node(1,p2);
         PQItem test = new PQItem(0,to,from);
-        assertEquals(test.getFrom(),from);
+        assertEquals(test.from(),from);
     }
 
 
@@ -61,6 +62,6 @@ class PQItemTest {
         Node node2 = new  Node(1,p2);
         PQItem testItem = new PQItem(0,node1,node2);
 
-        assertEquals(testItem.toString(),"0,(0,0)");
+        assertEquals("0,(0,0)",testItem.toString());
     }
 }

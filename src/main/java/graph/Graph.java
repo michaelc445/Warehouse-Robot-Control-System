@@ -4,20 +4,115 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.*;
+import org.paukov.combinatorics3.Generator;
 
 public class Graph {
     private final HashMap<Point,Node> vertices;
-    private int[][] map;
+    private  final ArrayList<Point>  shelves;
+    private final HashMap<Point,HashMap<Point,Integer>> distances;
+    private final int[][] map;
+    private final Point startPoint;
+    private final Point endPoint;
     public Graph(String fileName,boolean directed) throws Exception {
         this.vertices = new HashMap<>();
 
         int[][]  parsedInputFile =  parseFile(fileName);
-        if (directed){
-            this.createDirected(parsedInputFile);
-        }
-        else{
+        if (!directed){
             this.createUndirected(parsedInputFile);
         }
+        this.map= parsedInputFile;
+        this.startPoint = new Point(0,0);
+        this.endPoint = new Point(0,6);
+
+        this.shelves  = this.createShelveList(parsedInputFile);
+        this.distances = this.distanceBetweenAllShelves();
+
+    }
+    public Point getStartPoint(){
+        return this.startPoint;
+    }
+    public Point getEndPoint(){
+        return this.endPoint;
+    }
+
+    //TODO this is too slow on large maps with  lots of shelves. change this to floyd warshall instead of dijkstra
+    //then extract the shelf values
+    public HashMap<Point,HashMap<Point,Integer>> distanceBetweenAllShelves(){
+        HashMap<Point,HashMap<Point,Integer>>  result = new  HashMap<>();
+        this.shelves.add(this.startPoint);
+        this.shelves.add(this.endPoint);
+        for (int i =0; i < this.shelves.size()-1;i++){
+            Node  from = this.getNode(this.shelves.get(i));
+            if (from == null){
+                continue;
+            }
+            if (!result.containsKey(from.getLocation())){
+                result.put(from.getLocation(),new HashMap<>());
+            }
+            for (int j =i+1; j < this.shelves.size();j++){
+                Node to =this.getNode(this.shelves.get(j));
+                if (to == null){
+                    continue;
+                }
+                if  (!result.get(from.getLocation()).containsKey(to.getLocation())){
+                    int distance =  this.dijkstra(from,to).size()-1;
+                    result.get(from.getLocation()).put(to.getLocation(),distance);
+                    if (!result.containsKey(to.getLocation())){
+                        result.put(to.getLocation(),new HashMap<>());
+                    }
+                    result.get(to.getLocation()).put(from.getLocation(),distance);
+                }
+            }
+        }
+        this.shelves.remove(this.startPoint);
+        this.shelves.remove(this.endPoint);
+        return  result;
+    }
+    public List<Point> shortestOrderPath(Node start,Node end,ArrayList<Point> items){
+        List<List<Point>> permutationList = Generator.permutation(items).simple().stream().toList();
+        int min = Integer.MAX_VALUE;
+        List<Point> result = new ArrayList<>();
+        for (List<Point> points : permutationList) {
+            int cost = this.pathCost(start, end, points);
+            if (cost < min) {
+                min = cost;
+                result = points;
+            }
+        }
+        return result;
+    }
+    private int  pathCost(Node start,Node end,List<Point> items){
+        if (items  == null || items.size()==0){
+            return  0;
+        }
+        HashMap<Point,HashMap<Point,Integer>> distances = this.distances;
+        Point  s  =  start.getLocation();
+        HashMap<Point,Integer> startToFirst = distances.get(s);
+
+        int cost = startToFirst.get(items.get(0));
+        for (int i =0; i < items.size()-1;i++){
+            startToFirst=distances.get(items.get(i));
+            Point get =  items.get(i+1);
+            cost += startToFirst.get(get);
+        }
+        HashMap<Point,Integer> lastItemToDropOff = distances.get(items.get(items.size()-1));
+        cost += lastItemToDropOff.get(end.getLocation());
+        return cost;
+
+    }
+    private ArrayList<Point> createShelveList(int[][] map){
+        ArrayList<Point> shelveList = new ArrayList<>();
+        for (int i =0; i  < map.length;i++){
+            for(int j=0;  j  < map[i].length;j++){
+                if (map[i][j]==1){
+                    shelveList.add(new  Point(j,i));
+                }
+            }
+        }
+        return shelveList;
+    }
+    public ArrayList<Point> getShelves(){
+        return this.shelves;
     }
     public int[][] parseFile(String fileName) throws Exception {
         File inFile = new File(fileName);
@@ -42,16 +137,13 @@ public class Graph {
             result[i]=temp;
             i++;
         }
-        this.map=result;
         return result;
     }
-    public void createDirected(int[][] inputMap){
 
-    }
     public  HashMap<Point,Node> getVertices(){
         return this.vertices;
     }
-    void addNode(Node mainNode, int y, int x, int val){
+    public void addNode(Node mainNode, int y, int x, int val){
         Point  location = new Point(x,y);
         if  (this.vertices.containsKey(location)){
             mainNode.addEdge(this.vertices.get(location));
@@ -62,7 +154,6 @@ public class Graph {
         }
     }
     public void createUndirected(int[][] inputMap){
-
         for(int i =0; i< inputMap.length; i++){
             for (int j = 0; j < inputMap[i].length;j++){
                 Point point  =new Point(j,i);
@@ -122,8 +213,8 @@ public class Graph {
         exploreNode(start,pq,path,explored,0);
         while(pq.size() > 0){
             PQItem check = pq.remove();
-            exploreNode(check.getNext(),pq,path,explored,check.getCost());
-            if (check.getNext().getLocation().equals(find)){
+            exploreNode(check.next(),pq,path,explored,check.cost());
+            if (check.next().getLocation().equals(find)){
                 return getPath(start, end, path);
             }
         }
@@ -166,5 +257,30 @@ public class Graph {
         Collections.reverse(resultPath);
         return resultPath;
 
+    }
+    public ArrayList<ArrayList<Point>> getPathMultipleNodes(Node start, Node end, ArrayList<Point> items){
+        ArrayList<ArrayList<Point>> result = new ArrayList<>();
+        if (items.size()==0){
+            result.add(this.dijkstra(start,end));
+            return result;
+        }
+        ArrayList<Point> first = this.dijkstra(start,this.getNode(items.get(0)));
+        if (first ==  null){
+            return new ArrayList<>();
+        }
+        result.add(first);
+        for(int  i =0; i < items.size()-1;i++){
+            ArrayList<Point> temp = this.dijkstra(this.getNode(items.get(i)),this.getNode(items.get(i+1)));
+            if (temp ==  null){
+                return new ArrayList<>();
+            }
+            result.add(temp);
+        }
+        ArrayList<Point> finish = this.dijkstra(this.getNode(items.get(items.size()-1)),end);
+        if  (finish == null){
+            return new ArrayList<>();
+        }
+        result.add(finish);
+        return result;
     }
 }

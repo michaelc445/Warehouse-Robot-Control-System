@@ -1,8 +1,10 @@
 package graph;
 
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class PointTest {
 
@@ -31,8 +33,8 @@ class PointTest {
     void testToString() {
         Point test1 = new Point(0,0);
         Point test2 = new Point(0,1);
-        assertEquals(test1.toString(),"0,0");
-        assertEquals(test2.toString(),"0,1");
+        assertEquals("(0,0)",test1.toString());
+        assertEquals("(0,1)",test2.toString());
     }
 
     @Test

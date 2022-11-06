@@ -1,10 +1,8 @@
 package graph;
-
 import org.junit.jupiter.api.Test;
-
 import java.util.HashMap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class NodeTest {
 
@@ -47,7 +45,7 @@ class NodeTest {
     void testToString() {
         Point location = new Point(1,0);
         Node test = new Node(0, location);
-        assertEquals(test.toString(), "1,0");
+        assertEquals( "(1,0)",test.toString());
     }
 
     @Test

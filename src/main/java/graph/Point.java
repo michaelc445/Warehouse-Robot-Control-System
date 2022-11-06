@@ -22,11 +22,11 @@ public class Point {
         return this.x==o.x && this.y==o.y;
     }
     public String toString(){
-        return String.format("%d,%d",this.x,this.y);
+        return String.format("(%d,%d)",this.x,this.y);
     }
     @Override
     public  int hashCode(){
-        String res = String.format("%d,%d",this.x,this.y);
+        String res = String.format("(%d,%d)",this.x,this.y);
         return res.hashCode();
     }
 }
