@@ -8,14 +8,12 @@ import org.paukov.combinatorics3.Generator;
 
 public class Graph {
     private final HashMap<Point,Node> vertices;
-    private  final ArrayList<Point>  shelves;
-    private final HashMap<Point,HashMap<Point,Integer>> distances;
+    private final ArrayList<Point>  shelves;
     private final int[][] map;
     private final Point startPoint;
     private final Point endPoint;
     public Graph(String fileName,boolean directed) throws Exception {
         this.vertices = new HashMap<>();
-
         int[][]  parsedInputFile =  parseFile(fileName);
         if (!directed){
             this.createUndirected(parsedInputFile);
@@ -23,10 +21,7 @@ public class Graph {
         this.map= parsedInputFile;
         this.startPoint = new Point(0,0);
         this.endPoint = new Point(0,6);
-
         this.shelves  = this.createShelveList(parsedInputFile);
-        this.distances = this.distanceBetweenAllShelves();
-
     }
     public Point getStartPoint(){
         return this.startPoint;
@@ -35,68 +30,86 @@ public class Graph {
         return this.endPoint;
     }
 
-    //TODO this is too slow on large maps with  lots of shelves. change this to floyd warshall instead of dijkstra
-    //then extract the shelf values
-    public HashMap<Point,HashMap<Point,Integer>> distanceBetweenAllShelves(){
-        HashMap<Point,HashMap<Point,Integer>>  result = new  HashMap<>();
-        this.shelves.add(this.startPoint);
-        this.shelves.add(this.endPoint);
-        for (int i =0; i < this.shelves.size()-1;i++){
-            Node  from = this.getNode(this.shelves.get(i));
-            if (from == null){
-                continue;
-            }
-            if (!result.containsKey(from.getLocation())){
-                result.put(from.getLocation(),new HashMap<>());
-            }
-            for (int j =i+1; j < this.shelves.size();j++){
-                Node to =this.getNode(this.shelves.get(j));
-                if (to == null){
-                    continue;
-                }
-                if  (!result.get(from.getLocation()).containsKey(to.getLocation())){
-                    int distance =  this.dijkstra(from,to).size()-1;
-                    result.get(from.getLocation()).put(to.getLocation(),distance);
-                    if (!result.containsKey(to.getLocation())){
-                        result.put(to.getLocation(),new HashMap<>());
-                    }
-                    result.get(to.getLocation()).put(from.getLocation(),distance);
-                }
-            }
+    public ArrayList<Path> shortestOrderPath(Node start, Node end, ArrayList<Point> items){
+        if(items==null  || items.size()==0){
+            return null;
         }
-        this.shelves.remove(this.startPoint);
-        this.shelves.remove(this.endPoint);
-        return  result;
-    }
-    public List<Point> shortestOrderPath(Node start,Node end,ArrayList<Point> items){
         List<List<Point>> permutationList = Generator.permutation(items).simple().stream().toList();
         int min = Integer.MAX_VALUE;
         List<Point> result = new ArrayList<>();
+        items.add(start.getLocation());
+        items.add(end.getLocation());
+        HashMap<Point,HashMap<Point,Path>>  distancePairMap = this.createItemPairDistanceMap(items);
         for (List<Point> points : permutationList) {
-            int cost = this.pathCost(start, end, points);
+            int cost = this.pathCost(start, end, points,distancePairMap);
             if (cost < min) {
                 min = cost;
                 result = points;
             }
         }
+        return this.extractPaths(distancePairMap,result);
+    }
+    private ArrayList<Path> extractPaths(HashMap<Point,HashMap<Point,Path>>  distancePairMap,List<Point> path){
+        if (distancePairMap==null || distancePairMap.size()==0){
+            return null;
+        }
+        if(path.size()==0)  return null;
+        if (this.startPoint==null || !distancePairMap.containsKey(this.startPoint)){
+            return null;
+        }
+        ArrayList<Path> result = new ArrayList<>();
+        if (!distancePairMap.get(startPoint).containsKey(path.get(0)))  return  null;
+
+        Path firstPath = distancePairMap.get(this.startPoint).get(path.get(0));
+        result.add(firstPath);
+        for (int i  =0; i  < path.size()-1;i++){
+            Point p1  =  path.get(i);
+            Point p2  =  path.get(i+1);
+            if (!distancePairMap.containsKey(p1)  ||  !distancePairMap.get(p1).containsKey(p2))  return  null;
+            Path nextPath = distancePairMap.get(path.get(i)).get(path.get(i+1));
+            result.add(nextPath);
+        }
+        Path lastPath = distancePairMap.get(path.get(path.size()-1)).get(this.endPoint);
+        result.add(lastPath);
+        return  result;
+    }
+    private  HashMap<Point,HashMap<Point,Path>> createItemPairDistanceMap(ArrayList<Point> items){
+        HashMap<Point,HashMap<Point,Path>> result = new HashMap<>();
+        for (int i=0; i < items.size();i++){
+            for(int j=0; j < items.size();j++){
+                if (i==j) continue;
+
+                Point  p1  =items.get(i);
+                Point p2 = items.get(j);
+                if (result.containsKey(p1) && result.get(p1).containsKey(p2))continue;
+                Path distance =  this.dijkstra(this.getNode(p1),this.getNode(p2));
+                if (!result.containsKey(p1)){
+                    result.put(p1,new HashMap<>());
+                }
+                result.get(p1).put(p2,distance);
+                if(!result.containsKey(p2)){
+                    result.put(p2,new HashMap<>());
+                }
+                result.get(p2).put(p1,distance.reversed());
+            }
+        }
         return result;
     }
-    private int  pathCost(Node start,Node end,List<Point> items){
+    private int  pathCost(Node start,Node end,List<Point> items,HashMap<Point,HashMap<Point,Path>> distances){
         if (items  == null || items.size()==0){
             return  0;
         }
-        HashMap<Point,HashMap<Point,Integer>> distances = this.distances;
         Point  s  =  start.getLocation();
-        HashMap<Point,Integer> startToFirst = distances.get(s);
+        HashMap<Point,Path> startToFirst = distances.get(s);
 
-        int cost = startToFirst.get(items.get(0));
+        int cost = startToFirst.get(items.get(0)).getCost();
         for (int i =0; i < items.size()-1;i++){
             startToFirst=distances.get(items.get(i));
             Point get =  items.get(i+1);
-            cost += startToFirst.get(get);
+            cost += startToFirst.get(get).getCost();
         }
-        HashMap<Point,Integer> lastItemToDropOff = distances.get(items.get(items.size()-1));
-        cost += lastItemToDropOff.get(end.getLocation());
+        HashMap<Point,Path> lastItemToDropOff = distances.get(items.get(items.size()-1));
+        cost += lastItemToDropOff.get(end.getLocation()).getCost();
         return cost;
 
     }
@@ -202,7 +215,7 @@ public class Graph {
     public int[][] getMap(){
         return this.map;
     }
-    public ArrayList<Point> dijkstra(Node start, Node  end){
+    public Path dijkstra(Node start, Node  end){
         if (start==null  || end==null){
             return null;
         }
@@ -237,12 +250,12 @@ public class Graph {
         }
         return null;
     }
-    private ArrayList<Point> getPath(Node start, Node end, HashMap<Node,Node> path){
+    private Path getPath(Node start, Node end, HashMap<Node,Node> path){
 
         ArrayList<Point> resultPath = new ArrayList<>();
 
         if (start.getLocation().equals(end.getLocation())){
-            return resultPath;
+            return new Path(resultPath);
         }
         if (!path.containsKey(end)){
             return  null;
@@ -255,32 +268,33 @@ public class Graph {
             resultPath.add(check.getLocation());
         }
         Collections.reverse(resultPath);
-        return resultPath;
+        return new Path(resultPath);
 
     }
-    public ArrayList<ArrayList<Point>> getPathMultipleNodes(Node start, Node end, ArrayList<Point> items){
-        ArrayList<ArrayList<Point>> result = new ArrayList<>();
+    public ArrayList<Path> getPathMultipleNodes(Node start, Node end, ArrayList<Point> items){
+        ArrayList<Path> result = new ArrayList<>();
         if (items.size()==0){
             result.add(this.dijkstra(start,end));
             return result;
         }
-        ArrayList<Point> first = this.dijkstra(start,this.getNode(items.get(0)));
+        Path first = this.dijkstra(start,this.getNode(items.get(0)));
         if (first ==  null){
             return new ArrayList<>();
         }
         result.add(first);
         for(int  i =0; i < items.size()-1;i++){
-            ArrayList<Point> temp = this.dijkstra(this.getNode(items.get(i)),this.getNode(items.get(i+1)));
+            Path temp = this.dijkstra(this.getNode(items.get(i)),this.getNode(items.get(i+1)));
             if (temp ==  null){
                 return new ArrayList<>();
             }
             result.add(temp);
         }
-        ArrayList<Point> finish = this.dijkstra(this.getNode(items.get(items.size()-1)),end);
+        Path finish = this.dijkstra(this.getNode(items.get(items.size()-1)),end);
         if  (finish == null){
             return new ArrayList<>();
         }
         result.add(finish);
         return result;
     }
+
 }
