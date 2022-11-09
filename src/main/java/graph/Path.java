@@ -41,7 +41,6 @@ public class Path {
             }
         }
         return true;
-
     }
     public String toString(){
         StringBuilder  result  =  new StringBuilder();

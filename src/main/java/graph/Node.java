@@ -6,7 +6,6 @@ public class Node {
     private Point location;
     private HashMap<Point,Node> edges;
     private  int degree;
-
     public Node(int value, Point location){
         if (location==null)return;
         this.value = value;
@@ -14,9 +13,6 @@ public class Node {
         this.edges = new HashMap<>();
         this.degree=0;
     }
-
-
-
     public int getValue(){
         return this.value;
     }

@@ -4,14 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5dafaf29-34b9-46fd-8806-9e9da26dcb83" name="Changes" comment="no longer calculate distance  between all shelves.  added path  class">
-      <change afterPath="$PROJECT_DIR$/src/main/java/graph/Path.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/graph/PathTest.java" afterDir="false" />
+    <list default="true" id="5dafaf29-34b9-46fd-8806-9e9da26dcb83" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/display/RunVT.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/display/VIsualisationTool.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/graph/Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/graph/Graph.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stock/WarehouseStock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stock/WarehouseStock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/graph/GraphTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/graph/GraphTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/graph/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/graph/Node.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,15 +21,15 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="JUnit5 Test Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="VisualizationTool" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -113,7 +110,20 @@
       <command value="mvn idea:idea" />
     </option>
   </component>
-  <component name="RunManager" selected="Maven.team_software [test]">
+  <component name="RunManager" selected="Application.RunVT">
+    <configuration name="RunVT" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="display.RunVT" />
+      <module name="team_software" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="display.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="GraphTest.getPathMultipleNodes" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="team_software" />
       <extension name="coverage">
@@ -125,22 +135,6 @@
       <option name="PACKAGE_NAME" value="graph" />
       <option name="MAIN_CLASS_NAME" value="graph.GraphTest" />
       <option name="METHOD_NAME" value="getPathMultipleNodes" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="PathTest.getCost" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="team_software" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="graph.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="graph" />
-      <option name="MAIN_CLASS_NAME" value="graph.PathTest" />
-      <option name="METHOD_NAME" value="getCost" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -245,9 +239,9 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Application.RunVT" />
       <item itemvalue="JUnit.t" />
       <item itemvalue="JUnit.all_packages" />
-      <item itemvalue="JUnit.PathTest.getCost" />
       <item itemvalue="JUnit.PathTest.getPath" />
       <item itemvalue="JUnit.PathTest.reversed" />
       <item itemvalue="JUnit.PathTest.testEquals" />
@@ -256,11 +250,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.RunVT" />
+        <item itemvalue="JUnit.GraphTest.getPathMultipleNodes" />
         <item itemvalue="JUnit.PathTest.testEquals" />
         <item itemvalue="JUnit.PathTest.reversed" />
         <item itemvalue="JUnit.PathTest.getPath" />
-        <item itemvalue="JUnit.PathTest.getCost" />
-        <item itemvalue="JUnit.GraphTest.getPathMultipleNodes" />
       </list>
     </recent_temporary>
   </component>
