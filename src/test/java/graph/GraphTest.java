@@ -30,8 +30,6 @@ class GraphTest {
             }
         }
     }
-
-
     @Test
     void createUndirected()   throws Exception {
         String fileName = "src/test/java/TestMaps/testMap.csv";
@@ -87,18 +85,19 @@ class GraphTest {
         Point p2 = new Point(5,4);
         Node node1 = testGraph.getNode(p1);
         Node node2 =  testGraph.getNode(p2);
-        ArrayList<Point>  got  = testGraph.dijkstra(node1,node2);
-        ArrayList<Point> expected   =  new ArrayList<>();
-        expected.add(new   Point(0,0));
-        expected.add(new   Point(1,0));
-        expected.add(new   Point(2,0));
-        expected.add(new   Point(3,0));
-        expected.add(new   Point(3,1));
-        expected.add(new   Point(3,2));
-        expected.add(new   Point(3,3));
-        expected.add(new   Point(4,3));
-        expected.add(new   Point(5,3));
-        expected.add(new   Point(5,4));
+        Path  got  = testGraph.dijkstra(node1,node2);
+        ArrayList<Point> ex  =  new ArrayList<>();
+        ex.add(new   Point(0,0));
+        ex.add(new   Point(1,0));
+        ex.add(new   Point(2,0));
+        ex.add(new   Point(3,0));
+        ex.add(new   Point(3,1));
+        ex.add(new   Point(3,2));
+        ex.add(new   Point(3,3));
+        ex.add(new   Point(4,3));
+        ex.add(new   Point(5,3));
+        ex.add(new   Point(5,4));
+        Path expected = new Path(ex);
         assertEquals(expected,got);
         //node not in graph
         Node node3 = testGraph.getNode(new Point(-2,-3));
@@ -116,8 +115,8 @@ class GraphTest {
         test.add(new Point(0,2));
         test.add(new Point(0,4));
         test.add(new Point(0,6));
-        ArrayList<ArrayList<Point>> got  = testGraph.getPathMultipleNodes(start,end,test);
-        ArrayList<ArrayList<Point>> expected = new ArrayList<>();
+        ArrayList<Path> got  = testGraph.getPathMultipleNodes(start,end,test);
+        ArrayList<Path> expected = new ArrayList<>();
         ArrayList<Point> temp1 = new  ArrayList<>();
         ArrayList<Point> temp2 = new  ArrayList<>();
         ArrayList<Point> temp3 = new  ArrayList<>();
@@ -133,61 +132,29 @@ class GraphTest {
         temp3.add(new Point(0,6));
         temp4.add(new Point(0,6));
         temp4.add(new Point(0,5));
-        expected.add(temp1);
-        expected.add(temp2);
-        expected.add(temp3);
-        expected.add(temp4);
+        expected.add(new Path(temp1));
+        expected.add(new Path(temp2));
+        expected.add(new Path(temp3));
+        expected.add(new Path(temp4));
         assertEquals(expected,got);
     }
-
-
-    @Test
-    void distanceBetweenAllShelves() throws Exception {
-        String fileName = "src/test/java/TestMaps/testMap.csv";
-        Graph  testGraph  = new Graph(fileName,false);
-        HashMap<Point,HashMap<Point,Integer>> result = testGraph.distanceBetweenAllShelves();
-        ArrayList<Point>  shelves = testGraph.getShelves();
-        for (int i =0; i < shelves.size();i++){
-            assertTrue(result.containsKey(shelves.get(i)));
-            HashMap<Point,Integer> temp = result.get(shelves.get(i));
-            for (int j =0; j < shelves.size();j++){
-                if(i == j){
-                    continue;
-                }
-                assertTrue(temp.containsKey(shelves.get(j)));
-            }
-            assertTrue(result.containsKey(testGraph.getStartPoint()));
-            assertTrue(result.containsKey(testGraph.getEndPoint()));
-        }
-        HashMap<Point,Integer> start = result.get(testGraph.getStartPoint());
-        HashMap<Point,Integer> end = result.get(testGraph.getEndPoint());
-        assertNotNull(start);
-        assertNotNull(end);
-        for (Point shelf : shelves) {
-            assertTrue(start.containsKey(shelf));
-            assertTrue(end.containsKey(shelf));
-        }
-        assertTrue(start.containsKey(testGraph.getEndPoint()));
-        assertTrue(end.containsKey(testGraph.getStartPoint()));
-    }
-
     @Test
     void shortestOrderPath() throws Exception {
-        String fileName = "src/test/java/TestMaps/testMap.csv";
+        String fileName = "src/test/java/TestMaps/testMapLarge.csv";
         Graph  testGraph  = new Graph(fileName,false);
         //TODO  finish  test
         Node start = testGraph.getNode(testGraph.getStartPoint());
         Node end = testGraph.getNode(testGraph.getEndPoint());
         List<Point>  shelves  = testGraph.getShelves();
-
         ArrayList<Point> items = new ArrayList<>();
-        items.add(shelves.get(0));
-        items.add(shelves.get(1));
-        items.add(shelves.get(2));
-        items.add(shelves.get(3));
-        items.add(shelves.get(4));
-        List<Point> got= testGraph.shortestOrderPath(start,end,items);
-        assertNotNull(got);
+        items.add(shelves.get(5));
+        items.add(shelves.get(10));
+        items.add(shelves.get(6));
+        items.add(shelves.get(15));
+        items.add(shelves.get(8));
 
+        ArrayList<Path> got= testGraph.shortestOrderPath(start,end,items);
+        System.out.println(got);
+        assertNotNull(got);
     }
 }
