@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5dafaf29-34b9-46fd-8806-9e9da26dcb83" name="Changes" comment="added runMain configuration.&#10;&#10;added a Warehouse class.&#10;&#10;added an OrderSystem class.">
-      <change afterPath="$PROJECT_DIR$/src/test/java/main/WarehouseTest.java" afterDir="false" />
+    <list default="true" id="5dafaf29-34b9-46fd-8806-9e9da26dcb83" name="Changes" comment="added tests for warehouse">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/OrderSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/OrderSystem.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,7 +107,7 @@
       <command value="mvn idea:idea" />
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.all_main">
+  <component name="RunManager" selected="Application.runMain">
     <configuration name="RunVT" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="display.RunVT" />
       <module name="team_software" />
@@ -385,7 +385,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668366050588</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="added tests for warehouse">
+      <created>1668369287564</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1668369287564</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -446,7 +453,8 @@
     <MESSAGE value="added testfiles" />
     <MESSAGE value="no longer calculate distance  between all shelves.  added path  class" />
     <MESSAGE value="added runMain configuration.&#10;&#10;added a Warehouse class.&#10;&#10;added an OrderSystem class." />
-    <option name="LAST_COMMIT_MESSAGE" value="added runMain configuration.&#10;&#10;added a Warehouse class.&#10;&#10;added an OrderSystem class." />
+    <MESSAGE value="added tests for warehouse" />
+    <option name="LAST_COMMIT_MESSAGE" value="added tests for warehouse" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

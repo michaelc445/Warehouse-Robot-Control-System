@@ -11,27 +11,40 @@ import java.util.Set;
 
 public class OrderSystem extends JFrame implements ActionListener {
      JComboBox<Object> comboBox;
+     JButton addItemToWarehouseBtn;
+     JButton removeItemFromWarehouseBtn;
      Set<Point> itemLocationsToVisit;
      Warehouse warehouse = new Warehouse();
      OrderSystem(){
-         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-         this.setLayout(new FlowLayout());
-
          warehouse.addItem("Hammer", new Point(1,1));
          warehouse.addItem("Screw", new Point(2,2));
          warehouse.addItem("Helmet", new Point(3,3));
 
+         Object[] itemsInStock = warehouse.getItemNames();
+         itemLocationsToVisit = new HashSet<>();
+         addItemToWarehouseBtn = new JButton();
+         addItemToWarehouseBtn.setBounds(200,100,100,50);
+         addItemToWarehouseBtn.setText("Add to Warehouse");
+         addItemToWarehouseBtn.setFocusable(false);
+         removeItemFromWarehouseBtn = new JButton();
+         removeItemFromWarehouseBtn.setBounds(200,100,100,50);
+         removeItemFromWarehouseBtn.setText("Remove from Warehouse");
+         removeItemFromWarehouseBtn.setFocusable(false);
 
-        Object[] itemsInStock = warehouse.getItemNames();
-        itemLocationsToVisit = new HashSet<>();
+         comboBox = new JComboBox<>(itemsInStock);
 
-        comboBox = new JComboBox<>(itemsInStock);
-        comboBox.addActionListener(this);
+         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+         this.setLayout(new FlowLayout());
+         this.setVisible(true);
+         this.add(addItemToWarehouseBtn);
+         this.add(removeItemFromWarehouseBtn);
+         this.add(comboBox);
 
-        this.add(comboBox);
+         this.pack();
 
-        this.pack();
-        this.setVisible(true);
+         addItemToWarehouseBtn.addActionListener(this);
+         removeItemFromWarehouseBtn.addActionListener(this);
+         comboBox.addActionListener(this);
     }
 
     @Override
@@ -42,6 +55,12 @@ public class OrderSystem extends JFrame implements ActionListener {
             itemLocationsToVisit.add(warehouse.getItemLocation(selectedItem));
 
             System.out.println(itemLocationsToVisit);
+        }
+        else if (e.getSource() == addItemToWarehouseBtn) {
+            System.out.println("poo");
+        }
+        else if (e.getSource() == removeItemFromWarehouseBtn) {
+            System.out.println("pee");
         }
     }
 }
