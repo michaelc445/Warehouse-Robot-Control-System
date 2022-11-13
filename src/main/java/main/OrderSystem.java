@@ -74,27 +74,32 @@ public class OrderSystem extends JFrame implements ActionListener {
             System.out.println(itemLocationsToVisit);
         }
         else if (e.getSource() == sendOrderBtn){
-            JFrame frame = new JFrame();
-            frame.setTitle("Visualization tool");
-            frame.setSize( 700 + 24 , 700 + 48);
-            Dimension minSize = new Dimension();
-            minSize.height=700+48;
-            minSize.width=700+24;
-            frame.setMinimumSize(minSize);
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setVisible(true);
-            String fileName = "src/test/java/TestMaps/testMap.csv";
-            Graph inputGraph  = null;
-            try {
-                inputGraph = new Graph(fileName,false);
-            } catch (Exception ex) {
-                ex.printStackTrace();
+            if (itemLocationsToVisit.isEmpty()){
+                System.out.println("Empty order!");
             }
-            ArrayList<graph.Point> itemLocationList = new ArrayList<>();
-            itemLocationList.addAll(itemLocationsToVisit);
-            VisualizationTool vis = new VisualizationTool(inputGraph, itemLocationList);
-            frame.add(vis);
-            frame.pack();
+            else {
+                JFrame frame = new JFrame();
+                frame.setTitle("Visualization tool");
+                frame.setSize(700 + 24, 700 + 48);
+                Dimension minSize = new Dimension();
+                minSize.height = 700 + 48;
+                minSize.width = 700 + 24;
+                frame.setMinimumSize(minSize);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setVisible(true);
+                String fileName = "src/test/java/TestMaps/testMap.csv";
+                Graph inputGraph = null;
+                try {
+                    inputGraph = new Graph(fileName, false);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+                ArrayList<graph.Point> itemLocationList = new ArrayList<>();
+                itemLocationList.addAll(itemLocationsToVisit);
+                VisualizationTool vis = new VisualizationTool(inputGraph, itemLocationList);
+                frame.add(vis);
+                frame.pack();
+            }
         }
     }
 }
