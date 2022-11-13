@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5dafaf29-34b9-46fd-8806-9e9da26dcb83" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/main/OrderSystem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/main/Warehouse.java" afterDir="false" />
+    <list default="true" id="5dafaf29-34b9-46fd-8806-9e9da26dcb83" name="Changes" comment="added runMain configuration.&#10;&#10;added a Warehouse class.&#10;&#10;added an OrderSystem class.">
+      <change afterPath="$PROJECT_DIR$/src/test/java/main/WarehouseTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/graph/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/graph/Point.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/team_software.iml" beforeDir="false" afterPath="$PROJECT_DIR$/team_software.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,16 +37,23 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="VisualizationTool" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GithubProjectSettings">
-    <option name="branchProtectionPatterns">
-      <list>
-        <option value="master" />
-      </list>
+  <component name="GithubPullRequestsUISettings">
+    <option name="recentNewPullRequestHead">
+      <RepoCoordinatesHolder>
+        <option name="owner" value="michaelc445" />
+        <option name="repository" value="Warehouse-Robot-Control-System" />
+      </RepoCoordinatesHolder>
+    </option>
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="35758c0f-1102-45f4-af92-9012bb36c897" />
+        <option name="url" value="git@github.com:michaelc445/Warehouse-Robot-Control-System.git" />
+      </UrlAndAccount>
     </option>
   </component>
   <component name="HighlightingSettingsPerFile">
@@ -75,6 +78,9 @@
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -101,7 +107,7 @@
       <command value="mvn idea:idea" />
     </option>
   </component>
-  <component name="RunManager" selected="Application.runMain">
+  <component name="RunManager" selected="JUnit.all_main">
     <configuration name="RunVT" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="display.RunVT" />
       <module name="team_software" />
@@ -186,6 +192,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="all_main" type="JUnit" factoryName="JUnit">
+      <module name="team_software" />
+      <option name="PACKAGE_NAME" value="main" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="t" type="JUnit" factoryName="JUnit">
       <module name="team_software" />
       <option name="PACKAGE_NAME" value="graph" />
@@ -241,6 +257,7 @@
       <item itemvalue="Application.RunVT" />
       <item itemvalue="JUnit.t" />
       <item itemvalue="JUnit.all_packages" />
+      <item itemvalue="JUnit.all_main" />
       <item itemvalue="JUnit.PathTest.getPath" />
       <item itemvalue="JUnit.PathTest.reversed" />
       <item itemvalue="JUnit.PathTest.testEquals" />
@@ -361,7 +378,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667759671727</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="added runMain configuration.&#10;&#10;added a Warehouse class.&#10;&#10;added an OrderSystem class.">
+      <created>1668366050588</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1668366050588</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -421,7 +445,8 @@
     <MESSAGE value="changed  project to use maven, added shortest path between shelves and it works, but too slow for large maps, will have to change to floyd warshall" />
     <MESSAGE value="added testfiles" />
     <MESSAGE value="no longer calculate distance  between all shelves.  added path  class" />
-    <option name="LAST_COMMIT_MESSAGE" value="no longer calculate distance  between all shelves.  added path  class" />
+    <MESSAGE value="added runMain configuration.&#10;&#10;added a Warehouse class.&#10;&#10;added an OrderSystem class." />
+    <option name="LAST_COMMIT_MESSAGE" value="added runMain configuration.&#10;&#10;added a Warehouse class.&#10;&#10;added an OrderSystem class." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
