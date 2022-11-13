@@ -51,9 +51,7 @@ public class OrderSystem extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == comboBox){
             String selectedItem = (String) comboBox.getSelectedItem();
-
             itemLocationsToVisit.add(warehouse.getItemLocation(selectedItem));
-
             System.out.println(itemLocationsToVisit);
         }
         else if (e.getSource() == addItemToWarehouseBtn) {
