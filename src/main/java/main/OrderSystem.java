@@ -68,10 +68,12 @@ public class OrderSystem extends JFrame implements ActionListener {
         if (e.getSource() == addToOrderBtn) {
             itemLocationsToVisit.add(warehouse.getItemLocation(selectedItem));
             System.out.println(itemLocationsToVisit);
+            System.out.printf("Added %s to order\n",(selectedItem));
         }
         else if (e.getSource() == removeFromOrderBtn) {
             itemLocationsToVisit.remove(warehouse.getItemLocation(selectedItem));
             System.out.println(itemLocationsToVisit);
+            System.out.printf("Removed %s from order\n",(selectedItem));
         }
         else if (e.getSource() == sendOrderBtn){
             if (itemLocationsToVisit.isEmpty()){
