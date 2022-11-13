@@ -31,6 +31,7 @@ public class VisualizationTool extends JPanel {
     private int spacing = 1;
     private int boxSize = 25;
     private Timer timer;
+    private ArrayList<Point> order;
     private  final Graph warehouseGraph;
 
 //    public VisualizationTool() throws Exception {
@@ -57,6 +58,7 @@ public class VisualizationTool extends JPanel {
         items.add(shelves.get(6));
         items.add(shelves.get(15));
         items.add(shelves.get(8));
+        this.order = items;
         Node start = inputGraph.getNode(inputGraph.getStartPoint());
         Node end = inputGraph.getNode(inputGraph.getEndPoint());
         this.path = inputGraph.shortestOrderPath(start,end,items);
@@ -122,6 +124,12 @@ public class VisualizationTool extends JPanel {
                 getBoxSize() - getSpacing(),
                 getBoxSize() - getSpacing());
 
+        for(Point item:  this.order){
+            g.fillRect(getSpacing() + item.getX() * getBoxSize(),
+                    getSpacing() + item.getY() * getBoxSize(),
+                    getBoxSize() - getSpacing(),
+                    getBoxSize() - getSpacing());
+        }
         // creates red space to represent the robot's current location
         g.setColor(Color.RED);
         System.out.println(getStep());
