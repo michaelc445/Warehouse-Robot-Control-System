@@ -4,6 +4,8 @@ import graph.Graph;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.HashSet;
 
 public class RunVT extends JFrame {
     public static void main(String[] args) throws Exception {
@@ -19,7 +21,9 @@ public class RunVT extends JFrame {
         //frame.setResizable(false);
         String fileName = "src/test/java/TestMaps/testMap.csv";
         Graph  inputGraph  = new Graph(fileName,false);
-        VisualizationTool vis = new VisualizationTool(inputGraph);
+        ArrayList<graph.Point> order = new ArrayList<>();
+        order.add(new graph.Point(2,2));
+        VisualizationTool vis = new VisualizationTool(inputGraph, order);
         frame.add(vis);
         frame.pack();
     }

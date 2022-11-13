@@ -10,6 +10,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class VisualizationTool extends JPanel {
 
@@ -31,7 +33,7 @@ public class VisualizationTool extends JPanel {
     private int spacing = 1;
     private int boxSize = 25;
     private Timer timer;
-    private ArrayList<Point> order;
+    private ArrayList<graph.Point> order;
     private  final Graph warehouseGraph;
 
 //    public VisualizationTool() throws Exception {
@@ -46,22 +48,23 @@ public class VisualizationTool extends JPanel {
 //        this.mapHeight  =  this.map.length;
 //        this.mapWidth = this.map[0].length;
 //    }
-    public VisualizationTool(Graph inputGraph){
+    public VisualizationTool(Graph inputGraph, ArrayList<graph.Point> itemLocations){
         //timer for each update of the paths progression
         setTimer(new Timer(500, new StepListener()));
         getTimer().start();
         this.warehouseGraph=inputGraph;
-        ArrayList<Point> items = new ArrayList<>();
         this.shelves = inputGraph.getShelves();
+        /*
         items.add(shelves.get(5));
         items.add(shelves.get(10));
         items.add(shelves.get(6));
         items.add(shelves.get(15));
         items.add(shelves.get(8));
-        this.order = items;
+        */
+        this.order = itemLocations;
         Node start = inputGraph.getNode(inputGraph.getStartPoint());
         Node end = inputGraph.getNode(inputGraph.getEndPoint());
-        this.path = inputGraph.shortestOrderPath(start,end,items);
+        this.path = inputGraph.shortestOrderPath(start,end,itemLocations);
         int pathLength = 0;
         for (Path p : this.path){
             pathLength += p.getPath().size();
@@ -132,14 +135,14 @@ public class VisualizationTool extends JPanel {
         }
         // creates red space to represent the robot's current location
         g.setColor(Color.RED);
-        System.out.println(getStep());
-        System.out.println(getStep()/this.mapWidth);
-        System.out.println(getStep()%this.mapHeight);
+        //System.out.println(getStep());
+        //System.out.println(getStep()/this.mapWidth);
+        //System.out.println(getStep()%this.mapHeight);
         g.fillRect(getSpacing() + getPath().get(this.curY).getPath().get(this.curX).getX() * getBoxSize(),
                 getSpacing() + getPath().get(this.curY).getPath().get(this.curX).getY() * getBoxSize(),
                 getBoxSize() - getSpacing(),
                 getBoxSize() - getSpacing());
-        System.out.println("Step "+ getStep());
+        //System.out.println("Step "+ getStep());
 
     }
     // getters and setters
