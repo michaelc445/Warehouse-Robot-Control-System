@@ -4,8 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5dafaf29-34b9-46fd-8806-9e9da26dcb83" name="Changes" comment="added buttons to order system">
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/OrderSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/OrderSystem.java" afterDir="false" />
+
+    <list default="true" id="5dafaf29-34b9-46fd-8806-9e9da26dcb83" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/display/VisualizationTool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/display/VisualizationTool.java" afterDir="false" />
+
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,6 +102,7 @@
       <recent name="graph" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="display" />
       <recent name="graph" />
       <recent name="" />
     </key>
@@ -295,6 +299,7 @@
       <workItem from="1667703051540" duration="43000" />
       <workItem from="1667703105275" duration="20172000" />
       <workItem from="1667829459822" duration="17291000" />
+      <workItem from="1668102067594" duration="7047000" />
     </task>
     <task id="LOCAL-00001" summary="create project">
       <created>1665164156632</created>
@@ -461,6 +466,7 @@
     <MESSAGE value="changed  project to use maven, added shortest path between shelves and it works, but too slow for large maps, will have to change to floyd warshall" />
     <MESSAGE value="added testfiles" />
     <MESSAGE value="no longer calculate distance  between all shelves.  added path  class" />
+
     <MESSAGE value="added runMain configuration.&#10;&#10;added a Warehouse class.&#10;&#10;added an OrderSystem class." />
     <MESSAGE value="added tests for warehouse" />
     <MESSAGE value="added buttons to order system" />
@@ -477,5 +483,7 @@
       <FILTER>stock.*</FILTER>
       <FILTER>display.*</FILTER>
     </SUITE>
+
+
   </component>
 </project>
