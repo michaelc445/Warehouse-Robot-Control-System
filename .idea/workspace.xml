@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5dafaf29-34b9-46fd-8806-9e9da26dcb83" name="Changes" comment="added vt files">
+
+    <list default="true" id="5dafaf29-34b9-46fd-8806-9e9da26dcb83" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/OrderSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/OrderSystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/display/VisualizationTool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/display/VisualizationTool.java" afterDir="false" />
+
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,6 +102,7 @@
       <recent name="graph" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="display" />
       <recent name="graph" />
       <recent name="" />
     </key>
@@ -296,6 +299,7 @@
       <workItem from="1667703051540" duration="43000" />
       <workItem from="1667703105275" duration="20172000" />
       <workItem from="1667829459822" duration="17291000" />
+      <workItem from="1668102067594" duration="7047000" />
     </task>
     <task id="LOCAL-00001" summary="create project">
       <created>1665164156632</created>
@@ -402,28 +406,7 @@
       <option name="project" value="LOCAL" />
       <updated>1668371101798</updated>
     </task>
-    <task id="LOCAL-00016" summary="rebased origin/master">
-      <created>1668378108585</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1668378108586</updated>
-    </task>
-    <task id="LOCAL-00017" summary="rebased origin/master">
-      <created>1668378160045</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1668378160045</updated>
-    </task>
-    <task id="LOCAL-00018" summary="added vt files">
-      <created>1668378344856</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1668378344856</updated>
-    </task>
-    <option name="localTasksCounter" value="19" />
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -432,11 +415,6 @@
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
-        <entry key="0fa7fbe2-fd5f-4557-a1e5-cb3e0e5e71b9">
-          <value>
-            <State />
-          </value>
-        </entry>
         <entry key="MAIN">
           <value>
             <State>
@@ -488,12 +466,11 @@
     <MESSAGE value="changed  project to use maven, added shortest path between shelves and it works, but too slow for large maps, will have to change to floyd warshall" />
     <MESSAGE value="added testfiles" />
     <MESSAGE value="no longer calculate distance  between all shelves.  added path  class" />
+
     <MESSAGE value="added runMain configuration.&#10;&#10;added a Warehouse class.&#10;&#10;added an OrderSystem class." />
     <MESSAGE value="added tests for warehouse" />
     <MESSAGE value="added buttons to order system" />
-    <MESSAGE value="rebased origin/master" />
-    <MESSAGE value="added vt files" />
-    <option name="LAST_COMMIT_MESSAGE" value="added vt files" />
+    <option name="LAST_COMMIT_MESSAGE" value="added buttons to order system" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
@@ -506,5 +483,7 @@
       <FILTER>stock.*</FILTER>
       <FILTER>display.*</FILTER>
     </SUITE>
+
+
   </component>
 </project>
