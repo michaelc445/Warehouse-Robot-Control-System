@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5dafaf29-34b9-46fd-8806-9e9da26dcb83" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/display/RunVT.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/display/VIsualisationTool.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/graph/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/graph/Node.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/display/VisualizationTool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/display/VisualizationTool.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,7 +27,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="VisualizationTool" />
+        <entry key="$PROJECT_DIR$" value="order-system" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -100,6 +98,7 @@
       <recent name="graph" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="display" />
       <recent name="graph" />
       <recent name="" />
     </key>
@@ -277,6 +276,7 @@
       <workItem from="1667703051540" duration="43000" />
       <workItem from="1667703105275" duration="20172000" />
       <workItem from="1667829459822" duration="17291000" />
+      <workItem from="1668102067594" duration="7047000" />
     </task>
     <task id="LOCAL-00001" summary="create project">
       <created>1665164156632</created>
@@ -422,7 +422,8 @@
     <MESSAGE value="changed  project to use maven, added shortest path between shelves and it works, but too slow for large maps, will have to change to floyd warshall" />
     <MESSAGE value="added testfiles" />
     <MESSAGE value="no longer calculate distance  between all shelves.  added path  class" />
-    <option name="LAST_COMMIT_MESSAGE" value="no longer calculate distance  between all shelves.  added path  class" />
+    <MESSAGE value="added sample path to visualiztion tool" />
+    <option name="LAST_COMMIT_MESSAGE" value="added sample path to visualiztion tool" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
@@ -432,6 +433,9 @@
     <SUITE FILE_PATH="coverage/team_software$all_packages.ic" NAME="all_packages Coverage Results" MODIFIED="1667686531236" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>graph.*</FILTER>
       <FILTER>stock.*</FILTER>
+      <FILTER>display.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/team_software_project$RunVT.ic" NAME="RunVT Coverage Results" MODIFIED="1668103228213" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>display.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/team_software$All_in_team_software.ic" NAME="All in team_software Coverage Results" MODIFIED="1667671790243" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

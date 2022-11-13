@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Path {
     private final ArrayList<Point> path;
+
     private final int cost;
     public Path(ArrayList<Point> path){
         this.path   =  path;
@@ -52,4 +53,5 @@ public class Path {
         result.deleteCharAt(result.length()-1);
         return result.toString();
     }
+
 }
