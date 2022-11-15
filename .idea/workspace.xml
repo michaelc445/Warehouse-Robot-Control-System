@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5dafaf29-34b9-46fd-8806-9e9da26dcb83" name="Changes" comment="">
+    <list default="true" id="5dafaf29-34b9-46fd-8806-9e9da26dcb83" name="Changes" comment="Added controller class which has the functionality of our WRCS">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/display/VisualizationTool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/display/VisualizationTool.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/display/RunVT.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/display/VisualizationTool$StepListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/display/VisualizationTool$StepListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/display/VisualizationTool.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/display/VisualizationTool.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/OrderSystem.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/OrderSystem.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,6 +20,16 @@
   <component name="CoverageOptionsProvider">
     <option name="myAddOrReplace" value="0" />
   </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="Main">
+          <activation />
+        </task>
+        <projects_view />
+      </state>
+    </system>
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -24,19 +38,29 @@
       </list>
     </option>
   </component>
+  <component name="Git.Rebase.Settings">
+    <option name="NEW_BASE" value="origin/master" />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="order-system" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GithubProjectSettings">
-    <option name="branchProtectionPatterns">
-      <list>
-        <option value="master" />
-      </list>
+  <component name="GithubPullRequestsUISettings">
+    <option name="recentNewPullRequestHead">
+      <RepoCoordinatesHolder>
+        <option name="owner" value="michaelc445" />
+        <option name="repository" value="Warehouse-Robot-Control-System" />
+      </RepoCoordinatesHolder>
+    </option>
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="35758c0f-1102-45f4-af92-9012bb36c897" />
+        <option name="url" value="git@github.com:michaelc445/Warehouse-Robot-Control-System.git" />
+      </UrlAndAccount>
     </option>
   </component>
   <component name="HighlightingSettingsPerFile">
@@ -62,27 +86,9 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;true&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;last_directory_selection&quot;: &quot;C:/Users/Michael/IdeaProjects/team_software/src/main/java/main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Michael/IdeaProjects/team_software/src/test/java&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.editor&quot;
-  }
-}</component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Michael\IdeaProjects\team_software\src\test" />
@@ -109,7 +115,7 @@
       <command value="mvn idea:idea" />
     </option>
   </component>
-  <component name="RunManager" selected="Application.RunVT">
+  <component name="RunManager" selected="Application.runMain">
     <configuration name="RunVT" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="display.RunVT" />
       <module name="team_software" />
@@ -119,6 +125,13 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="runMain" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="main.Main" />
+      <module name="team_software" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -187,6 +200,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="all_main" type="JUnit" factoryName="JUnit">
+      <module name="team_software" />
+      <option name="PACKAGE_NAME" value="main" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="t" type="JUnit" factoryName="JUnit">
       <module name="team_software" />
       <option name="PACKAGE_NAME" value="graph" />
@@ -238,9 +261,11 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Application.runMain" />
       <item itemvalue="Application.RunVT" />
       <item itemvalue="JUnit.t" />
       <item itemvalue="JUnit.all_packages" />
+      <item itemvalue="JUnit.all_main" />
       <item itemvalue="JUnit.PathTest.getPath" />
       <item itemvalue="JUnit.PathTest.reversed" />
       <item itemvalue="JUnit.PathTest.testEquals" />
@@ -362,7 +387,56 @@
       <option name="project" value="LOCAL" />
       <updated>1667759671727</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="added runMain configuration.&#10;&#10;added a Warehouse class.&#10;&#10;added an OrderSystem class.">
+      <created>1668366050588</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1668366050588</updated>
+    </task>
+    <task id="LOCAL-00014" summary="added tests for warehouse">
+      <created>1668369287564</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1668369287564</updated>
+    </task>
+    <task id="LOCAL-00015" summary="added buttons to order system">
+      <created>1668371101798</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1668371101798</updated>
+    </task>
+    <task id="LOCAL-00016" summary="visualization tool now takes orders from order system">
+      <created>1668382194558</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1668382194558</updated>
+    </task>
+    <task id="LOCAL-00017" summary="fixed the empty order bug">
+      <created>1668382727522</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1668382727522</updated>
+    </task>
+    <task id="LOCAL-00018" summary="added display message indicating which item was added or removed from order">
+      <created>1668383362897</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1668383362897</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Added controller class which has the functionality of our WRCS">
+      <created>1668547815055</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1668547815055</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -371,6 +445,11 @@
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
+        <entry key="0fa7fbe2-fd5f-4557-a1e5-cb3e0e5e71b9">
+          <value>
+            <State />
+          </value>
+        </entry>
         <entry key="MAIN">
           <value>
             <State>
@@ -422,22 +501,25 @@
     <MESSAGE value="changed  project to use maven, added shortest path between shelves and it works, but too slow for large maps, will have to change to floyd warshall" />
     <MESSAGE value="added testfiles" />
     <MESSAGE value="no longer calculate distance  between all shelves.  added path  class" />
-    <MESSAGE value="added sample path to visualiztion tool" />
-    <option name="LAST_COMMIT_MESSAGE" value="added sample path to visualiztion tool" />
+    <MESSAGE value="added runMain configuration.&#10;&#10;added a Warehouse class.&#10;&#10;added an OrderSystem class." />
+    <MESSAGE value="added tests for warehouse" />
+    <MESSAGE value="added buttons to order system" />
+    <MESSAGE value="visualization tool now takes orders from order system" />
+    <MESSAGE value="fixed the empty order bug" />
+    <MESSAGE value="added display message indicating which item was added or removed from order" />
+    <MESSAGE value="Added controller class which has the functionality of our WRCS" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added controller class which has the functionality of our WRCS" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
     <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/team_software$All_in_team_software.ic" NAME="All in team_software Coverage Results" MODIFIED="1667671790243" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/team_software$all_packages.ic" NAME="all_packages Coverage Results" MODIFIED="1667686531236" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>graph.*</FILTER>
       <FILTER>stock.*</FILTER>
       <FILTER>display.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/team_software_project$RunVT.ic" NAME="RunVT Coverage Results" MODIFIED="1668103228213" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>display.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/team_software$All_in_team_software.ic" NAME="All in team_software Coverage Results" MODIFIED="1667671790243" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
