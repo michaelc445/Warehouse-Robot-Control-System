@@ -3,7 +3,7 @@ package main;
 import java.util.HashMap;
 
 public class Warehouse {
-    private final HashMap<String, graph.Point> locations = new HashMap<>();
+    private static final HashMap<String, graph.Point> locations = new HashMap<>();
 
     public Warehouse(){
 

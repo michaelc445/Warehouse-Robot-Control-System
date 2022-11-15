@@ -1,7 +1,6 @@
 package display;
 
 import graph.Graph;
-import graph.Node;
 import graph.Path;
 import graph.Point;
 
@@ -10,17 +9,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 
 public class VisualizationTool extends JPanel {
-
-    //private int[][] path = {{0,0},{0,1},{0,2},{0,3},{1,3},{2,3},{3,3},{4,3},{3,3},{2,3},{1,3},{0,3},{0,2},{0,1},{0,0} };
-
-    //Map and path hard coded for testing
     private ArrayList<Path> path;
     private final ArrayList<Point> shelves;
-    private int[][] map;
+    private final int[][] map;
 
     private Point chargingAreaLocation;
     private Point dispatchAreaLocation;
@@ -29,14 +22,13 @@ public class VisualizationTool extends JPanel {
     private int step;
     private int curX;
     private int curY;
-    private int pathSize;
+    private final int pathSize;
     private int spacing = 1;
     private int boxSize = 25;
     private Timer timer;
-    private ArrayList<graph.Point> order;
-    private  final Graph warehouseGraph;
+    private final ArrayList<graph.Point> order;
 
-//    public VisualizationTool() throws Exception {
+    //    public VisualizationTool() throws Exception {
 //        //timer for each update of the paths progression
 //        this.setTimer(new Timer(500, new StepListener()));
 //        this.getTimer().start();
@@ -48,23 +40,14 @@ public class VisualizationTool extends JPanel {
 //        this.mapHeight  =  this.map.length;
 //        this.mapWidth = this.map[0].length;
 //    }
-    public VisualizationTool(Graph inputGraph, ArrayList<graph.Point> itemLocations){
+    public VisualizationTool(Graph inputGraph, ArrayList<Path> path, ArrayList<Point> locationsToVisit){
         //timer for each update of the paths progression
         setTimer(new Timer(500, new StepListener()));
         getTimer().start();
-        this.warehouseGraph=inputGraph;
         this.shelves = inputGraph.getShelves();
-        /*
-        items.add(shelves.get(5));
-        items.add(shelves.get(10));
-        items.add(shelves.get(6));
-        items.add(shelves.get(15));
-        items.add(shelves.get(8));
-        */
-        this.order = itemLocations;
-        Node start = inputGraph.getNode(inputGraph.getStartPoint());
-        Node end = inputGraph.getNode(inputGraph.getEndPoint());
-        this.path = inputGraph.shortestOrderPath(start,end,itemLocations);
+
+        this.path = path;
+        this.order = locationsToVisit;
         int pathLength = 0;
         for (Path p : this.path){
             pathLength += p.getPath().size();
@@ -73,8 +56,8 @@ public class VisualizationTool extends JPanel {
         this.map = inputGraph.getMap();
         this.mapHeight  =  this.map.length;
         this.mapWidth = this.map[0].length;
-        this.dispatchAreaLocation=this.warehouseGraph.getEndPoint();
-        this.chargingAreaLocation=this.warehouseGraph.getStartPoint();
+        this.dispatchAreaLocation= inputGraph.getEndPoint();
+        this.chargingAreaLocation= inputGraph.getStartPoint();
 
     }
     public void paintComponent(Graphics g){

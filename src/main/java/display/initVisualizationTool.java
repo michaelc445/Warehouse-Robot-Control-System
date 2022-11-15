@@ -1,16 +1,15 @@
-/*
 package display;
 
 import graph.Graph;
 import graph.Path;
+import graph.Point;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.HashSet;
 
-public class RunVT extends JFrame {
-    public static void main(String[] args) throws Exception {
+public class initVisualizationTool {
+    public initVisualizationTool(Graph inputGraph, ArrayList<Path> path, ArrayList<Point> locationsToVisit) {
         JFrame frame = new JFrame();
         frame.setTitle("Visualization tool");
         frame.setSize( 700 + 24 , 700 + 48);
@@ -20,14 +19,8 @@ public class RunVT extends JFrame {
         frame.setMinimumSize(minSize);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
-        //frame.setResizable(false);
-        String fileName = "src/test/java/TestMaps/testMap.csv";
-        Graph  inputGraph  = new Graph(fileName,false);
-
-        //VisualizationTool vis = new VisualizationTool(inputGraph, order);
-        //frame.add(vis);
+        VisualizationTool vis = new VisualizationTool(inputGraph, path, locationsToVisit);
+        frame.add(vis);
         frame.pack();
     }
 }
-
- */
