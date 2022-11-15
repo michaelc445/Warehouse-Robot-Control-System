@@ -28,18 +28,6 @@ public class VisualizationTool extends JPanel {
     private Timer timer;
     private final ArrayList<graph.Point> order;
 
-    //    public VisualizationTool() throws Exception {
-//        //timer for each update of the paths progression
-//        this.setTimer(new Timer(500, new StepListener()));
-//        this.getTimer().start();
-//        String fileName = "src/test/java/TestMaps/testMap.csv";
-//        Graph  inputGraph  = new Graph(fileName,false);
-//        this.warehouseGraph=inputGraph;
-//        this.shelves  = inputGraph.getShelves();
-//        this.map = inputGraph.getMap();
-//        this.mapHeight  =  this.map.length;
-//        this.mapWidth = this.map[0].length;
-//    }
     public VisualizationTool(Graph inputGraph, ArrayList<Path> path, ArrayList<Point> locationsToVisit){
         //timer for each update of the paths progression
         setTimer(new Timer(500, new StepListener()));
@@ -118,14 +106,10 @@ public class VisualizationTool extends JPanel {
         }
         // creates red space to represent the robot's current location
         g.setColor(Color.RED);
-        //System.out.println(getStep());
-        //System.out.println(getStep()/this.mapWidth);
-        //System.out.println(getStep()%this.mapHeight);
         g.fillRect(getSpacing() + getPath().get(this.curY).getPath().get(this.curX).getX() * getBoxSize(),
                 getSpacing() + getPath().get(this.curY).getPath().get(this.curX).getY() * getBoxSize(),
                 getBoxSize() - getSpacing(),
                 getBoxSize() - getSpacing());
-        //System.out.println("Step "+ getStep());
 
     }
     // getters and setters
