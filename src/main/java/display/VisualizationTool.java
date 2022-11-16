@@ -1,18 +1,19 @@
 package display;
 
-import graph.Graph;
 import graph.Path;
 import graph.Point;
+import graph.WarehouseGraph;
+import main.Warehouse;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.util.List;
 
 public class VisualizationTool extends JPanel {
-    private ArrayList<Path> path;
-    private final ArrayList<Point> shelves;
+    private List<Path> path;
+    private final List<Point> shelves;
     private final int[][] map;
 
     private Point chargingAreaLocation;
@@ -26,13 +27,13 @@ public class VisualizationTool extends JPanel {
     private int spacing = 1;
     private int boxSize = 25;
     private Timer timer;
-    private final ArrayList<graph.Point> order;
+    private final List<graph.Point> order;
 
-    public VisualizationTool(Graph inputGraph, ArrayList<Path> path, ArrayList<Point> locationsToVisit){
+    public VisualizationTool(Warehouse warehouse, List<Path> path, List<Point> locationsToVisit){
         //timer for each update of the paths progression
         setTimer(new Timer(500, new StepListener()));
         getTimer().start();
-        this.shelves = inputGraph.getShelves();
+        this.shelves = warehouse.getShelveLocations();
 
         this.path = path;
         this.order = locationsToVisit;
@@ -41,11 +42,11 @@ public class VisualizationTool extends JPanel {
             pathLength += p.getPath().size();
         }
         this.pathSize=pathLength;
-        this.map = inputGraph.getMap();
+        this.map = warehouse.getMapLayout();
         this.mapHeight  =  this.map.length;
         this.mapWidth = this.map[0].length;
-        this.dispatchAreaLocation= inputGraph.getEndPoint();
-        this.chargingAreaLocation= inputGraph.getStartPoint();
+        this.dispatchAreaLocation= warehouse.getDispatchedArea();
+        this.chargingAreaLocation= warehouse.getChargingArea();
 
     }
     public void paintComponent(Graphics g){
@@ -157,11 +158,11 @@ public class VisualizationTool extends JPanel {
         this.timer = timer;
     }
 
-    public ArrayList<Path> getPath() {
+    public List<Path> getPath() {
         return path;
     }
 
-    public void setPath(ArrayList<Path> path) {
+    public void setPath(List<Path> path) {
         this.path = path;
     }
 

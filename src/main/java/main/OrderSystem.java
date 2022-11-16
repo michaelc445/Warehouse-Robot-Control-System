@@ -1,26 +1,26 @@
 package main;
 
-import graph.Graph;
+import graph.WarehouseGraph;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashSet;
+import java.util.List;
 
 public class OrderSystem extends JFrame implements ActionListener {
-    Graph inputGraph;
     JComboBox<Object> comboBox;
      JButton addToOrderBtn;
      JButton sendOrderBtn;
      JButton removeFromOrderBtn;
      HashSet<String> order;
-     Warehouse warehouse = new Warehouse();
 
+     Warehouse temporaryFieldWarehouse;
 
-     public OrderSystem(Graph inputGraph){
-         this.inputGraph = inputGraph;
-         Object[] itemsInStock = warehouse.getItemNames();
+     public OrderSystem(Warehouse warehouse){
+         temporaryFieldWarehouse = warehouse;
+
          order = new HashSet<>();
          addToOrderBtn = new JButton();
          addToOrderBtn.setBounds(200,100,100,50);
@@ -38,7 +38,7 @@ public class OrderSystem extends JFrame implements ActionListener {
 
 
 
-         comboBox = new JComboBox<>(itemsInStock);
+         comboBox = new JComboBox<>(warehouse.getItemNames().toArray());
 
          this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
          this.setLayout(new FlowLayout());
@@ -75,7 +75,7 @@ public class OrderSystem extends JFrame implements ActionListener {
             }
             else {
                 //send the order to the WRCS!!
-                new Controller(inputGraph, order);
+                new Controller(temporaryFieldWarehouse, order);
             }
         }
     }

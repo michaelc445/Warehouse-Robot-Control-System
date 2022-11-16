@@ -1,19 +1,17 @@
 package main;
 import display.initVisualizationTool;
-import graph.Graph;
-import graph.Node;
-import graph.Path;
+import graph.*;
+
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class Controller {
-    Warehouse warehouse = new Warehouse();
-    ArrayList<graph.Point> locationsToVisit;
 
-    public Controller(Graph inputGraph, HashSet<String> order){
 
-        Node start = inputGraph.getNode(inputGraph.getStartPoint());
-        Node end = inputGraph.getNode(inputGraph.getEndPoint());
+    public Controller(Warehouse warehouse, Set<String> order) {
+        ArrayList<Point> locationsToVisit;
+
         locationsToVisit = new ArrayList<>();
 
         //perform a database lookup to fetch item locations
@@ -22,11 +20,11 @@ public class Controller {
         }
 
         //calculate a path for the robot through the warehouse visiting all locations
-        ArrayList<Path> path = inputGraph.shortestOrderPath(start,end, locationsToVisit);
-
+        PathFinder pathFinder = new PathFinder();
+        List<Path> shortestPath = pathFinder.findShortestPath(warehouse, locationsToVisit);
 
         //send this path to the visualization tool
-        new initVisualizationTool(inputGraph, path, locationsToVisit);
+        new initVisualizationTool(warehouse, shortestPath, locationsToVisit);
 
     }
 
