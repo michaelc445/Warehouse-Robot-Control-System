@@ -12,7 +12,9 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import javax.swing.DefaultListModel;
 import javax.swing.JList;
+import javax.swing.ListModel;
 import main.Controller;
 import static main.Main.warehouse;
 import util.Parser;
@@ -52,9 +54,10 @@ public class UserInterface extends javax.swing.JFrame {
         processButton = new javax.swing.JButton();
         itemSelectComboBox = new javax.swing.JComboBox<>();
         jSeparator2 = new javax.swing.JSeparator();
-        orderScrollPane = new javax.swing.JScrollPane();
         orderLabel = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        orderListPanel = new javax.swing.JList<>();
         itemListPanel = new javax.swing.JPanel();
         itemsLabel = new javax.swing.JLabel();
         itemListScrollPane = new javax.swing.JScrollPane(new JList(items));
@@ -104,26 +107,28 @@ public class UserInterface extends javax.swing.JFrame {
         orderLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         orderLabel.setText("Order");
 
+        jScrollPane1.setViewportView(orderListPanel);
+
         javax.swing.GroupLayout orderSystemPanelLayout = new javax.swing.GroupLayout(orderSystemPanel);
         orderSystemPanel.setLayout(orderSystemPanelLayout);
         orderSystemPanelLayout.setHorizontalGroup(
             orderSystemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(orderSystemPanelLayout.createSequentialGroup()
-                .addGroup(orderSystemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(orderSystemPanelLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, orderSystemPanelLayout.createSequentialGroup()
+                .addGroup(orderSystemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, orderSystemPanelLayout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jSeparator1))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, orderSystemPanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(orderSystemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(orderSystemLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(addItemButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(removeItemButton, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
                             .addComponent(processButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(itemSelectComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jSeparator2)
-                            .addComponent(orderScrollPane)
-                            .addComponent(orderLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(orderSystemPanelLayout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jSeparator1)))
+                            .addComponent(orderLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         orderSystemPanelLayout.setVerticalGroup(
@@ -141,11 +146,11 @@ public class UserInterface extends javax.swing.JFrame {
                 .addComponent(itemSelectComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(2, 2, 2)
+                .addGap(17, 17, 17)
                 .addComponent(orderLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(orderScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(processButton)
                 .addContainerGap())
         );
@@ -176,7 +181,7 @@ public class UserInterface extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(itemsLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(itemListScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
+                .addComponent(itemListScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -192,7 +197,7 @@ public class UserInterface extends javax.swing.JFrame {
         );
         visualisationToolPanelLayout.setVerticalGroup(
             visualisationToolPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 398, Short.MAX_VALUE)
+            .addGap(0, 404, Short.MAX_VALUE)
         );
 
         getContentPane().add(visualisationToolPanel, java.awt.BorderLayout.CENTER);
@@ -266,10 +271,11 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JScrollPane itemListScrollPane;
     private javax.swing.JComboBox<String> itemSelectComboBox;
     private javax.swing.JLabel itemsLabel;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel orderLabel;
-    private javax.swing.JScrollPane orderScrollPane;
+    private javax.swing.JList<String> orderListPanel;
     private javax.swing.JLabel orderSystemLabel;
     private javax.swing.JPanel orderSystemPanel;
     private javax.swing.JButton processButton;
@@ -278,8 +284,12 @@ public class UserInterface extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void updateOrderScrollPanel() {
-        orderScrollPane.removeAll();
-        orderScrollPane.add(new JList(order.toArray()));
+        orderListPanel.removeAll();
+        var listModel = new DefaultListModel<>();
+        for (String item : order) {
+            listModel.addElement(item);
+        }
+        orderListPanel.setModel((ListModel) listModel);
     }
 
     private void launchController() {
