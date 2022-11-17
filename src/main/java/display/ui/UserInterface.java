@@ -4,6 +4,7 @@
  */
 package display.ui;
 
+import display.VisualizationTool;
 import display.initVisualizationTool;
 import graph.Path;
 import graph.PathFinder;
@@ -15,8 +16,10 @@ import java.util.Set;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.ListModel;
+import javax.swing.SwingUtilities;
 import main.Controller;
 import static main.Main.warehouse;
+import main.Warehouse;
 import util.Parser;
 
 /**
@@ -61,7 +64,7 @@ public class UserInterface extends javax.swing.JFrame {
         itemListPanel = new javax.swing.JPanel();
         itemsLabel = new javax.swing.JLabel();
         itemListScrollPane = new javax.swing.JScrollPane(new JList(items));
-        visualisationToolPanel = new javax.swing.JPanel();
+        visualisationPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Warehouse Robotic Control System");
@@ -187,20 +190,18 @@ public class UserInterface extends javax.swing.JFrame {
 
         getContentPane().add(itemListPanel, java.awt.BorderLayout.LINE_END);
 
-        visualisationToolPanel.setBorder(new javax.swing.border.MatteBorder(null));
-
-        javax.swing.GroupLayout visualisationToolPanelLayout = new javax.swing.GroupLayout(visualisationToolPanel);
-        visualisationToolPanel.setLayout(visualisationToolPanelLayout);
-        visualisationToolPanelLayout.setHorizontalGroup(
-            visualisationToolPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 292, Short.MAX_VALUE)
+        javax.swing.GroupLayout visualisationPanelLayout = new javax.swing.GroupLayout(visualisationPanel);
+        visualisationPanel.setLayout(visualisationPanelLayout);
+        visualisationPanelLayout.setHorizontalGroup(
+            visualisationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 294, Short.MAX_VALUE)
         );
-        visualisationToolPanelLayout.setVerticalGroup(
-            visualisationToolPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 404, Short.MAX_VALUE)
+        visualisationPanelLayout.setVerticalGroup(
+            visualisationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 406, Short.MAX_VALUE)
         );
 
-        getContentPane().add(visualisationToolPanel, java.awt.BorderLayout.CENTER);
+        getContentPane().add(visualisationPanel, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -280,7 +281,7 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JPanel orderSystemPanel;
     private javax.swing.JButton processButton;
     private javax.swing.JButton removeItemButton;
-    private javax.swing.JPanel visualisationToolPanel;
+    private javax.swing.JPanel visualisationPanel;
     // End of variables declaration//GEN-END:variables
 
     private void updateOrderScrollPanel() {
@@ -307,6 +308,15 @@ public class UserInterface extends javax.swing.JFrame {
         List<Path> shortestPath = pathFinder.findShortestPath(warehouse, locationsToVisit);
 
         //send this path to the visualization tool
-        new initVisualizationTool(warehouse, shortestPath, locationsToVisit);
+        showVisualisation(warehouse, shortestPath, locationsToVisit);
+    }
+    
+    protected void showVisualisation(Warehouse warehouse, List<Path> shortestPath, ArrayList<Point> locationsToVisit) {
+        SwingUtilities.invokeLater(() -> {
+            this.remove(visualisationPanel);
+            this.add(new VisualizationTool(warehouse, shortestPath, locationsToVisit));
+            this.invalidate();
+            this.revalidate();
+        });
     }
 }
