@@ -4,12 +4,31 @@
  */
 package display.ui;
 
+import display.initVisualizationTool;
+import graph.Path;
+import graph.PathFinder;
+import graph.Point;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import javax.swing.JList;
+import main.Controller;
+import static main.Main.warehouse;
+import util.Parser;
+
 /**
  *
  * @author art
  */
 public class UserInterface extends javax.swing.JFrame {
 
+    Parser parser = new Parser();
+    
+    String[] items = parser.parseItems("items.csv");
+    
+    Set<String> order = new HashSet<>();
+    
     /**
      * Creates new form UserInterface
      */
@@ -31,14 +50,14 @@ public class UserInterface extends javax.swing.JFrame {
         addItemButton = new javax.swing.JButton();
         removeItemButton = new javax.swing.JButton();
         processButton = new javax.swing.JButton();
-        itemSelectComboBox = new javax.swing.JComboBox<>();
+        itemSelectComboBox = new javax.swing.JComboBox<>(items);
         jSeparator2 = new javax.swing.JSeparator();
         orderScrollPane = new javax.swing.JScrollPane();
         orderLabel = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         itemListPanel = new javax.swing.JPanel();
         itemsLabel = new javax.swing.JLabel();
-        itemListScrollPane = new javax.swing.JScrollPane();
+        itemListScrollPane = new javax.swing.JScrollPane(new JList(items));
         visualisationToolPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -62,8 +81,18 @@ public class UserInterface extends javax.swing.JFrame {
         });
 
         removeItemButton.setText("Remove item");
+        removeItemButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeItemButtonActionPerformed(evt);
+            }
+        });
 
         processButton.setText("Process");
+        processButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                processButtonActionPerformed(evt);
+            }
+        });
 
         itemSelectComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         itemSelectComboBox.addActionListener(new java.awt.event.ActionListener() {
@@ -172,47 +201,64 @@ public class UserInterface extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addItemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addItemButtonActionPerformed
-        // TODO add your handling code here:
+        String selectedItem = (String) itemSelectComboBox.getSelectedItem();
+        order.add(selectedItem);
+        updateOrderScrollPanel();
+        System.out.printf("Added %s to order\n",(selectedItem));
     }//GEN-LAST:event_addItemButtonActionPerformed
 
     private void itemSelectComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemSelectComboBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_itemSelectComboBoxActionPerformed
 
+    private void removeItemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeItemButtonActionPerformed
+        String selectedItem = (String) itemSelectComboBox.getSelectedItem();
+        order.remove(selectedItem);
+        updateOrderScrollPanel();
+        System.out.printf("Removed %s from order\n",(selectedItem));
+    }//GEN-LAST:event_removeItemButtonActionPerformed
+
+    private void processButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_processButtonActionPerformed
+        if (order.isEmpty()){
+            System.out.println("Empty order!");
+        }
+        else {
+            launchController();
+        }
+    }//GEN-LAST:event_processButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UserInterface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UserInterface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UserInterface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UserInterface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new UserInterface().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(UserInterface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(UserInterface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(UserInterface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(UserInterface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(() -> {
+//            new UserInterface().setVisible(true);
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addItemButton;
@@ -230,4 +276,27 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JButton removeItemButton;
     private javax.swing.JPanel visualisationToolPanel;
     // End of variables declaration//GEN-END:variables
+
+    private void updateOrderScrollPanel() {
+        orderScrollPane.removeAll();
+        orderScrollPane.add(new JList(order.toArray()));
+    }
+
+    private void launchController() {
+       ArrayList<Point> locationsToVisit;
+
+        locationsToVisit = new ArrayList<>();
+
+        //perform a database lookup to fetch item locations
+        for (String item : order){
+            locationsToVisit.add(warehouse.getItemLocation(item));
+        }
+
+        //calculate a path for the robot through the warehouse visiting all locations
+        PathFinder pathFinder = new PathFinder();
+        List<Path> shortestPath = pathFinder.findShortestPath(warehouse, locationsToVisit);
+
+        //send this path to the visualization tool
+        new initVisualizationTool(warehouse, shortestPath, locationsToVisit);
+    }
 }
