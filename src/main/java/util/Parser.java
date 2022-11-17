@@ -3,6 +3,8 @@ package util;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -11,7 +13,7 @@ import java.util.stream.Stream;
  */
 public class Parser {
 
-    private static final String DELIMITER = ",";
+    private static final String CSV_DELIMITER = ",";
 
     /**
      * Parses data from the .csv file containing a warehouse map layout represented by the 0 and 1
@@ -22,13 +24,22 @@ public class Parser {
         List<int[]> rows;
         try (Stream<String> fileStream = getFileFromResourcesAsStream(warehouseMapFile)) {
             rows = fileStream
-                    .map(line -> line.split(DELIMITER))
+                    .map(line -> line.split(CSV_DELIMITER))
                     .map(Parser::mapStringArrToIntArr)
                     .toList();
         }
-        int layoutWidth = rows.size();
-        int layoutLength = rows.get(0).length;
-        return rows.toArray(new int[layoutWidth][layoutLength]);
+        return rows.toArray(int[][]::new);
+    }
+
+    public String[] parseItems(String itemsFile) {
+        List<String> items = new ArrayList<>();
+        try (Stream<String> fileStream = getFileFromResourcesAsStream(itemsFile)) {
+            fileStream.forEach(line -> {
+               String[] itemArray = line.split(CSV_DELIMITER);
+               items.addAll(Arrays.asList(itemArray));
+            });
+        }
+        return items.toArray(String[]::new);
     }
 
     private Stream<String> getFileFromResourcesAsStream(String fileName) {
