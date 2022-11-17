@@ -9,6 +9,7 @@ import graph.WarehouseGraph;
 import stock.Item;
 import util.Parser;
 
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -27,11 +28,11 @@ public class Main {
 
         warehouse = new Warehouse(warehouseGraph);
 
-        warehouse.addItem(new Item("Hammer", new Point(2,2)));
-        warehouse.addItem(new Item("Screw", new Point(4,4)));
-        warehouse.addItem(new Item("Helmet", new Point(4,2)));
-        warehouse.addItem(new Item("Axe", new Point(5,5)));
-        warehouse.addItem(new Item("Wrench", new Point(1,4)));
+        warehouse.addItem(new Item("hammer", new Point(2,2)));
+        warehouse.addItem(new Item("screws", new Point(4,4)));
+        warehouse.addItem(new Item("helmet", new Point(4,2)));
+        warehouse.addItem(new Item("axe", new Point(5,5)));
+        warehouse.addItem(new Item("wrench", new Point(1,4)));
 
         launchUI();
     }
