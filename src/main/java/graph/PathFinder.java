@@ -106,18 +106,6 @@ public class PathFinder {
 
     }
 
-    private ArrayList<Point> createShelveList(int[][] map) {
-        ArrayList<Point> shelveList = new ArrayList<>();
-        for (int i = 0; i < map.length; i++) {
-            for (int j = 0; j < map[i].length; j++) {
-                if (map[i][j] == 1) {
-                    shelveList.add(new Point(j, i));
-                }
-            }
-        }
-        return shelveList;
-    }
-
     public Path dijkstra(Node start, Node end) {
         if (start == null || end == null) {
             return null;
