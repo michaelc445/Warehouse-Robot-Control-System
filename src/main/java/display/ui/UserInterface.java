@@ -50,7 +50,7 @@ public class UserInterface extends javax.swing.JFrame {
         addItemButton = new javax.swing.JButton();
         removeItemButton = new javax.swing.JButton();
         processButton = new javax.swing.JButton();
-        itemSelectComboBox = new javax.swing.JComboBox<>(items);
+        itemSelectComboBox = new javax.swing.JComboBox<>();
         jSeparator2 = new javax.swing.JSeparator();
         orderScrollPane = new javax.swing.JScrollPane();
         orderLabel = new javax.swing.JLabel();
@@ -94,7 +94,7 @@ public class UserInterface extends javax.swing.JFrame {
             }
         });
 
-        itemSelectComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        itemSelectComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(items));
         itemSelectComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 itemSelectComboBoxActionPerformed(evt);
