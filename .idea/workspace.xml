@@ -4,13 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5dafaf29-34b9-46fd-8806-9e9da26dcb83" name="Changes" comment="Added controller class which has the functionality of our WRCS">
+    <list default="true" id="5dafaf29-34b9-46fd-8806-9e9da26dcb83" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/display/RunVT.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/items.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/items.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/TestMaps/testMapMedium.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/testMapMedium.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/display/VisualizationTool$StepListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/display/VisualizationTool$StepListener.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/display/VisualizationTool.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/display/VisualizationTool.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/graph/Graph.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/main/OrderSystem.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/OrderSystem.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/Warehouse.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/Warehouse.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,10 +49,17 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="order-system" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GithubProjectSettings">
+    <option name="branchProtectionPatterns">
+      <list>
+        <option value="master" />
+      </list>
+    </option>
   </component>
   <component name="GithubPullRequestsUISettings">
     <option name="recentNewPullRequestHead">
@@ -86,9 +98,11 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Michael/IdeaProjects/team_software_project/src/main/resources&quot;
+  }
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Michael\IdeaProjects\team_software\src\test" />
@@ -97,6 +111,7 @@
       <recent name="" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Michael\IdeaProjects\team_software_project\src\main\resources" />
       <recent name="C:\Users\Michael\IdeaProjects\team_software\src\test\java" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -263,13 +278,13 @@
     <list>
       <item itemvalue="Application.runMain" />
       <item itemvalue="Application.RunVT" />
+      <item itemvalue="JUnit.all_main" />
       <item itemvalue="JUnit.t" />
       <item itemvalue="JUnit.all_packages" />
-      <item itemvalue="JUnit.all_main" />
+      <item itemvalue="JUnit.GraphTest.getPathMultipleNodes" />
       <item itemvalue="JUnit.PathTest.getPath" />
       <item itemvalue="JUnit.PathTest.reversed" />
       <item itemvalue="JUnit.PathTest.testEquals" />
-      <item itemvalue="JUnit.GraphTest.getPathMultipleNodes" />
       <item itemvalue="Maven.team_software [test]" />
     </list>
     <recent_temporary>
@@ -515,11 +530,11 @@
     <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/team_software$All_in_team_software.ic" NAME="All in team_software Coverage Results" MODIFIED="1667671790243" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/team_software$all_packages.ic" NAME="all_packages Coverage Results" MODIFIED="1667686531236" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>graph.*</FILTER>
       <FILTER>stock.*</FILTER>
       <FILTER>display.*</FILTER>
     </SUITE>
+    <SUITE FILE_PATH="coverage/team_software$All_in_team_software.ic" NAME="All in team_software Coverage Results" MODIFIED="1667671790243" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

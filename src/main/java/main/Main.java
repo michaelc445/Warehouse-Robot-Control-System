@@ -9,12 +9,11 @@ import graph.WarehouseGraph;
 import stock.Item;
 import util.Parser;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 
 public class Main {
-    private static final String WAREHOUSE_MAP_FILE = "warehouse_map.csv";
+    private static final String WAREHOUSE_MAP_FILE = "testMapMedium.csv";
     private static final Point START_POINT = new Point(0, 0);
     private static final Point END_POINT = new Point(0, 6);
     
@@ -27,12 +26,23 @@ public class Main {
         WarehouseGraph warehouseGraph = new WarehouseGraph(warehouseMapLayout, START_POINT, END_POINT);
 
         warehouse = new Warehouse(warehouseGraph);
-
-        warehouse.addItem(new Item("hammer", new Point(2,2)));
-        warehouse.addItem(new Item("screws", new Point(4,4)));
-        warehouse.addItem(new Item("helmet", new Point(4,2)));
-        warehouse.addItem(new Item("axe", new Point(5,5)));
-        warehouse.addItem(new Item("wrench", new Point(1,4)));
+        List<Point> shelves= warehouse.getShelveLocations();
+        String[] t = parser.parseItems("items.csv");
+        Random rand = new Random();
+        HashMap<Point,Boolean> explored = new HashMap<>();
+        for(String name: t){
+            Point randomPoint = shelves.get(rand.nextInt(shelves.size()));
+            while (explored.containsKey(randomPoint)){
+                randomPoint = shelves.get(rand.nextInt(shelves.size()));
+            }
+            explored.put(randomPoint,true);
+            warehouse.addItem(new Item(name,randomPoint));
+        }
+//        warehouse.addItem(new Item("hammer", new Point(2,2)));
+//        warehouse.addItem(new Item("screws", new Point(4,4)));
+//        warehouse.addItem(new Item("helmet", new Point(4,2)));
+//        warehouse.addItem(new Item("axe", new Point(5,5)));
+//        warehouse.addItem(new Item("wrench", new Point(1,4)));
 
         launchUI();
     }
