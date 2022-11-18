@@ -5,10 +5,12 @@ import graph.WarehouseGraph;
 import stock.Item;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Warehouse {
-    private final List<Item> items = new ArrayList<>();
+    private final HashMap<String,Item> items;
     private final List<Point> shelveLocations;
     private final Point chargingArea;
     private final Point dispatchedArea;
@@ -16,6 +18,7 @@ public class Warehouse {
 
 
     public Warehouse(WarehouseGraph warehouseGraph) {
+        this.items=  new HashMap<>();
         this.warehouseGraph = warehouseGraph;
         this.shelveLocations = createShelveList(warehouseGraph.getWarehouseMapLayout());
         this.chargingArea = warehouseGraph.getStartNode().getLocation();
@@ -34,27 +37,33 @@ public class Warehouse {
         return shelveList;
     }
 
-    public void addItem(Item item){
-        items.add(item);
+    public void addItem(String name, Point location){
+        items.put(name,new Item(name,location));
     }
     public void removeItemByName(String name){
-        items.removeIf(item -> item.name().equals(name));
+        items.remove(name);
     }
-    public graph.Point getItemLocation(String name){
-        return items.stream()
-                .filter(item -> item.name().equals(name))
-                .findFirst()
-                .orElseThrow()
-                .location();
+    public Point getItemLocation(String name){
+        if (!items.containsKey(name)){
+            return null;
+        }
+        return items.get(name).location();
     }
     public List<String> getItemNames(){
-        return items.stream().map(Item::name).toList();
+        List<String> result = new ArrayList<>();
+        for (Map.Entry<String, Item> entry:  items.entrySet()){
+            result.add(entry.getKey());
+        }
+        return result;
     }
 
     public List<Item> getItems() {
-        return items;
+        List<Item> result = new ArrayList<>();
+        for (Map.Entry<String, Item> entry:  items.entrySet()){
+            result.add(entry.getValue());
+        }
+        return result;
     }
-
 
     public Point getChargingArea() {
         return chargingArea;
@@ -69,7 +78,11 @@ public class Warehouse {
     }
 
     public List<Point> getItemLocations() {
-        return items.stream().map(Item::location).toList();
+        List<Point> result = new ArrayList<>();
+        for (Map.Entry<String, Item> entry:  items.entrySet()){
+            result.add(entry.getValue().location());
+        }
+        return result;
     }
 
     public List<Point> getShelveLocations() {

@@ -1,12 +1,9 @@
 package util;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Stream;
 
 /**
  * The Parser class is a stateless class with methods to parse the data from files
@@ -20,39 +17,30 @@ public class Parser {
      * @param warehouseMapFile - filename of the file in the 'resources' folder
      * @return int[][] warehouseMapLayout
      */
-    public int[][] parseMapLayout(String warehouseMapFile) {
-        List<int[]> rows;
-        try (Stream<String> fileStream = getFileFromResourcesAsStream(warehouseMapFile)) {
-            rows = fileStream
-                    .map(line -> line.split(CSV_DELIMITER))
-                    .map(Parser::mapStringArrToIntArr)
-                    .toList();
+    public int[][] parseMapLayout(String warehouseMapFile) throws IOException {
+        File inFile = new File(warehouseMapFile);
+        BufferedReader bufferedReader  = new BufferedReader(new FileReader(inFile));
+        String  line;
+        ArrayList<int[]> parsedInputFile =  new ArrayList<>();
+        while ((line = bufferedReader.readLine())!= null){
+            String[] t = line.split(CSV_DELIMITER);
+            parsedInputFile.add(Arrays.stream(t).mapToInt(Integer::parseInt).toArray());
         }
-        return rows.toArray(int[][]::new);
+        bufferedReader.close();
+        return parsedInputFile.toArray(int[][]::new);
     }
 
-    public String[] parseItems(String itemsFile) {
-        List<String> items = new ArrayList<>();
-        try (Stream<String> fileStream = getFileFromResourcesAsStream(itemsFile)) {
-            fileStream.forEach(line -> {
-               String[] itemArray = line.split(CSV_DELIMITER);
-               items.addAll(Arrays.asList(itemArray));
-            });
+    public String[] parseItems(String itemsFile) throws IOException {
+        File inFile = new File(itemsFile);
+        BufferedReader bufferedReader  = new BufferedReader(new FileReader(inFile));
+        String  line;
+        ArrayList<String> parsedInputFile =  new ArrayList<>();
+        while ((line = bufferedReader.readLine())!= null){
+            String[] t = line.split(CSV_DELIMITER);
+            parsedInputFile.addAll(List.of(t));
         }
-        return items.toArray(String[]::new);
-    }
-
-    private Stream<String> getFileFromResourcesAsStream(String fileName) {
-        var inputStream = getClass().getClassLoader().getResourceAsStream(fileName);
-        if (inputStream == null) {
-            throw new IllegalArgumentException("File not found! File: " + fileName);
-        } else {
-            return new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8)).lines();
-        }
-    }
-
-    private static int[] mapStringArrToIntArr(String[] array) {
-        return Stream.of(array).mapToInt(Integer::parseInt).toArray();
+        bufferedReader.close();
+        return parsedInputFile.toArray(String[]::new);
     }
 
 }

@@ -9,7 +9,6 @@ class NodeTest {
     @Test
     void getValue() {
         Point p1 = new Point(0,0);
-
         Node test = new Node(0, p1);
         assertEquals(test.getValue(), 0);
     }

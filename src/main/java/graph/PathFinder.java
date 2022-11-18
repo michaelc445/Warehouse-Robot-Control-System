@@ -9,26 +9,19 @@ public class PathFinder {
 
     public List<Path> findShortestPath(Warehouse warehouse, List<Point> orderedItems) {
         WarehouseGraph warehouseGraph = warehouse.getWarehouseGraph();
-
         checkArguments(warehouseGraph, orderedItems);
-
         Node start = warehouseGraph.getStartNode();
         Node end = warehouseGraph.getEndNode();
-
         List<List<Point>> permutationList = Generator.permutation(orderedItems).simple().stream().toList();
-
         List<Point> itemLocations = new ArrayList<>(List.copyOf(orderedItems));
         itemLocations.add(start.getLocation());
         itemLocations.add(end.getLocation());
-
         HashMap<Point, HashMap<Point, Path>> distancePairMap = createItemPairDistanceMap(warehouseGraph, itemLocations);
-
         List<Point> shortestPath = permutationList.stream().min((path, pathToCompare) -> {
             int cost = pathCost(start, end, path, distancePairMap);
             int costToCompare = pathCost(start, end, pathToCompare, distancePairMap);
             return Integer.compare(cost, costToCompare);
         }).orElse(new ArrayList<>());
-
         return extractPaths(warehouseGraph, distancePairMap, shortestPath);
     }
 
@@ -43,8 +36,8 @@ public class PathFinder {
 
         if (!distancePairMap.containsKey(start))
             throw new IllegalArgumentException("No starting location in Distance pair map");
-        if (!distancePairMap.get(start).containsKey(path.get(0))) // TODO: what does this condition statement check?
-            throw new IllegalArgumentException("???");
+        if (!distancePairMap.get(start).containsKey(path.get(0)))
+            throw new IllegalArgumentException("Item is not in start location map");
 
         // TODO: continue refactoring from this stage
 
@@ -63,6 +56,18 @@ public class PathFinder {
         result.add(lastPath);
         return result;
     }
+
+    /**
+     * This creates a distance  pair map between the locations  of items  in the warehouse.
+     * it creates a nested HashMap using Point's  as keys
+     * map.get(item1.point).get(item2.point) = path between item1 and item2
+     * similarly
+     * map.get(item2.point).get(item1.point) = path between item2 and item1
+     * map will contain a key for all items in the order aswell as start/end point
+     * @param warehouseGraph graph representation of the  warehouse
+     * @param items list of items to be collected
+     * @return HashMap<Point, HashMap<Point, Path>>
+     */
 
     private HashMap<Point, HashMap<Point, Path>> createItemPairDistanceMap(WarehouseGraph warehouseGraph, List<Point> items) {
         HashMap<Point, HashMap<Point, Path>> result = new HashMap<>();
