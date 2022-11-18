@@ -143,9 +143,7 @@ public class PathFinder {
     }
 
     private Path getPath(Node start, Node end, HashMap<Node, Node> path) {
-
         ArrayList<Point> resultPath = new ArrayList<>();
-
         if (start.getLocation().equals(end.getLocation())) {
             return new Path(resultPath);
         }

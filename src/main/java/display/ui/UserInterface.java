@@ -28,7 +28,7 @@ public class UserInterface extends javax.swing.JFrame {
 
     Parser parser = new Parser();
     
-    String[] items = parser.parseItems("src/main/resources/items.csv");
+    String[] items = parser.parseItems("items.csv");
     
     Set<String> order = new HashSet<>();
     
