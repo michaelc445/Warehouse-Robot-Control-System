@@ -11,12 +11,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class WarehouseGraphTest {
     private static final Point START_POINT = new Point(0, 0);
     private static final Point END_POINT = new Point(0, 6);
+    private static final String MAP_FILE = "warehouse_map.csv";
     private static int[][] map;
     private static WarehouseGraph graph;
     @BeforeAll
     public static void  init() throws IOException {
         Parser mapParser =  new Parser();
-        map  = mapParser.parseMapLayout("src/test/java/TestMaps/testMap.csv");
+        map  = mapParser.parseMapLayout(MAP_FILE);
         graph =  new WarehouseGraph(map,START_POINT,END_POINT);
     }
     @Test

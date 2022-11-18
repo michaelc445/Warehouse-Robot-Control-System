@@ -19,7 +19,7 @@ class PathFinderTest {
     @BeforeAll
     public static void setUp() throws IOException {
         Parser mapParser =  new Parser();
-        int[][] map = mapParser.parseMapLayout("src/test/java/TestMaps/testMap.csv");
+        int[][] map = mapParser.parseMapLayout("warehouse_map.csv");
         graph =  new WarehouseGraph(map,START_POINT,END_POINT);
         pathFinder = new PathFinder();
     }
