@@ -14,8 +14,9 @@ public class Warehouse {
     private final List<Point> shelveLocations;
     private final Point chargingArea;
     private final Point dispatchedArea;
-    private final WarehouseGraph warehouseGraph; // TODO: think about getting rid of the field
+    private final WarehouseGraph warehouseGraph;
 
+    private static final int ORDER_LIMITATION = 5;
 
     public Warehouse(WarehouseGraph warehouseGraph) {
         this.items=  new HashMap<>();
@@ -91,5 +92,9 @@ public class Warehouse {
 
     public WarehouseGraph getWarehouseGraph() {
         return warehouseGraph;
+    }
+
+    public int getOrderLimitation() {
+        return ORDER_LIMITATION;
     }
 }
