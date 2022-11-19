@@ -56,12 +56,6 @@ public class Main {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
-            try {
-                new UserInterface().setVisible(true);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
+        java.awt.EventQueue.invokeLater(() -> new UserInterface().setVisible(true));
     }
 }
