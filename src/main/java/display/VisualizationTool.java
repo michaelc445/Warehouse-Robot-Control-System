@@ -25,7 +25,7 @@ public class VisualizationTool extends JPanel {
     private int curY;
     private final int pathSize;
     private int spacing = 1;
-    private int boxSize = 25;
+    private int boxSize = 24;
     private Timer timer;
     private final List<graph.Point> order;
 
