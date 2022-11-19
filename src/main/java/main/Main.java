@@ -1,19 +1,19 @@
 package main;
 
-import display.ui.UserInterface;
+import display.UserInterface;
 import graph.Point;
 import graph.WarehouseGraph;
 import util.Parser;
-import java.io.IOException;
+
 import java.util.*;
 
 
 public class Main {
-    private static final String WAREHOUSE_MAP_FILE = "testMapMedium.csv";
-    private static final String ITEM_FILE = "items.csv";
+    private static final String WAREHOUSE_MAP_FILE = "warehouse_map.csv";
+    private static final String ITEM_FILE = "items_small.csv";
     private static final Point START_POINT = new Point(0, 0);
     private static final Point END_POINT = new Point(0, 6);
-    
+
     public static Warehouse warehouse;
 
     public static void main(String[] args) throws Exception {
@@ -21,17 +21,19 @@ public class Main {
         int[][] warehouseMapLayout = parser.parseMapLayout(WAREHOUSE_MAP_FILE);
         WarehouseGraph warehouseGraph = new WarehouseGraph(warehouseMapLayout, START_POINT, END_POINT);
         warehouse = new Warehouse(warehouseGraph);
-        List<Point> shelves= warehouse.getShelveLocations();
-        String[] t = parser.parseItems(ITEM_FILE);
+
+        List<Point> shelves = warehouse.getShelveLocations();
+        String[] items = parser.parseItems(ITEM_FILE);
+
         Random rand = new Random();
-        HashMap<Point,Boolean> explored = new HashMap<>();
-        for(String name: t){
+        HashMap<Point, Boolean> explored = new HashMap<>();
+        for (String item : items) {
             Point randomPoint = shelves.get(rand.nextInt(shelves.size()));
-            while (explored.containsKey(randomPoint)){
+            while (explored.containsKey(randomPoint)) {
                 randomPoint = shelves.get(rand.nextInt(shelves.size()));
             }
-            explored.put(randomPoint,true);
-            warehouse.addItem(name,randomPoint);
+            explored.put(randomPoint, true);
+            warehouse.addItem(item, randomPoint);
         }
 
         launchUI();
@@ -41,7 +43,7 @@ public class Main {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
