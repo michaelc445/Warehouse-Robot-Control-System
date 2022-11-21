@@ -1,19 +1,62 @@
 package main;
 
-import graph.Graph;
+import display.UserInterface;
 import graph.Point;
+import graph.WarehouseGraph;
+import util.Parser;
+
+import java.util.*;
+
 
 public class Main {
-    public static void main(String[] args) throws Exception {
-        String graphFile = "src/test/java/TestMaps/testMap.csv";
-        Graph inputGraph  = new Graph(graphFile,false);
-        Warehouse warehouse = new Warehouse();
-        warehouse.addItem("Hammer", new Point(2,2));
-        warehouse.addItem("Screw", new Point(4,4));
-        warehouse.addItem("Helmet", new Point(4,2));
-        warehouse.addItem("Axe", new Point(5,5));
-        warehouse.addItem("Wrench", new Point(1,4));
+    private static final String WAREHOUSE_MAP_FILE = "testMapMedium.csv";
+    private static final String ITEM_FILE = "items.csv";
+    private static final Point START_POINT = new Point(0, 0);
+    private static final Point END_POINT = new Point(0, 6);
 
-        new OrderSystem(inputGraph);
+    public static Warehouse warehouse;
+
+    public static void main(String[] args) throws Exception {
+        Parser parser = new Parser();
+        int[][] warehouseMapLayout = parser.parseMapLayout(WAREHOUSE_MAP_FILE);
+        WarehouseGraph warehouseGraph = new WarehouseGraph(warehouseMapLayout, START_POINT, END_POINT);
+        warehouse = new Warehouse(warehouseGraph);
+
+        List<Point> shelves = warehouse.getShelveLocations();
+        String[] items = parser.parseItems(ITEM_FILE);
+
+        Random rand = new Random();
+        HashMap<Point, Boolean> explored = new HashMap<>();
+        for (String item : items) {
+            Point randomPoint = shelves.get(rand.nextInt(shelves.size()));
+            while (explored.containsKey(randomPoint)) {
+                randomPoint = shelves.get(rand.nextInt(shelves.size()));
+            }
+            explored.put(randomPoint, true);
+            warehouse.addItem(item, randomPoint);
+        }
+        launchUI();
+    }
+
+    private static void launchUI() throws InstantiationException, IllegalAccessException, javax.swing.UnsupportedLookAndFeelException {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(UserInterface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(() -> new UserInterface().setVisible(true));
     }
 }

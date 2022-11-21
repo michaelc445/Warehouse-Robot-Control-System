@@ -1,41 +1,61 @@
 package main;
 import graph.Point;
+import graph.WarehouseGraph;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import util.Parser;
 
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 public class WarehouseTest {
-
+    private static Warehouse warehouse;
+    private static final Point START_POINT = new Point(0, 0);
+    private static final Point END_POINT = new Point(0, 6);
+    @BeforeAll
+    public  static void setUp() throws IOException {
+        Parser mapParser =  new Parser();
+        int[][] map = mapParser.parseMapLayout("warehouse_map.csv");
+        WarehouseGraph graph = new WarehouseGraph(map, START_POINT, END_POINT);
+        warehouse  = new Warehouse(graph);
+    }
     @Test
-    void addItem() throws Exception{
-        Warehouse locs1 = new Warehouse();
-        locs1.addItem("test1", new Point(1,1));
-        assertEquals(locs1.getItemLocation("test1"), new Point(1,1));
+    void addItem() {
+        warehouse.addItem("test1", new Point(1,1));
+        assertEquals(warehouse.getItemLocation("test1"), new Point(1,1));
     }
 
     @Test
-    void getItemNames() throws Exception{
-        Warehouse locs2 = new Warehouse();
-        locs2.addItem("test1", new Point(1,1));
-        locs2.addItem("test2", new Point(2,2));
-        Object[] expected1 = {"test2", "test1"};
-        assertArrayEquals(locs2.getItemNames(),expected1);
+    void getItemNames() {
+
+        warehouse.addItem("test1", new Point(1,1));
+        warehouse.addItem("test2", new Point(2,2));
+        List<String> expected =new ArrayList<>();
+        expected.add("test1");
+        expected.add("test2");
+        List<String> got = warehouse.getItemNames();
+        Collections.sort(got);
+        Collections.sort(expected);
+        assertEquals(got,expected);
     }
 
     @Test
-    void getItemLocation() throws Exception{
-        Warehouse locs3 = new Warehouse();
-        locs3.addItem("test1", new Point(1,1));
-        assertEquals(locs3.getItemLocation("test1"), new Point(1,1));
+    void getItemLocation() {
+        warehouse.addItem("test1", new Point(1,1));
+        assertEquals(warehouse.getItemLocation("test1"), new Point(1,1));
     }
 
     @Test
-    void removeItem() throws Exception{
-        Warehouse locs4 = new Warehouse();
-        locs4.addItem("test1", new Point(1,1));
-        locs4.addItem("test2", new Point(2,2));
-        locs4.removeItem("test2");
-        Object[] expected2 = {"test1"};
-        assertArrayEquals(locs4.getItemNames(), expected2);
+    void removeItemByName() {
+        warehouse.addItem("test1", new Point(1,1));
+        warehouse.addItem("test2", new Point(2,2));
+        warehouse.removeItemByName("test2");
+        List<String> expected   = new ArrayList<>();
+        expected.add("test1");
+        assertEquals(warehouse.getItemNames(), expected);
     }
 }
