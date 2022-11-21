@@ -346,8 +346,13 @@ public class UserInterface extends javax.swing.JFrame {
         logTextArea.setRows(5);
         jScrollPane1.setViewportView(logTextArea);
 
-        emulationSpeedSlider.setMaximum(1500);
+        emulationSpeedSlider.setMajorTickSpacing(200);
+        emulationSpeedSlider.setMaximum(1000);
         emulationSpeedSlider.setMinimum(50);
+        emulationSpeedSlider.setMinorTickSpacing(50);
+        emulationSpeedSlider.setPaintTicks(true);
+        emulationSpeedSlider.setSnapToTicks(true);
+        emulationSpeedSlider.setToolTipText("Robot speed");
         emulationSpeedSlider.setValue(500);
         emulationSpeedSlider.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -473,11 +478,7 @@ public class UserInterface extends javax.swing.JFrame {
     }
 
     private void emulationSpeedSliderStateChanged(javax.swing.event.ChangeEvent evt) {
-        emulationSpeed = emulationSpeedSlider.getValue();
-        if (visualisation != null)
-            visualisation.getTimer().setDelay(emulationSpeed);
-        addToLogger("Speed was changed to " + emulationSpeed);
-
+        changeEmulationSpeedBySliderVal();
     }
 
     private void updateOrderScrollPanel() {
@@ -552,6 +553,7 @@ public class UserInterface extends javax.swing.JFrame {
             this.remove(visualisationPanel);
             visualisation = new VisualizationTool(warehouse, shortestPath, locationsToVisit);
             visualisation.setLocation(visualisationPanel.getWidth() / 2, visualisationPanel.getHeight() / 2 );
+            changeEmulationSpeedBySliderVal();
             this.add(visualisation);
             this.invalidate();
             this.revalidate();
@@ -590,6 +592,16 @@ public class UserInterface extends javax.swing.JFrame {
                 updateOrderScrollPanel();
                 addToLogger("Item  " + selectedItem + " removed from order");
             }
+        }
+    }
+
+    private void changeEmulationSpeedBySliderVal() {
+        emulationSpeed = emulationSpeedSlider.getValue();
+        if (visualisation != null) {
+            if (emulationSpeed == emulationSpeedSlider.getMaximum()) {
+                emulationSpeed -= emulationSpeedSlider.getMinimum();
+            }
+            visualisation.getTimer().setDelay(emulationSpeedSlider.getMaximum() - emulationSpeed);
         }
     }
 
