@@ -4,6 +4,7 @@ import main.Warehouse;
 import org.paukov.combinatorics3.Generator;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 public class PathFinder {
 
@@ -12,12 +13,12 @@ public class PathFinder {
         checkArguments(warehouseGraph, orderedItems);
         Node start = warehouseGraph.getStartNode();
         Node end = warehouseGraph.getEndNode();
-        List<List<Point>> permutationList = Generator.permutation(orderedItems).simple().stream().toList();
+        Stream<List<Point>> permutationStream = Generator.permutation(orderedItems).simple().stream();
         List<Point> itemLocations = new ArrayList<>(List.copyOf(orderedItems));
         itemLocations.add(start.getLocation());
         itemLocations.add(end.getLocation());
         HashMap<Point, HashMap<Point, Path>> distancePairMap = createItemPairDistanceMap(warehouseGraph, itemLocations);
-        List<Point> shortestPath = permutationList.stream().min((path, pathToCompare) -> {
+        List<Point> shortestPath = permutationStream.min((path, pathToCompare) -> {
             int cost = pathCost(start, end, path, distancePairMap);
             int costToCompare = pathCost(start, end, pathToCompare, distancePairMap);
             return Integer.compare(cost, costToCompare);
