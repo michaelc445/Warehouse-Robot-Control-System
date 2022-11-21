@@ -19,12 +19,14 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import static main.Main.warehouse;
 import main.Warehouse;
+import util.Parser;
 
 /**
  *
  * @author art
  */
 public class UserInterface extends javax.swing.JFrame {
+
     String[] items = warehouse.getItemNames().toArray(String[]::new);
 
     Set<String> order = new HashSet<>();
@@ -32,6 +34,10 @@ public class UserInterface extends javax.swing.JFrame {
     String selectedItem = "";
 
     boolean isOrderListFocused = false;
+
+    VisualizationTool visualisation;
+
+    int emulationSpeed = 500;
 
     /**
      * Creates new form UserInterface
@@ -105,11 +111,8 @@ public class UserInterface extends javax.swing.JFrame {
         maxSizeDialog.setTitle("Order List Is Full");
         maxSizeDialog.setAlwaysOnTop(true);
         maxSizeDialog.setLocation(new java.awt.Point(300, 400));
-        maxSizeDialog.setLocationByPlatform(true);
-        maxSizeDialog.setMaximumSize(new java.awt.Dimension(520, 150));
         maxSizeDialog.setMinimumSize(new java.awt.Dimension(520, 150));
         maxSizeDialog.setName("dialog_window"); // NOI18N
-        maxSizeDialog.setPreferredSize(new java.awt.Dimension(520, 150));
         maxSizeDialog.setResizable(false);
 
         maximumOrderLimitLabel.setFont(new java.awt.Font("Fira Sans", 0, 24)); // NOI18N
@@ -343,6 +346,15 @@ public class UserInterface extends javax.swing.JFrame {
         logTextArea.setRows(5);
         jScrollPane1.setViewportView(logTextArea);
 
+        emulationSpeedSlider.setMaximum(1500);
+        emulationSpeedSlider.setMinimum(50);
+        emulationSpeedSlider.setValue(500);
+        emulationSpeedSlider.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                emulationSpeedSliderStateChanged(evt);
+            }
+        });
+
         emulationSpeedLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         emulationSpeedLabel.setText("Emulation Speed");
         emulationSpeedLabel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -460,6 +472,14 @@ public class UserInterface extends javax.swing.JFrame {
         removeSelectedItemFromOrderList();
     }
 
+    private void emulationSpeedSliderStateChanged(javax.swing.event.ChangeEvent evt) {
+        emulationSpeed = emulationSpeedSlider.getValue();
+        if (visualisation != null)
+            visualisation.getTimer().setDelay(emulationSpeed);
+        addToLogger("Speed was changed to " + emulationSpeed);
+
+    }
+
     private void updateOrderScrollPanel() {
         orderList.removeAll();
         DefaultListModel<String> listModel = new DefaultListModel<>();
@@ -503,6 +523,15 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JPanel visualisationPanel;
     // End of variables declaration
 
+//    private void updateOrderScrollPanel() {
+//        orderListPanel.removeAll();
+//        var listModel = new DefaultListModel<>();
+//        for (String item : order) {
+//            listModel.addElement(item);
+//        }
+//        orderListPanel.setModel((ListModel) listModel);
+//    }
+
     private void launchController() {
         ArrayList<Point> locationsToVisit;
 
@@ -521,7 +550,7 @@ public class UserInterface extends javax.swing.JFrame {
     protected void showVisualisation(Warehouse warehouse, List<Path> shortestPath, ArrayList<Point> locationsToVisit) {
         SwingUtilities.invokeLater(() -> {
             this.remove(visualisationPanel);
-            JPanel visualisation = new VisualizationTool(warehouse, shortestPath, locationsToVisit);
+            visualisation = new VisualizationTool(warehouse, shortestPath, locationsToVisit);
             visualisation.setLocation(visualisationPanel.getWidth() / 2, visualisationPanel.getHeight() / 2 );
             this.add(visualisation);
             this.invalidate();
@@ -538,7 +567,7 @@ public class UserInterface extends javax.swing.JFrame {
     }
 
     private void addSelectedItemToOrderList() {
-        if (order.size() == warehouse.getOrderLimitation()) {
+        if (order.size() == 5) {
             maxSizeDialog.setVisible(true);
             addToLogger("Maximum Order list size is reached");
         } else {
