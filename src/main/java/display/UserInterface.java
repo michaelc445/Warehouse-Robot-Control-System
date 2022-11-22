@@ -538,6 +538,9 @@ public class UserInterface extends javax.swing.JFrame {
     protected void showVisualisation(Warehouse warehouse, List<Path> shortestPath, ArrayList<Point> locationsToVisit) {
         SwingUtilities.invokeLater(() -> {
             this.remove(visualisationPanel);
+            if (visualisation != null) {
+                this.remove(visualisation);
+            }
             visualisation = new VisualizationTool(warehouse, shortestPath, locationsToVisit);
             visualisation.setLocation(visualisationPanel.getWidth() / 2, visualisationPanel.getHeight() / 2 );
             changeEmulationSpeedBySliderVal();
