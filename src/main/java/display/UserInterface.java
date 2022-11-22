@@ -10,10 +10,7 @@ import graph.Point;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import javax.swing.DefaultListModel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -522,16 +519,6 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JLabel selectItemHintLabel;
     private javax.swing.JPanel uesrControlPanel;
     private javax.swing.JPanel visualisationPanel;
-    // End of variables declaration
-
-//    private void updateOrderScrollPanel() {
-//        orderListPanel.removeAll();
-//        var listModel = new DefaultListModel<>();
-//        for (String item : order) {
-//            listModel.addElement(item);
-//        }
-//        orderListPanel.setModel((ListModel) listModel);
-//    }
 
     private void launchController() {
         ArrayList<Point> locationsToVisit;
@@ -574,9 +561,13 @@ public class UserInterface extends javax.swing.JFrame {
             addToLogger("Maximum Order list size is reached");
         } else {
             if (!order.contains(selectedItem)) {
-                order.add(selectedItem);
-                addToLogger("Item  " + selectedItem + " added to order");
-                updateOrderScrollPanel();
+                if (Arrays.stream(items).toList().contains(selectedItem)) {
+                    order.add(selectedItem);
+                    addToLogger("Item  " + selectedItem + " added to order");
+                    updateOrderScrollPanel();
+                } else {
+                    addToLogger("Item is not present in the Item DB or wasn't selected");
+                }
             } else {
                 addToLogger("Item  " + selectedItem + " is already in the order list");
             }
@@ -587,11 +578,17 @@ public class UserInterface extends javax.swing.JFrame {
         if (isOrderListFocused) {
             if (order.isEmpty()) {
                 addToLogger("Remove pressed, but the order list is empty");
-            } else {
-                order.remove(selectedItem);
-                updateOrderScrollPanel();
-                addToLogger("Item  " + selectedItem + " removed from order");
+            } else if (selectedItem != null){
+                if (Arrays.stream(items).toList().contains(selectedItem)) {
+                    order.remove(selectedItem);
+                    addToLogger("Item  " + selectedItem + " removed from order");
+                    updateOrderScrollPanel();
+                } else {
+                    addToLogger("Item is not present in the Item DB or wasn't selected");
+                }
             }
+        } else {
+            addToLogger("Please, select item from the Order List to remove it (not form DB)");
         }
     }
 
@@ -604,7 +601,4 @@ public class UserInterface extends javax.swing.JFrame {
             visualisation.getTimer().setDelay(emulationSpeedSlider.getMaximum() - emulationSpeed);
         }
     }
-
-
-
 }
