@@ -1,5 +1,4 @@
 package main;
-import display.initVisualizationTool;
 import graph.*;
 
 import java.util.ArrayList;
@@ -21,10 +20,10 @@ public class Controller {
 
         //calculate a path for the robot through the warehouse visiting all locations
         PathFinder pathFinder = new PathFinder();
-        List<Path> shortestPath = pathFinder.findShortestPath(warehouse, locationsToVisit);
+        List<Path> shortestPath = pathFinder.findShortestPath(warehouse.getWarehouseGraph(), locationsToVisit);
 
         //send this path to the visualization tool
-        new initVisualizationTool(warehouse, shortestPath, locationsToVisit);
+//        new initVisualizationTool(warehouse, shortestPath, locationsToVisit);
 
     }
 
