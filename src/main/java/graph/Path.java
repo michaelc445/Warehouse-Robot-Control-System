@@ -1,18 +1,19 @@
 package graph;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Path {
-    private final ArrayList<Point> path;
+    private final List<Point> path;
     private final int cost;
-    public Path(ArrayList<Point> path){
-        this.path   =  path;
+    public Path(List<Point> path){
+        this.path =  path;
         this.cost = path.size()-1;
     }
     public   int getCost(){
         return this.cost;
     }
-    public ArrayList<Point> getPath(){
+    public List<Point> getPath(){
         return this.path;
     }
 
