@@ -3,6 +3,7 @@ package graph;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -38,9 +39,9 @@ class PathTest {
         points.add(p1);
         points.add(p2);
         Path newPath  = new Path(points);
-        ArrayList<Point>  path1  =  newPath.getPath();
+        List<Point> path1  =  newPath.getPath();
         Path  reversedPath = newPath.reversed();
-        ArrayList<Point>  path2  =  reversedPath.getPath();
+        List<Point>  path2  =  reversedPath.getPath();
         for(int i =0; i < path1.size();i++){
             assertEquals(path1.get(i),path2.get(path2.size()-1-i));
         }

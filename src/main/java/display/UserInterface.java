@@ -530,7 +530,7 @@ public class UserInterface extends javax.swing.JFrame {
         }
 
         PathFinder pathFinder = new PathFinder();
-        List<Path> shortestPath = pathFinder.findShortestPath(warehouse, locationsToVisit);
+        List<Path> shortestPath = pathFinder.findShortestPath(warehouse.getWarehouseGraph(), locationsToVisit);
 
         showVisualisation(warehouse, shortestPath, locationsToVisit);
     }

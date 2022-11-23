@@ -1,6 +1,5 @@
 package graph;
 
-import main.Warehouse;
 import org.paukov.combinatorics3.Generator;
 
 import java.util.*;
@@ -8,39 +7,37 @@ import java.util.stream.Stream;
 
 public class PathFinder {
 
-    public List<Path> findShortestPath(Warehouse warehouse, List<Point> orderedItems) {
-        WarehouseGraph warehouseGraph = warehouse.getWarehouseGraph();
-        checkArguments(warehouseGraph, orderedItems);
+    public List<Path> findShortestPath(WarehouseGraph warehouseGraph, List<Point> orderedItemLocations) {
+        checkArguments(warehouseGraph, orderedItemLocations);
+
+        Stream<List<Point>> permutationStream = Generator.permutation(orderedItemLocations).simple().stream();
+
+        List<Point> locations = new ArrayList<>(List.copyOf(orderedItemLocations));
         Node start = warehouseGraph.getStartNode();
         Node end = warehouseGraph.getEndNode();
-        Stream<List<Point>> permutationStream = Generator.permutation(orderedItems).simple().stream();
-        List<Point> itemLocations = new ArrayList<>(List.copyOf(orderedItems));
-        itemLocations.add(start.getLocation());
-        itemLocations.add(end.getLocation());
-        HashMap<Point, HashMap<Point, Path>> distancePairMap = createItemPairDistanceMap(warehouseGraph, itemLocations);
+        locations.add(start.getLocation());
+        locations.add(end.getLocation());
+
+        HashMap<Point, HashMap<Point, Path>> distancePairMap
+                = createItemPairDistanceMap(warehouseGraph, locations);
+
         List<Point> shortestPath = permutationStream.min((path, pathToCompare) -> {
             int cost = pathCost(start, end, path, distancePairMap);
             int costToCompare = pathCost(start, end, pathToCompare, distancePairMap);
             return Integer.compare(cost, costToCompare);
         }).orElse(new ArrayList<>());
-        return extractPaths(warehouseGraph, distancePairMap, shortestPath);
+
+        List<Path> shortestPaths = extractPaths(warehouseGraph, distancePairMap, shortestPath);
+
+        return shortestPaths;
     }
 
     private List<Path> extractPaths(WarehouseGraph warehouseGraph, HashMap<Point, HashMap<Point, Path>> distancePairMap, List<Point> path) {
-        if (distancePairMap.isEmpty())
-            throw new IllegalArgumentException("Distances pair map is empty");
-        if (path.isEmpty())
-            throw new IllegalArgumentException("Cannot extract an empty path");
-
         Point start = warehouseGraph.getStartNode().getLocation();
         Point end = warehouseGraph.getEndNode().getLocation();
 
         if (!distancePairMap.containsKey(start))
             throw new IllegalArgumentException("No starting location in Distance pair map");
-        if (!distancePairMap.get(start).containsKey(path.get(0)))
-            throw new IllegalArgumentException("Item is not in start location map");
-
-        // TODO: continue refactoring from this stage
 
         ArrayList<Path> result = new ArrayList<>();
 
@@ -175,7 +172,6 @@ public class PathFinder {
 
         if (itemLocations.isEmpty())
             throw new IllegalArgumentException("Item locations list is empty");
-
     }
 
 }
