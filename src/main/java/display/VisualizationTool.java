@@ -2,9 +2,7 @@ package display;
 
 import graph.Path;
 import graph.Point;
-import graph.WarehouseGraph;
 import main.Warehouse;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -68,7 +66,6 @@ public class VisualizationTool extends JPanel {
         // creates black spaces to represent the selves
         g.setColor(Color.BLACK);
         for (Point shelve: this.shelves) {
-            //System.out.println(map[i][0]);
             g.fillRect(spacing + shelve.getX() * getBoxSize(),
                     spacing + shelve.getY() * getBoxSize(),
                     getBoxSize() - spacing,

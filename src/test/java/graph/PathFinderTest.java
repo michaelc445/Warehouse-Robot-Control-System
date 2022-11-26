@@ -4,8 +4,8 @@ import main.Warehouse;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.TestFactory;
+import stock.ItemOrder;
 import util.Parser;
-import java.io.IOException;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -21,14 +21,14 @@ class PathFinderTest {
     private static final String MAP_FILE = "warehouse_map.csv";
     private static int[][] map;
     @BeforeAll
-    static void setUp() throws IOException {
+    static void setUp() {
         map = parser.parseMapLayout(MAP_FILE);
         graph =  new WarehouseGraph(map,START_POINT,END_POINT);
         shelves  = new Warehouse(graph).getShelveLocations();
     }
     @TestFactory
     Stream<DynamicTest> findShortestPathTest(){
-        record TestCase(String name, Class<IllegalArgumentException> e, WarehouseGraph g, List<Point> items, List<Path> expected){
+        record TestCase(String name, Class<IllegalArgumentException> e, WarehouseGraph g, List<ItemOrder> items, List<Path> expected){
             public void check(){
                 if (e != null) {
                     assertThrows(e, () -> pathFinder.findShortestPath(g, items));
@@ -43,8 +43,8 @@ class PathFinderTest {
                         IllegalArgumentException.class,
                         new WarehouseGraph(new int[0][0], START_POINT, END_POINT),
                         List.of(
-                                new Point(2,2),
-                                new Point(3,4)
+                                new ItemOrder("itemA",new Point(2,2),1,1),
+                                new ItemOrder("itemB",new Point(3,4),1,1)
                         ),
                         null
                 ),
@@ -53,8 +53,8 @@ class PathFinderTest {
                         IllegalArgumentException.class,
                         new WarehouseGraph(map, START_POINT, null),
                         List.of(
-                                new Point(2,2),
-                                new Point(3,4)
+                                new ItemOrder("itemA",new Point(2,2),1,1),
+                                new ItemOrder("itemB",new Point(3,4),1,1)
                         ),
                         null
                 ),
@@ -63,8 +63,8 @@ class PathFinderTest {
                         IllegalArgumentException.class,
                         new WarehouseGraph(map, null, END_POINT),
                         List.of(
-                                new Point(2,2),
-                                new Point(3,4)
+                                new ItemOrder("itemA",new Point(2,2),1,1),
+                                new ItemOrder("itemB",new Point(3,4),1,1)
                         ),
                         null
                 ),
@@ -73,8 +73,8 @@ class PathFinderTest {
                         IllegalArgumentException.class,
                         null,
                         List.of(
-                                new Point(2,2),
-                                new Point(3,4)
+                                new ItemOrder("itemA",new Point(2,2),1,1),
+                                new ItemOrder("itemB",new Point(3,4),1,1)
                         ),
                         null
                 ),
@@ -90,8 +90,8 @@ class PathFinderTest {
                         null,
                         graph,
                         List.of(
-                                shelves.get(5),
-                                shelves.get(10)
+                                new ItemOrder("itemA",shelves.get(5),1,1),
+                                new ItemOrder("itemB",shelves.get(10),1,1)
                         ),
 
                         List.of(

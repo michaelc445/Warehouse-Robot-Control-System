@@ -33,8 +33,6 @@ public class Main {
                 randomPoint = shelves.get(rand.nextInt(shelves.size()));
             }
             explored.put(randomPoint, true);
-            System.out.println(item[0]);
-            System.out.println(item[1]);
             warehouse.addItem(item[0], randomPoint,Integer.parseInt(item[1]));
         }
         launchUI();

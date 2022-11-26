@@ -4,16 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5dafaf29-34b9-46fd-8806-9e9da26dcb83" name="Changes" comment="removed old tests from PathFinderTest">
+    <list default="true" id="5dafaf29-34b9-46fd-8806-9e9da26dcb83" name="Changes" comment="added weights to order path">
+      <change afterPath="$PROJECT_DIR$/src/main/java/stock/ItemOrder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/display/UserInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/display/UserInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/display/VisualizationTool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/display/VisualizationTool.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/graph/PathFinder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/graph/PathFinder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/OrderSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/OrderSystem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/Warehouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/Warehouse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stock/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stock/Item.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/util/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/Parser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/items.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/items.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/graph/WarehouseGraphTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/graph/WarehouseGraphTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/main/WarehouseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/main/WarehouseTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/items.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/items.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/graph/PathFinderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/graph/PathFinderTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,6 +39,7 @@
       <list>
         <option value="JUnit5 Test Class" />
         <option value="Class" />
+        <option value="Record" />
       </list>
     </option>
   </component>
@@ -128,9 +130,10 @@
     <option name="myCommands">
       <command value="mvn test" />
       <command value="mvn idea:idea" />
+      <command value="mvn clean" />
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.All in team_software">
+  <component name="RunManager" selected="Application.runMain">
     <configuration name="runMain" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="main.Main" />
       <module name="team_software" />
@@ -161,22 +164,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PathFinderTest.dijkstra" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="team_software" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="graph.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="graph" />
-      <option name="MAIN_CLASS_NAME" value="graph.PathFinderTest" />
-      <option name="METHOD_NAME" value="dijkstra" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="PathFinderTest.dijkstraTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="team_software" />
       <extension name="coverage">
@@ -188,6 +175,22 @@
       <option name="PACKAGE_NAME" value="graph" />
       <option name="MAIN_CLASS_NAME" value="graph.PathFinderTest" />
       <option name="METHOD_NAME" value="dijkstraTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PathFinderTest.findShortestPathTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="team_software" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="graph.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="graph" />
+      <option name="MAIN_CLASS_NAME" value="graph.PathFinderTest" />
+      <option name="METHOD_NAME" value="findShortestPathTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -274,17 +277,17 @@
       <item itemvalue="JUnit.All in team_software" />
       <item itemvalue="JUnit.PathFinderTest" />
       <item itemvalue="JUnit.PathFinderTest,itemLocationListIsNULL_findShortestPath_thenThrowIllegalArgumentException and 3 more" />
-      <item itemvalue="JUnit.PathFinderTest.dijkstra" />
       <item itemvalue="JUnit.PathFinderTest.dijkstraTest" />
+      <item itemvalue="JUnit.PathFinderTest.findShortestPathTest" />
       <item itemvalue="Maven.team_software [test]" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.PathFinderTest.findShortestPathTest" />
         <item itemvalue="JUnit.All in team_software" />
         <item itemvalue="JUnit.PathFinderTest" />
         <item itemvalue="JUnit.PathFinderTest,itemLocationListIsNULL_findShortestPath_thenThrowIllegalArgumentException and 3 more" />
         <item itemvalue="JUnit.PathFinderTest.dijkstraTest" />
-        <item itemvalue="JUnit.PathFinderTest.dijkstra" />
       </list>
     </recent_temporary>
   </component>
@@ -308,7 +311,7 @@
       <workItem from="1667703105275" duration="20172000" />
       <workItem from="1667829459822" duration="17291000" />
       <workItem from="1668102067594" duration="7047000" />
-      <workItem from="1669467875214" duration="13495000" />
+      <workItem from="1669467875214" duration="27586000" />
     </task>
     <task id="LOCAL-00001" summary="create project">
       <created>1665164156632</created>
@@ -464,7 +467,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669478504529</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="changed item file to contain item weights, changed parser for new format of item file. added weight to Item record">
+      <created>1669481657074</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1669481657074</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -544,7 +554,9 @@
     <MESSAGE value="added testcases for findShortestPath in table form" />
     <MESSAGE value="added DynamicTests for dijkstra" />
     <MESSAGE value="removed old tests from PathFinderTest" />
-    <option name="LAST_COMMIT_MESSAGE" value="removed old tests from PathFinderTest" />
+    <MESSAGE value="changed item file to contain item weights, changed parser for new format of item file. added weight to Item record" />
+    <MESSAGE value="added weights to order path" />
+    <option name="LAST_COMMIT_MESSAGE" value="added weights to order path" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
