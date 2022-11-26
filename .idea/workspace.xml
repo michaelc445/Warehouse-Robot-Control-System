@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5dafaf29-34b9-46fd-8806-9e9da26dcb83" name="Changes" comment="added weights to order path">
+    <list default="true" id="5dafaf29-34b9-46fd-8806-9e9da26dcb83" name="Changes" comment="fixed bug in pathFinder.accountForWeight">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/graph/PathFinder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/graph/PathFinder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +93,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/Michael/IdeaProjects/team_software_project/src/main/resources",
+    "last_opened_file_path": "C:/Users/Michael/IdeaProjects/raytracingtestfinal1",
     "nodejs_package_manager_path": "npm"
   }
 }]]></component>
@@ -123,9 +123,11 @@
       <command value="mvn test" />
       <command value="mvn idea:idea" />
       <command value="mvn clean" />
+      <command value="mvn clean install" />
+      <command value="mvn clean assembly:single" />
     </option>
   </component>
-  <component name="RunManager" selected="Application.runMain">
+  <component name="RunManager" selected="JAR Application.team.software-1.0-SNAPSHOT-jar-with-dependencies.jar">
     <configuration name="runMain" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="main.Main" />
       <module name="team_software" />
@@ -156,22 +158,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PathFinderTest.dijkstraTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="team_software" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="graph.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="graph" />
-      <option name="MAIN_CLASS_NAME" value="graph.PathFinderTest" />
-      <option name="METHOD_NAME" value="dijkstraTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="PathFinderTest.findShortestPathTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="team_software" />
       <extension name="coverage">
@@ -184,19 +170,6 @@
       <option name="MAIN_CLASS_NAME" value="graph.PathFinderTest" />
       <option name="METHOD_NAME" value="findShortestPathTest" />
       <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="PathFinderTest,itemLocationListIsNULL_findShortestPath_thenThrowIllegalArgumentException and 3 more" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="team_software" />
-      <option name="TEST_OBJECT" value="pattern" />
-      <patterns>
-        <pattern testClass="graph.PathFinderTest,itemLocationListIsNULL_findShortestPath_thenThrowIllegalArgumentException" />
-        <pattern testClass="graph.PathFinderTest,itemLocationListIsEmpty_findShortestPath_thenThrowIllegalArgumentException" />
-        <pattern testClass="graph.PathFinderTest,noStartingLocationInDistancePairMap_findShortestPath_thenThrowIllegalArgumentException" />
-        <pattern testClass="graph.PathFinderTest,dijkstra" />
-      </patterns>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -220,6 +193,14 @@
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
+    </configuration>
+    <configuration name="team.software-1.0-SNAPSHOT-jar-with-dependencies.jar" type="JarApplication" temporary="true">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/target/team.software-1.0-SNAPSHOT-jar-with-dependencies.jar" />
+      <method v="2" />
+    </configuration>
+    <configuration name="team.software-1.0-SNAPSHOT.jar" type="JarApplication" temporary="true">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/target/team.software-1.0-SNAPSHOT.jar" />
+      <method v="2" />
     </configuration>
     <configuration name="team_software [test]" type="MavenRunConfiguration" factoryName="Maven" nameIsGenerated="true">
       <MavenSettings>
@@ -263,23 +244,23 @@
     </configuration>
     <list>
       <item itemvalue="Application.runMain" />
+      <item itemvalue="JAR Application.team.software-1.0-SNAPSHOT-jar-with-dependencies.jar" />
+      <item itemvalue="JAR Application.team.software-1.0-SNAPSHOT.jar" />
       <item itemvalue="JUnit.all_main" />
       <item itemvalue="JUnit.t" />
       <item itemvalue="JUnit.all_packages" />
       <item itemvalue="JUnit.All in team_software" />
       <item itemvalue="JUnit.PathFinderTest" />
-      <item itemvalue="JUnit.PathFinderTest,itemLocationListIsNULL_findShortestPath_thenThrowIllegalArgumentException and 3 more" />
-      <item itemvalue="JUnit.PathFinderTest.dijkstraTest" />
       <item itemvalue="JUnit.PathFinderTest.findShortestPathTest" />
       <item itemvalue="Maven.team_software [test]" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JAR Application.team.software-1.0-SNAPSHOT-jar-with-dependencies.jar" />
+        <item itemvalue="JAR Application.team.software-1.0-SNAPSHOT.jar" />
         <item itemvalue="JUnit.PathFinderTest.findShortestPathTest" />
         <item itemvalue="JUnit.All in team_software" />
         <item itemvalue="JUnit.PathFinderTest" />
-        <item itemvalue="JUnit.PathFinderTest,itemLocationListIsNULL_findShortestPath_thenThrowIllegalArgumentException and 3 more" />
-        <item itemvalue="JUnit.PathFinderTest.dijkstraTest" />
       </list>
     </recent_temporary>
   </component>
@@ -303,7 +284,7 @@
       <workItem from="1667703105275" duration="20172000" />
       <workItem from="1667829459822" duration="17291000" />
       <workItem from="1668102067594" duration="7047000" />
-      <workItem from="1669467875214" duration="30138000" />
+      <workItem from="1669467875214" duration="31582000" />
     </task>
     <task id="LOCAL-00001" summary="create project">
       <created>1665164156632</created>
@@ -473,7 +454,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669495841507</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="fixed bug in pathFinder.accountForWeight">
+      <created>1669498331221</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1669498331221</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -555,7 +543,8 @@
     <MESSAGE value="removed old tests from PathFinderTest" />
     <MESSAGE value="changed item file to contain item weights, changed parser for new format of item file. added weight to Item record" />
     <MESSAGE value="added weights to order path" />
-    <option name="LAST_COMMIT_MESSAGE" value="added weights to order path" />
+    <MESSAGE value="fixed bug in pathFinder.accountForWeight" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed bug in pathFinder.accountForWeight" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
