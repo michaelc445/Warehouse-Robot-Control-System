@@ -49,15 +49,15 @@ public class PathFinder {
             ItemOrder  order = locationMap.get(item);
             newPath.add(item);
             for (int i =0; i < order.quantity();i++){
-                currentWeight += order.weight();
-                if (currentWeight >maxWeight){
+                if (currentWeight + order.weight()>maxWeight){
                     newPath.add(endPoint);
                     newPath.add(item);
                     currentWeight = order.weight();
-                }else if (currentWeight==maxWeight && j!=optimalOrder.size()-1){
+                }
+                currentWeight += order.weight();
+                if (currentWeight==maxWeight && j!=optimalOrder.size()-1){
                     currentWeight=0;
                     newPath.add(endPoint);
-                    newPath.add(item);
                 }
             }
         }
