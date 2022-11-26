@@ -9,7 +9,12 @@ public class PathFinder {
 
     public List<Path> findShortestPath(WarehouseGraph warehouseGraph, List<Point> orderedItemLocations) {
         checkArguments(warehouseGraph, orderedItemLocations);
-
+        if(warehouseGraph.getStartNode()==null ){
+            throw new IllegalArgumentException("startPoint is null");
+        }
+        if(warehouseGraph.getEndNode()==null ){
+            throw new IllegalArgumentException("endPoint is null");
+        }
         Stream<List<Point>> permutationStream = Generator.permutation(orderedItemLocations).simple().stream();
 
         List<Point> locations = new ArrayList<>(List.copyOf(orderedItemLocations));
@@ -27,9 +32,9 @@ public class PathFinder {
             return Integer.compare(cost, costToCompare);
         }).orElse(new ArrayList<>());
 
-        List<Path> shortestPaths = extractPaths(warehouseGraph, distancePairMap, shortestPath);
+        return extractPaths(warehouseGraph, distancePairMap, shortestPath);
 
-        return shortestPaths;
+
     }
 
     private List<Path> extractPaths(WarehouseGraph warehouseGraph, HashMap<Point, HashMap<Point, Path>> distancePairMap, List<Point> path) {

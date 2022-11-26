@@ -4,18 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5dafaf29-34b9-46fd-8806-9e9da26dcb83" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" afterDir="false" />
+    <list default="true" id="5dafaf29-34b9-46fd-8806-9e9da26dcb83" name="Changes" comment="added testcases for findShortestPath in table form">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/items.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/items.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/TestMaps/testMapMedium.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/testMapMedium.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/display/VisualizationTool$StepListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/display/VisualizationTool$StepListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/display/VisualizationTool.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/display/VisualizationTool.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/graph/Graph.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/OrderSystem.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/OrderSystem.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/Warehouse.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/Warehouse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/graph/PathFinder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/graph/PathFinder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/graph/PathFinderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/graph/PathFinderTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +41,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="order-system" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -98,11 +90,12 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Michael/IdeaProjects/team_software_project/src/main/resources&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/Michael/IdeaProjects/team_software_project/src/main/resources"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Michael\IdeaProjects\team_software\src\test" />
@@ -130,7 +123,7 @@
       <command value="mvn idea:idea" />
     </option>
   </component>
-  <component name="RunManager" selected="Application.runMain">
+  <component name="RunManager" selected="Maven.team_software [test]">
     <configuration name="RunVT" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="display.RunVT" />
       <module name="team_software" />
@@ -167,7 +160,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PathTest.getPath" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="PathFinderTest.findShortestPathTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="team_software" />
       <extension name="coverage">
         <pattern>
@@ -176,8 +169,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="graph" />
-      <option name="MAIN_CLASS_NAME" value="graph.PathTest" />
-      <option name="METHOD_NAME" value="getPath" />
+      <option name="MAIN_CLASS_NAME" value="graph.PathFinderTest" />
+      <option name="METHOD_NAME" value="findShortestPathTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -281,19 +274,19 @@
       <item itemvalue="JUnit.all_main" />
       <item itemvalue="JUnit.t" />
       <item itemvalue="JUnit.all_packages" />
+      <item itemvalue="JUnit.PathFinderTest.findShortestPathTest" />
       <item itemvalue="JUnit.GraphTest.getPathMultipleNodes" />
-      <item itemvalue="JUnit.PathTest.getPath" />
       <item itemvalue="JUnit.PathTest.reversed" />
       <item itemvalue="JUnit.PathTest.testEquals" />
       <item itemvalue="Maven.team_software [test]" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.PathFinderTest.findShortestPathTest" />
         <item itemvalue="Application.RunVT" />
         <item itemvalue="JUnit.GraphTest.getPathMultipleNodes" />
         <item itemvalue="JUnit.PathTest.testEquals" />
         <item itemvalue="JUnit.PathTest.reversed" />
-        <item itemvalue="JUnit.PathTest.getPath" />
       </list>
     </recent_temporary>
   </component>
@@ -317,6 +310,7 @@
       <workItem from="1667703105275" duration="20172000" />
       <workItem from="1667829459822" duration="17291000" />
       <workItem from="1668102067594" duration="7047000" />
+      <workItem from="1669467875214" duration="6853000" />
     </task>
     <task id="LOCAL-00001" summary="create project">
       <created>1665164156632</created>
@@ -523,7 +517,8 @@
     <MESSAGE value="fixed the empty order bug" />
     <MESSAGE value="added display message indicating which item was added or removed from order" />
     <MESSAGE value="Added controller class which has the functionality of our WRCS" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added controller class which has the functionality of our WRCS" />
+    <MESSAGE value="added testcases for findShortestPath in table form" />
+    <option name="LAST_COMMIT_MESSAGE" value="added testcases for findShortestPath in table form" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
