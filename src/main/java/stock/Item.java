@@ -7,4 +7,4 @@ import graph.Point;
  * @param name - name of the item
  * @param location - location of the item, represented as a Point
  */
-public record Item(String name, Point location) {}
+public record Item(String name, Point location,int weight) {}

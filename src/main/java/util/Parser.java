@@ -3,7 +3,6 @@ package util;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -19,7 +18,7 @@ public class Parser {
      * @param warehouseMapFile - filename of the file in the 'resources' folder
      * @return int[][] warehouseMapLayout
      */
-    public int[][] parseMapLayout(String warehouseMapFile) throws IOException {
+    public int[][] parseMapLayout(String warehouseMapFile) {
         List<int[]> rows;
         try (Stream<String> fileStream = getFileFromResourcesAsStream(warehouseMapFile)) {
             rows = fileStream
@@ -31,15 +30,15 @@ public class Parser {
         return rows.toArray(int[][]::new);
     }
 
-    public String[] parseItems(String itemsFile)  {
-        List<String> items = new ArrayList<>();
+    public String[][] parseItems(String itemsFile)  {
+        List<String[]> items = new ArrayList<>();
         try (Stream<String> fileStream = getFileFromResourcesAsStream(itemsFile)) {
             fileStream.forEach(line -> {
                 String[] itemArray = line.split(CSV_DELIMITER);
-                items.addAll(Arrays.asList(itemArray));
+                items.add(itemArray);
             });
         }
-        return items.toArray(String[]::new);
+        return items.toArray(String[][]::new);
     }
     private Stream<String> getFileFromResourcesAsStream(String fileName) {
         var inputStream = getClass().getClassLoader().getResourceAsStream(fileName);

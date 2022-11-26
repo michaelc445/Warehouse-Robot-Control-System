@@ -3,7 +3,6 @@ package graph;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import util.Parser;
-import java.io.IOException;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,7 +14,7 @@ class WarehouseGraphTest {
     private static int[][] map;
     private static WarehouseGraph graph;
     @BeforeAll
-    public static void  init() throws IOException {
+    static void  setUp(){
         Parser mapParser =  new Parser();
         map  = mapParser.parseMapLayout(MAP_FILE);
         graph =  new WarehouseGraph(map,START_POINT,END_POINT);
