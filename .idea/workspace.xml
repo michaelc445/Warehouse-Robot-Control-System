@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5dafaf29-34b9-46fd-8806-9e9da26dcb83" name="Changes" comment="fixed bug in pathFinder.accountForWeight">
+    <list default="true" id="5dafaf29-34b9-46fd-8806-9e9da26dcb83" name="Changes" comment="fixed? bug in pathfinder.accountForWeight">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/graph/PathFinder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/graph/PathFinder.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,9 +125,10 @@
       <command value="mvn clean" />
       <command value="mvn clean install" />
       <command value="mvn clean assembly:single" />
+      <command value="mvn clean install assembly:single" />
     </option>
   </component>
-  <component name="RunManager" selected="JAR Application.team.software-1.0-SNAPSHOT-jar-with-dependencies.jar">
+  <component name="RunManager" selected="Application.runMain">
     <configuration name="runMain" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="main.Main" />
       <module name="team_software" />
@@ -284,7 +285,7 @@
       <workItem from="1667703105275" duration="20172000" />
       <workItem from="1667829459822" duration="17291000" />
       <workItem from="1668102067594" duration="7047000" />
-      <workItem from="1669467875214" duration="31582000" />
+      <workItem from="1669467875214" duration="33369000" />
     </task>
     <task id="LOCAL-00001" summary="create project">
       <created>1665164156632</created>
@@ -461,7 +462,21 @@
       <option name="project" value="LOCAL" />
       <updated>1669498331221</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="changed pom file to create executable jar. mvn clean install assembly:single">
+      <created>1669501052529</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1669501052529</updated>
+    </task>
+    <task id="LOCAL-00027" summary="fixed? bug in pathfinder.accountForWeight">
+      <created>1669501479463</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1669501479463</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -544,7 +559,9 @@
     <MESSAGE value="changed item file to contain item weights, changed parser for new format of item file. added weight to Item record" />
     <MESSAGE value="added weights to order path" />
     <MESSAGE value="fixed bug in pathFinder.accountForWeight" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed bug in pathFinder.accountForWeight" />
+    <MESSAGE value="changed pom file to create executable jar. mvn clean install assembly:single" />
+    <MESSAGE value="fixed? bug in pathfinder.accountForWeight" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed? bug in pathfinder.accountForWeight" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

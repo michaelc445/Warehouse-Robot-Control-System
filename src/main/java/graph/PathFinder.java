@@ -43,19 +43,30 @@ public class PathFinder {
             locationMap.put(item.location(),item);
         }
         int currentWeight = 0;
+        int numItems = 0;
         List<Point> newPath = new ArrayList<>();
         for(int j=0; j < optimalOrder.size();j++){
             Point item = optimalOrder.get(j);
             ItemOrder  order = locationMap.get(item);
             newPath.add(item);
             for (int i =0; i < order.quantity();i++){
-                currentWeight += order.weight();
-                if (currentWeight >maxWeight){
+                if (currentWeight + order.weight()>maxWeight){
                     newPath.add(endPoint);
                     newPath.add(item);
+                    String out = String.format("drop off: %s numItems: %d",item,numItems);
+                    System.out.println(out);
+                    numItems=1;
                     currentWeight = order.weight();
-                }else if (currentWeight==maxWeight && j!=optimalOrder.size()-1){
+
+                    continue;
+                }
+                currentWeight += order.weight();
+                numItems+=1;
+                if (currentWeight==maxWeight && j!=optimalOrder.size()-1){
                     currentWeight=0;
+                    String out = String.format("drop off: %s numItems: %d",item,numItems);
+                    System.out.println(out);
+                    numItems =0;
                     newPath.add(endPoint);
                     newPath.add(item);
                 }
