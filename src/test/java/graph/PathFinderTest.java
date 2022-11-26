@@ -39,7 +39,7 @@ class PathFinderTest {
                 }
             }
         }
-        var testCases = Stream.of(
+        Stream<TestCase> testCases = Stream.of(
                 new TestCase(
                         "no vertices in graph",
                         IllegalArgumentException.class,
@@ -230,16 +230,13 @@ class PathFinderTest {
     }
 
     @Test
-    void dijkstra() throws IOException {
-        int[][] map = parser.parseMapLayout(MAP_FILE);
-        graph =  new WarehouseGraph(map,START_POINT,END_POINT);
+    void dijkstra(){
 
-        PathFinder   p = new PathFinder();
         Point p1 = new Point(0,0);
         Point p2 = new Point(5,4);
         Node node1 = graph.getNodeByLocation(p1);
         Node node2 =  graph.getNodeByLocation(p2);
-        Path  got  = p.dijkstra(node1,node2);
+        Path  got  = pathFinder.dijkstra(node1,node2);
         ArrayList<Point> ex  =  new ArrayList<>();
         ex.add(new   Point(0,0));
         ex.add(new   Point(1,0));
@@ -255,7 +252,50 @@ class PathFinderTest {
         assertEquals(expected,got);
         //node not in graph
         Node node3 = graph.getNodeByLocation(new Point(-2,-3));
-        got = p.dijkstra(node1,node3);
+        got = pathFinder.dijkstra(node1,node3);
         assertNull(got);
+    }
+    @TestFactory
+    Stream<DynamicTest> dijkstraTest(){
+        record TestCase(String name, WarehouseGraph g,Point start, Point end, Path expected){
+            public void check(){
+                assertEquals(expected, pathFinder.dijkstra(g.getNodeByLocation(start),g.getNodeByLocation(end)));
+            }
+        }
+        Stream<TestCase> testCases = Stream.of(
+                new TestCase(
+                        "start node not in graph",
+                        graph,
+                        new Point(-1,-3),
+                        new Point(1,1),
+                        null
+                ),
+                new TestCase(
+                        "end node not in graph",
+                        graph,
+                        new Point(0,0),
+                        new Point(-1,-5),
+                        null
+                ),
+                new TestCase(
+                        "success",
+                        graph,
+                        new Point(0,0),
+                        new Point(5,4),
+                        new Path(List.of(
+                                new   Point(0,0),
+                                new   Point(1,0),
+                                new   Point(2,0),
+                                new   Point(3,0),
+                                new   Point(3,1),
+                                new   Point(3,2),
+                                new   Point(3,3),
+                                new   Point(4,3),
+                                new   Point(5,3),
+                                new   Point(5,4)
+                        ))
+                )
+        );
+        return DynamicTest.stream(testCases.iterator(), TestCase::name, TestCase::check);
     }
 }
