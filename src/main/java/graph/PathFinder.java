@@ -53,28 +53,29 @@ public class PathFinder {
                 if (currentWeight + order.weight()>maxWeight){
                     newPath.add(endPoint);
                     newPath.add(item);
-                    String out = String.format("drop off: %s numItems: %d",item,numItems);
-                    System.out.println(out);
-                    numItems=1;
-                    currentWeight = order.weight();
-
-                    continue;
+//                    String out = String.format("drop off: %s numItems: %d",item,numItems);
+//                    System.out.println(out);
+                    numItems=0;
+                    currentWeight = 0;
                 }
                 currentWeight += order.weight();
                 numItems+=1;
                 if (currentWeight==maxWeight && j!=optimalOrder.size()-1){
                     currentWeight=0;
-                    String out = String.format("drop off: %s numItems: %d",item,numItems);
-                    System.out.println(out);
+//                    String out = String.format("drop off: %s numItems1: %d",item,numItems);
+//                    System.out.println(out);
                     numItems =0;
                     newPath.add(endPoint);
-                    newPath.add(item);
+                    if (i+1!=order.quantity()){
+                        newPath.add(item);
+                    }
                 }
             }
         }
         if (newPath.get(newPath.size()-1).equals(endPoint)){
             newPath.remove(newPath.size()-1);
         }
+        System.out.println(newPath);
         return newPath;
     }
     private List<Point> findOptimalOrder(HashMap<Point, HashMap<Point, Path>> distancePairMap, List<Point> orderedItemLocations,WarehouseGraph graph){
