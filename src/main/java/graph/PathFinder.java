@@ -44,25 +44,21 @@ public class PathFinder {
         }
         int currentWeight = 0;
         List<Point> newPath = new ArrayList<>();
-        for(Point item: optimalOrder){
+        for(int j=0; j < optimalOrder.size();j++){
+            Point item = optimalOrder.get(j);
             ItemOrder  order = locationMap.get(item);
             newPath.add(item);
             for (int i =0; i < order.quantity();i++){
-                if (currentWeight + order.weight() >maxWeight){
-                    if (i+1 != order.quantity()){
-                        newPath.add(endPoint);
-                        newPath.add(item);
-                    }else{
-                        newPath.add(endPoint);
-                    }
-                    currentWeight = 0;
-                }
                 currentWeight += order.weight();
-                if (currentWeight==maxWeight){
+                if (currentWeight >maxWeight){
+                    newPath.add(endPoint);
+                    newPath.add(item);
+                    currentWeight = order.weight();
+                }else if (currentWeight==maxWeight && j!=optimalOrder.size()-1){
                     currentWeight=0;
                     newPath.add(endPoint);
+                    newPath.add(item);
                 }
-
             }
         }
         if (newPath.get(newPath.size()-1).equals(endPoint)){
