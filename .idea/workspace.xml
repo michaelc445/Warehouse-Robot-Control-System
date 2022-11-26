@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5dafaf29-34b9-46fd-8806-9e9da26dcb83" name="Changes" comment="added testcases for findShortestPath in table form">
+    <list default="true" id="5dafaf29-34b9-46fd-8806-9e9da26dcb83" name="Changes" comment="removed old tests from PathFinderTest">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/graph/PathFinderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/graph/PathFinderTest.java" afterDir="false" />
     </list>
@@ -122,20 +122,7 @@
       <command value="mvn idea:idea" />
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.PathFinderTest.dijkstraTest">
-    <configuration name="RunVT" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="display.RunVT" />
-      <module name="team_software" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="display.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.PathFinderTest">
     <configuration name="runMain" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="main.Main" />
       <module name="team_software" />
@@ -143,7 +130,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GraphTest.getPathMultipleNodes" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="PathFinderTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="team_software" />
       <extension name="coverage">
         <pattern>
@@ -152,9 +139,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="graph" />
-      <option name="MAIN_CLASS_NAME" value="graph.GraphTest" />
-      <option name="METHOD_NAME" value="getPathMultipleNodes" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="MAIN_CLASS_NAME" value="graph.PathFinderTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -203,6 +189,19 @@
       <option name="MAIN_CLASS_NAME" value="graph.PathFinderTest" />
       <option name="METHOD_NAME" value="findShortestPathTest" />
       <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PathFinderTest,itemLocationListIsNULL_findShortestPath_thenThrowIllegalArgumentException and 3 more" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="team_software" />
+      <option name="TEST_OBJECT" value="pattern" />
+      <patterns>
+        <pattern testClass="graph.PathFinderTest,itemLocationListIsNULL_findShortestPath_thenThrowIllegalArgumentException" />
+        <pattern testClass="graph.PathFinderTest,itemLocationListIsEmpty_findShortestPath_thenThrowIllegalArgumentException" />
+        <pattern testClass="graph.PathFinderTest,noStartingLocationInDistancePairMap_findShortestPath_thenThrowIllegalArgumentException" />
+        <pattern testClass="graph.PathFinderTest,dijkstra" />
+      </patterns>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -269,23 +268,23 @@
     </configuration>
     <list>
       <item itemvalue="Application.runMain" />
-      <item itemvalue="Application.RunVT" />
       <item itemvalue="JUnit.all_main" />
       <item itemvalue="JUnit.t" />
       <item itemvalue="JUnit.all_packages" />
+      <item itemvalue="JUnit.PathFinderTest" />
+      <item itemvalue="JUnit.PathFinderTest,itemLocationListIsNULL_findShortestPath_thenThrowIllegalArgumentException and 3 more" />
       <item itemvalue="JUnit.PathFinderTest.dijkstra" />
       <item itemvalue="JUnit.PathFinderTest.dijkstraTest" />
       <item itemvalue="JUnit.PathFinderTest.findShortestPathTest" />
-      <item itemvalue="JUnit.GraphTest.getPathMultipleNodes" />
       <item itemvalue="Maven.team_software [test]" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.PathFinderTest" />
+        <item itemvalue="JUnit.PathFinderTest,itemLocationListIsNULL_findShortestPath_thenThrowIllegalArgumentException and 3 more" />
         <item itemvalue="JUnit.PathFinderTest.dijkstraTest" />
         <item itemvalue="JUnit.PathFinderTest.dijkstra" />
         <item itemvalue="JUnit.PathFinderTest.findShortestPathTest" />
-        <item itemvalue="Application.RunVT" />
-        <item itemvalue="JUnit.GraphTest.getPathMultipleNodes" />
       </list>
     </recent_temporary>
   </component>
@@ -309,7 +308,7 @@
       <workItem from="1667703105275" duration="20172000" />
       <workItem from="1667829459822" duration="17291000" />
       <workItem from="1668102067594" duration="7047000" />
-      <workItem from="1669467875214" duration="9360000" />
+      <workItem from="1669467875214" duration="10617000" />
     </task>
     <task id="LOCAL-00001" summary="create project">
       <created>1665164156632</created>
@@ -451,7 +450,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669474788071</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="added DynamicTests for dijkstra">
+      <created>1669477244178</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1669477244178</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -529,7 +535,9 @@
     <MESSAGE value="added display message indicating which item was added or removed from order" />
     <MESSAGE value="Added controller class which has the functionality of our WRCS" />
     <MESSAGE value="added testcases for findShortestPath in table form" />
-    <option name="LAST_COMMIT_MESSAGE" value="added testcases for findShortestPath in table form" />
+    <MESSAGE value="added DynamicTests for dijkstra" />
+    <MESSAGE value="removed old tests from PathFinderTest" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed old tests from PathFinderTest" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
