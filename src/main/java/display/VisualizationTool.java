@@ -3,11 +3,17 @@ package display;
 import graph.Path;
 import graph.Point;
 import main.Warehouse;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+
+
 
 public class VisualizationTool extends JPanel {
     private List<Path> path;
@@ -27,7 +33,31 @@ public class VisualizationTool extends JPanel {
     private Timer timer;
     private final List<graph.Point> order;
 
+
+    private Image robotImg;
+    private Image hammerImg;
+    private Image screwImg;
+    private Image helmetImg;
+    private Image axeImg;
+    private Image wrenchImg;
+
+
+
     public VisualizationTool(Warehouse warehouse, List<Path> path, List<Point> locationsToVisit){
+
+        try {
+            setRobotImg(ImageIO.read(new File("src/main/java/display/static/robot.png")));
+            setHammerImg(ImageIO.read(new File("src/main/java/display/static/hammer.png")));
+            setScrewImg(ImageIO.read(new File("src/main/java/display/static/screw.png")));
+            setHelmetImg(ImageIO.read(new File("src/main/java/display/static/helmet.png")));
+            setAxeImg(ImageIO.read(new File("src/main/java/display/static/axe.png")));
+            setWrenchImg(ImageIO.read(new File("src/main/java/display/static/wrench.png")));
+
+
+        } catch (IOException ex) {
+            // handle exception...
+        }
+
         //timer for each update of the paths progression
         setTimer(new Timer(500, new StepListener()));
         getTimer().start();
@@ -102,12 +132,43 @@ public class VisualizationTool extends JPanel {
                     getBoxSize() - spacing,
                     getBoxSize() - spacing);
         }
+
+
         // creates red space to represent the robot's current location
         g.setColor(Color.RED);
         g.fillRect(spacing + getPath().get(this.curY).getPath().get(this.curX).getX() * getBoxSize(),
                 spacing + getPath().get(this.curY).getPath().get(this.curX).getY() * getBoxSize(),
                 getBoxSize() - spacing,
                 getBoxSize() - spacing);
+
+        setRobotImg(getRobotImg().getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
+        setHammerImg(getHammerImg().getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
+        setScrewImg(getScrewImg().getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
+        setHelmetImg(getHelmetImg().getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
+        setAxeImg(getAxeImg().getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
+        setWrenchImg(getWrenchImg().getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
+
+        /*//Hammer image (2,2)
+        g.drawImage(getHammerImg(),getSpacing() + 2 * getBoxSize(),
+                getSpacing() + 2 * getBoxSize(),
+                this);
+        // Screw image (4,4)
+        g.drawImage(getScrewImg(),getSpacing() + 4 * getBoxSize(),
+                getSpacing() + 4 * getBoxSize(),
+                this);
+        // Helmet (4,2)
+        g.drawImage(getHelmetImg(),getSpacing() + 4 * getBoxSize(),
+                getSpacing() + 2 * getBoxSize(),
+                this);
+        // Axe (5,5)
+        g.drawImage(getAxeImg(),getSpacing() + 5 * getBoxSize(),
+                getSpacing() + 5 * getBoxSize(),
+                this);
+        // Wrench (1,4)
+        g.drawImage(getWrenchImg(),getSpacing() + 1 * getBoxSize(),
+                getSpacing() + 4 * getBoxSize(),
+                this);
+        */
 
     }
     // getters and setters
@@ -199,6 +260,54 @@ public class VisualizationTool extends JPanel {
 
     public void setDispatchAreaLocation(Point dispatchAreaLocation) {
         this.dispatchAreaLocation = dispatchAreaLocation;
+    }
+
+    public Image getHammerImg() {
+        return hammerImg;
+    }
+
+    public void setHammerImg(Image hammerImg) {
+        this.hammerImg = hammerImg;
+    }
+
+    public Image getScrewImg() {
+        return screwImg;
+    }
+
+    public void setScrewImg(Image screwImg) {
+        this.screwImg = screwImg;
+    }
+
+    public Image getHelmetImg() {
+        return helmetImg;
+    }
+
+    public void setHelmetImg(Image helmetImg) {
+        this.helmetImg = helmetImg;
+    }
+
+    public Image getAxeImg() {
+        return axeImg;
+    }
+
+    public void setAxeImg(Image axeImg) {
+        this.axeImg = axeImg;
+    }
+
+    public Image getWrenchImg() {
+        return wrenchImg;
+    }
+
+    public void setWrenchImg(Image wrenchImg) {
+        this.wrenchImg = wrenchImg;
+    }
+
+    public Image getRobotImg() {
+        return robotImg;
+    }
+
+    public void setRobotImg(Image robotImg) {
+        this.robotImg = robotImg;
     }
 
 
