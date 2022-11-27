@@ -37,13 +37,12 @@ public class PathFinder {
      * @param maxWeight robots max carry Weight
      * @return new optimal path with trips back to drop off point
      */
-    private List<Point> accountForWeight(List<Point>optimalOrder,List<ItemOrder> orders,int maxWeight,Point endPoint){
+    public List<Point> accountForWeight(List<Point>optimalOrder,List<ItemOrder> orders,int maxWeight,Point endPoint){
         HashMap<Point,ItemOrder> locationMap= new HashMap<>();
         for (ItemOrder item : orders){
             locationMap.put(item.location(),item);
         }
         int currentWeight = 0;
-        int numItems = 0;
         List<Point> newPath = new ArrayList<>();
         for(int j=0; j < optimalOrder.size();j++){
             Point item = optimalOrder.get(j);
@@ -53,18 +52,11 @@ public class PathFinder {
                 if (currentWeight + order.weight()>maxWeight){
                     newPath.add(endPoint);
                     newPath.add(item);
-//                    String out = String.format("drop off: %s numItems: %d",item,numItems);
-//                    System.out.println(out);
-                    numItems=0;
                     currentWeight = 0;
                 }
                 currentWeight += order.weight();
-                numItems+=1;
                 if (currentWeight==maxWeight && j!=optimalOrder.size()-1){
                     currentWeight=0;
-//                    String out = String.format("drop off: %s numItems1: %d",item,numItems);
-//                    System.out.println(out);
-                    numItems =0;
                     newPath.add(endPoint);
                     if (i+1!=order.quantity()){
                         newPath.add(item);
@@ -75,7 +67,6 @@ public class PathFinder {
         if (newPath.get(newPath.size()-1).equals(endPoint)){
             newPath.remove(newPath.size()-1);
         }
-        System.out.println(newPath);
         return newPath;
     }
     private List<Point> findOptimalOrder(HashMap<Point, HashMap<Point, Path>> distancePairMap, List<Point> orderedItemLocations,WarehouseGraph graph){

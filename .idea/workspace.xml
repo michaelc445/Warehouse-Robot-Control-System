@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5dafaf29-34b9-46fd-8806-9e9da26dcb83" name="Changes" comment="Merge remote-tracking branch 'origin/michael' into michael&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/main/java/graph/PathFinder.java">
+    <list default="true" id="5dafaf29-34b9-46fd-8806-9e9da26dcb83" name="Changes" comment="added tests for accountForWeight method">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/graph/PathFinder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/graph/PathFinder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/graph/PathFinderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/graph/PathFinderTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,13 +90,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Michael/IdeaProjects/raytracingtestfinal1&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "WebServerToolWindowFactoryState": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "last_opened_file_path": "C:/Users/Michael/IdeaProjects/assignment3",
+    "nodejs_package_manager_path": "npm"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Michael\IdeaProjects\team_software\src\test" />
@@ -113,8 +115,8 @@
       <recent name="graph" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
-      <recent name="display" />
       <recent name="graph" />
+      <recent name="display" />
       <recent name="" />
     </key>
   </component>
@@ -128,7 +130,7 @@
       <command value="mvn clean install assembly:single" />
     </option>
   </component>
-  <component name="RunManager" selected="Application.runMain">
+  <component name="RunManager" selected="JUnit.PathFinderTest.accountForWeight">
     <configuration name="runMain" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="main.Main" />
       <module name="team_software" />
@@ -144,7 +146,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PathFinderTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="PathFinderTest.accountForWeight" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="team_software" />
       <extension name="coverage">
         <pattern>
@@ -154,7 +156,8 @@
       </extension>
       <option name="PACKAGE_NAME" value="graph" />
       <option name="MAIN_CLASS_NAME" value="graph.PathFinderTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="METHOD_NAME" value="accountForWeight" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -201,6 +204,33 @@
     </configuration>
     <configuration name="team.software-1.0-SNAPSHOT.jar" type="JarApplication" temporary="true">
       <option name="JAR_PATH" value="$PROJECT_DIR$/target/team.software-1.0-SNAPSHOT.jar" />
+      <method v="2" />
+    </configuration>
+    <configuration name="build jar" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="clean" />
+                <option value="install" />
+                <option value="assembly:single" />
+              </list>
+            </option>
+            <option name="pomFileName" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
       <method v="2" />
     </configuration>
     <configuration name="team_software [test]" type="MavenRunConfiguration" factoryName="Maven" nameIsGenerated="true">
@@ -250,18 +280,19 @@
       <item itemvalue="JUnit.all_main" />
       <item itemvalue="JUnit.t" />
       <item itemvalue="JUnit.all_packages" />
+      <item itemvalue="JUnit.PathFinderTest.accountForWeight" />
       <item itemvalue="JUnit.All in team_software" />
-      <item itemvalue="JUnit.PathFinderTest" />
       <item itemvalue="JUnit.PathFinderTest.findShortestPathTest" />
+      <item itemvalue="Maven.build jar" />
       <item itemvalue="Maven.team_software [test]" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.PathFinderTest.accountForWeight" />
         <item itemvalue="JAR Application.team.software-1.0-SNAPSHOT-jar-with-dependencies.jar" />
         <item itemvalue="JAR Application.team.software-1.0-SNAPSHOT.jar" />
         <item itemvalue="JUnit.PathFinderTest.findShortestPathTest" />
         <item itemvalue="JUnit.All in team_software" />
-        <item itemvalue="JUnit.PathFinderTest" />
       </list>
     </recent_temporary>
   </component>
@@ -285,7 +316,8 @@
       <workItem from="1667703105275" duration="20172000" />
       <workItem from="1667829459822" duration="17291000" />
       <workItem from="1668102067594" duration="7047000" />
-      <workItem from="1669467875214" duration="35994000" />
+      <workItem from="1669467875214" duration="38521000" />
+      <workItem from="1669515004061" duration="3399000" />
     </task>
     <task id="LOCAL-00001" summary="create project">
       <created>1665164156632</created>
@@ -483,7 +515,21 @@
       <option name="project" value="LOCAL" />
       <updated>1669502601051</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="Merge remote-tracking branch 'origin/michael' into michael&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/main/java/graph/PathFinder.java">
+      <created>1669505554643</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1669505554643</updated>
+    </task>
+    <task id="LOCAL-00030" summary="added tests for accountForWeight method">
+      <created>1669517197756</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1669517197756</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -543,7 +589,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Added dijkstra and fixed some things." />
     <MESSAGE value="Added config to run all tests" />
     <MESSAGE value="fixed tests in graph" />
     <MESSAGE value="Added point class and reworked graph package to use points" />
@@ -568,7 +613,8 @@
     <MESSAGE value="changed pom file to create executable jar. mvn clean install assembly:single" />
     <MESSAGE value="fixed? bug in pathfinder.accountForWeight" />
     <MESSAGE value="Merge remote-tracking branch 'origin/michael' into michael&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/main/java/graph/PathFinder.java" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'origin/michael' into michael&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/main/java/graph/PathFinder.java" />
+    <MESSAGE value="added tests for accountForWeight method" />
+    <option name="LAST_COMMIT_MESSAGE" value="added tests for accountForWeight method" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
