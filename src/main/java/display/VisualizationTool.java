@@ -189,70 +189,69 @@ public class VisualizationTool extends JPanel {
         setChainsawImg(getChainsawImg().getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
 
 
-        //Hammer image (2,2)
-        g.drawImage(getHammerImg(),getSpacing() + 2 * getBoxSize(),
-                getSpacing() + 2 * getBoxSize(),
-                this);
-        // Screw image (4,4)
-        g.drawImage(getScrewImg(),getSpacing() + 4 * getBoxSize(),
-                getSpacing() + 4 * getBoxSize(),
-                this);
-        // Helmet (4,2)
-        g.drawImage(getHardHatImg(),getSpacing() + 4 * getBoxSize(),
-                getSpacing() + 2 * getBoxSize(),
-                this);
-        // Axe (5,5)
-        g.drawImage(getAxeImg(),getSpacing() + 5 * getBoxSize(),
+        //Hammer image (14,5)
+        g.drawImage(getHammerImg(),getSpacing() + 14 * getBoxSize(),
                 getSpacing() + 5 * getBoxSize(),
+                this);
+        // Screw image (3,19)
+        g.drawImage(getScrewImg(),getSpacing() + 3 * getBoxSize(),
+                getSpacing() + 19 * getBoxSize(),
+                this);
+        // Helmet (12,17)
+        g.drawImage(getHardHatImg(),getSpacing() + 12 * getBoxSize(),
+                getSpacing() + 17 * getBoxSize(),
+                this);
+        // Axe (13,23)
+        g.drawImage(getAxeImg(),getSpacing() + 13 * getBoxSize(),
+                getSpacing() + 23 * getBoxSize(),
                 this);
         // Wrench (1,4)
         g.drawImage(getWrenchImg(),getSpacing() + 1 * getBoxSize(),
                 getSpacing() + 4 * getBoxSize(),
                 this);
-
-        g.drawImage(getTorchImg(),getSpacing() + 1 * getBoxSize(),
-                getSpacing() + 4 * getBoxSize(),
+        // Torch (35,19)
+        g.drawImage(getTorchImg(),getSpacing() + 35 * getBoxSize(),
+                getSpacing() + 19 * getBoxSize(),
                 this);
-
-        g.drawImage(getNailsImg(),getSpacing() + 1 * getBoxSize(),
-                getSpacing() + 4 * getBoxSize(),
+        // Nails (7,16)
+        g.drawImage(getNailsImg(),getSpacing() + 7 * getBoxSize(),
+                getSpacing() + 16 * getBoxSize(),
                 this);
-
-        g.drawImage(getBrickImg(),getSpacing() + 1 * getBoxSize(),
-                getSpacing() + 4 * getBoxSize(),
+        // Brick (15,20)
+        g.drawImage(getBrickImg(),getSpacing() + 15 * getBoxSize(),
+                getSpacing() + 20 * getBoxSize(),
                 this);
-
+        // Battery (1,29)
         g.drawImage(getBatteryImg(),getSpacing() + 1 * getBoxSize(),
+                getSpacing() + 29 * getBoxSize(),
+                this);
+        // Drill (31,4)
+        g.drawImage(getDrillImg(),getSpacing() + 31 * getBoxSize(),
                 getSpacing() + 4 * getBoxSize(),
                 this);
-
-        g.drawImage(getDrillImg(),getSpacing() + 1 * getBoxSize(),
+        // Screwdriver (25,26)
+        g.drawImage(getScrewdriverImg(),getSpacing() + 25 * getBoxSize(),
+                getSpacing() + 26 * getBoxSize(),
+                this);
+        // Saw (11,4)
+        g.drawImage(getSawImg(),getSpacing() + 11 * getBoxSize(),
                 getSpacing() + 4 * getBoxSize(),
                 this);
-
-        g.drawImage(getScrewdriverImg(),getSpacing() + 1 * getBoxSize(),
+        // Crowbar (32,11)
+        g.drawImage(getCrowbarImg(),getSpacing() + 32 * getBoxSize(),
+                getSpacing() + 11 * getBoxSize(),
+                this);
+        // Pickaxe (26,4)
+        g.drawImage(getPickaxeImg(),getSpacing() + 26 * getBoxSize(),
                 getSpacing() + 4 * getBoxSize(),
                 this);
-
-        g.drawImage(getSawImg(),getSpacing() + 1 * getBoxSize(),
-                getSpacing() + 4 * getBoxSize(),
+        // Wires (21,29)
+        g.drawImage(getWiresImg(),getSpacing() + 21 * getBoxSize(),
+                getSpacing() + 29 * getBoxSize(),
                 this);
-
-
-        g.drawImage(getCrowbarImg(),getSpacing() + 1 * getBoxSize(),
-                getSpacing() + 4 * getBoxSize(),
-                this);
-
-        g.drawImage(getPickaxeImg(),getSpacing() + 1 * getBoxSize(),
-                getSpacing() + 4 * getBoxSize(),
-                this);
-
-        g.drawImage(getWiresImg(),getSpacing() + 1 * getBoxSize(),
-                getSpacing() + 4 * getBoxSize(),
-                this);
-
-        g.drawImage(getChainsawImg(),getSpacing() + 1 * getBoxSize(),
-                getSpacing() + 4 * getBoxSize(),
+        // Chainsaw ()
+        g.drawImage(getChainsawImg(),getSpacing() + 36 * getBoxSize(),
+                getSpacing() + 2 * getBoxSize(),
                 this);
 
     }
