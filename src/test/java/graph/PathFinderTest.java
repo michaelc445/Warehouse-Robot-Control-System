@@ -177,4 +177,124 @@ class PathFinderTest {
         );
         return DynamicTest.stream(testCases.iterator(), TestCase::name, TestCase::check);
     }
+
+    @TestFactory
+    Stream<DynamicTest> accountForWeight() {
+        record TestCase(String name,List<Point>optimalOrder,List<ItemOrder> orders,int maxWeight,Point endPoint,List<Point>expected){
+            public void check(){
+                List<Point> got = pathFinder.accountForWeight(optimalOrder,orders,maxWeight,endPoint);
+
+                assertArrayEquals(expected.toArray(),got.toArray(),"got: "+new Path(got));
+            }
+        }
+        Stream<TestCase> testCases = Stream.of(
+                new TestCase(
+                        "No change",
+                        List.of(
+                                new Point(1,1),
+                                new Point(2,2)
+                        ),
+                        List.of(
+                          new ItemOrder("itemA",new Point(1,1),1,1),
+                                new ItemOrder("itemA",new Point(2,2),1,1)
+                        ),
+                        10,
+                        graph.getEndNode().getLocation(),
+                        List.of(
+                                new Point(1,1),
+                                new Point(2,2)
+                        )
+
+                ),
+                new TestCase(
+                        "full order weight",
+                        List.of(
+                                new Point(1,1),
+                                new Point(2,2)
+                        ),
+                        List.of(
+                                new ItemOrder("itemA",new Point(1,1),9,1),
+                                new ItemOrder("itemA",new Point(2,2),1,1)
+                        ),
+                        10,
+                        graph.getEndNode().getLocation(),
+                        List.of(
+                                new Point(1,1),
+                                new Point(2,2)
+                        )
+
+                ),
+                new TestCase(
+                        "1 extra item ",
+                        List.of(
+                                new Point(1,1),
+                                new Point(2,2)
+                        ),
+                        List.of(
+                                new ItemOrder("itemA",new Point(1,1),10,1),
+                                new ItemOrder("itemA",new Point(2,2),1,1)
+                        ),
+                        10,
+                        graph.getEndNode().getLocation(),
+                        List.of(
+                                new Point(1,1),
+                                graph.getEndNode().getLocation(),
+                                new Point(2,2)
+                        )
+
+                ),
+                new TestCase(
+                        "multiple trips",
+                        List.of(
+                                new Point(1,1),
+                                new Point(2,2)
+                        ),
+                        List.of(
+                                new ItemOrder("itemA",new Point(1,1),10,3),
+                                new ItemOrder("itemA",new Point(2,2),1,7)
+                        ),
+                        10,
+                        graph.getEndNode().getLocation(),
+                        List.of(
+                                new Point(1,1),
+                                graph.getEndNode().getLocation(),
+                                new Point(1,1),
+                                graph.getEndNode().getLocation(),
+                                new Point(1,1),
+                                graph.getEndNode().getLocation(),
+                                new Point(1,1),
+                                new Point(2,2)
+                        )
+
+                ),
+                new TestCase(
+                        "multiple trips with extra",
+                        List.of(
+                                new Point(1,1),
+                                new Point(2,2)
+                        ),
+                        List.of(
+                                new ItemOrder("itemA",new Point(1,1),10,3),
+                                new ItemOrder("itemA",new Point(2,2),1,9)
+                        ),
+                        10,
+                        graph.getEndNode().getLocation(),
+                        List.of(
+                                new Point(1,1),
+                                graph.getEndNode().getLocation(),
+                                new Point(1,1),
+                                graph.getEndNode().getLocation(),
+                                new Point(1,1),
+                                graph.getEndNode().getLocation(),
+                                new Point(1,1),
+                                new Point(2,2),
+                                graph.getEndNode().getLocation(),
+                                new Point(2,2)
+                        )
+
+                )
+
+        );
+        return DynamicTest.stream(testCases.iterator(), TestCase::name, TestCase::check);
+    }
 }
