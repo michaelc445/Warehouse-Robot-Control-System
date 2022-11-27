@@ -137,13 +137,16 @@ public class VisualizationTool extends JPanel {
 
 
         // creates red space to represent the robot's current location
+        setRobotImg(getRobotImg().getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
         g.setColor(Color.RED);
         g.fillRect(spacing + getPath().get(this.curY).getPath().get(this.curX).getX() * getBoxSize(),
                 spacing + getPath().get(this.curY).getPath().get(this.curX).getY() * getBoxSize(),
                 getBoxSize() - spacing,
                 getBoxSize() - spacing);
+        g.drawImage(getRobotImg(),getSpacing() + getPath().get(this.curY).getPath().get(this.curX).getX() * getBoxSize(),
+                getSpacing() + getPath().get(this.curY).getPath().get(this.curX).getY() * getBoxSize(),
+                this);
 
-        setRobotImg(getRobotImg().getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
         setHammerImg(getHammerImg().getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
         setScrewImg(getScrewImg().getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
         setHelmetImg(getHelmetImg().getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
