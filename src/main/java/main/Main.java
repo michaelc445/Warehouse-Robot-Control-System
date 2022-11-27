@@ -10,7 +10,7 @@ import java.util.*;
 
 public class Main {
     private static final String WAREHOUSE_MAP_FILE = "testMapMedium.csv";
-    private static final String ITEM_FILE = "items.csv";
+    private static final String ITEM_FILE = "constructionItems.csv";
     private static final Point START_POINT = new Point(0, 0);
     private static final Point END_POINT = new Point(0, 6);
 
