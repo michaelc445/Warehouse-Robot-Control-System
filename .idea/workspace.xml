@@ -10,8 +10,10 @@
     </list>
     <list default="true" id="5dafaf29-34b9-46fd-8806-9e9da26dcb83" name="Changes" comment="" />
     <list default="true" id="5dafaf29-34b9-46fd-8806-9e9da26dcb83" name="Changes" comment="added tests for accountForWeight method">
+    <list default="true" id="5dafaf29-34b9-46fd-8806-9e9da26dcb83" name="Changes" comment="added constructionItems.csv and pngs">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/graph/PathFinderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/graph/PathFinderTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/display/VisualizationTool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/display/VisualizationTool.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,6 +90,9 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "last_opened_file_path": "C:/Users/kscan/OneDrive/Desktop/IdeaProjects/team_software_project/src/main/resources"
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "WebServerToolWindowFactoryState": "false",
@@ -454,6 +459,35 @@
       <option name="project" value="LOCAL" />
       <updated>1668547815055</updated>
     </task>
+    <task id="LOCAL-00020" summary="added static folder with images">
+      <created>1669553217691</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1669553217691</updated>
+    </task>
+    <task id="LOCAL-00021" summary="assigned pngs to variables">
+      <created>1669553704648</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1669553704648</updated>
+    </task>
+    <task id="LOCAL-00022" summary="added robots image to vt">
+      <created>1669554336618</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1669554336618</updated>
+    </task>
+    <task id="LOCAL-00023" summary="added constructionItems.csv and pngs">
+      <created>1669565837759</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1669565837761</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <task id="LOCAL-00020" summary="added testcases for findShortestPath in table form">
       <created>1669474788071</created>
       <option name="number" value="00020" />
@@ -648,6 +682,11 @@
     <MESSAGE value="Merge remote-tracking branch 'origin/michael' into michael&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/main/java/graph/PathFinder.java" />
     <MESSAGE value="added tests for accountForWeight method" />
     <option name="LAST_COMMIT_MESSAGE" value="added tests for accountForWeight method" />
+    <MESSAGE value="assigned pngs to variables" />
+    <MESSAGE value="added robots image to vt" />
+    <MESSAGE value="added constructionItems.csv and pngs" />
+    <option name="LAST_COMMIT_MESSAGE" value="added constructionItems.csv and pngs" />
+    <MESSAGE value="added static folder with images" />
     <MESSAGE value="assigned pngs to variables" />
     <MESSAGE value="added robots image to vt" />
     <MESSAGE value="added constructionItems.csv and pngs" />
