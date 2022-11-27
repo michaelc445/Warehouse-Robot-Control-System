@@ -58,23 +58,23 @@ public class VisualizationTool extends JPanel {
     public VisualizationTool(Warehouse warehouse, List<Path> path, List<Point> locationsToVisit){
 
         try {
-            setRobotImg(ImageIO.read(new File("src/main/java/display/static/robot.png")));
-            setHammerImg(ImageIO.read(new File("src/main/java/display/static/hammer.png")));
-            setScrewImg(ImageIO.read(new File("src/main/java/display/static/screw.png")));
-            setHardHatImg(ImageIO.read(new File("src/main/java/display/static/hardHat.png")));
-            setAxeImg(ImageIO.read(new File("src/main/java/display/static/axe.png")));
-            setWrenchImg(ImageIO.read(new File("src/main/java/display/static/wrench.png")));
-            setTorchImg(ImageIO.read(new File("src/main/java/display/static/torch.png")));
-            setNailsImg(ImageIO.read(new File("src/main/java/display/static/nails.png")));
-            setBrickImg(ImageIO.read(new File("src/main/java/display/static/brick.png")));
-            setBatteryImg(ImageIO.read(new File("src/main/java/display/static/battery.png")));
-            setDrillImg(ImageIO.read(new File("src/main/java/display/static/drill.png")));
-            setScrewdriverImg(ImageIO.read(new File("src/main/java/display/static/screwdriver.png")));
-            setSawImg(ImageIO.read(new File("src/main/java/display/static/saw.png")));
-            setCrowbarImg(ImageIO.read(new File("src/main/java/display/static/crowbar.png")));
-            setPickaxeImg(ImageIO.read(new File("src/main/java/display/static/pickaxe.png")));
-            setWiresImg(ImageIO.read(new File("src/main/java/display/static/wires.png")));
-            setChainsawImg(ImageIO.read(new File("src/main/java/display/static/chainsaw.png")));
+            setRobotImg(ImageIO.read(new File("src/main/java/display/static/robot.png")).getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
+            setHammerImg(ImageIO.read(new File("src/main/java/display/static/hammer.png")).getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
+            setScrewImg(ImageIO.read(new File("src/main/java/display/static/screw.png")).getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
+            setHardHatImg(ImageIO.read(new File("src/main/java/display/static/hardHat.png")).getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
+            setAxeImg(ImageIO.read(new File("src/main/java/display/static/axe.png")).getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
+            setWrenchImg(ImageIO.read(new File("src/main/java/display/static/wrench.png")).getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
+            setTorchImg(ImageIO.read(new File("src/main/java/display/static/torch.png")).getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
+            setNailsImg(ImageIO.read(new File("src/main/java/display/static/nails.png")).getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
+            setBrickImg(ImageIO.read(new File("src/main/java/display/static/brick.png")).getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
+            setBatteryImg(ImageIO.read(new File("src/main/java/display/static/battery.png")).getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
+            setDrillImg(ImageIO.read(new File("src/main/java/display/static/drill.png")).getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
+            setScrewdriverImg(ImageIO.read(new File("src/main/java/display/static/screwdriver.png")).getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
+            setSawImg(ImageIO.read(new File("src/main/java/display/static/saw.png")).getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
+            setCrowbarImg(ImageIO.read(new File("src/main/java/display/static/crowbar.png")).getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
+            setPickaxeImg(ImageIO.read(new File("src/main/java/display/static/pickaxe.png")).getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
+            setWiresImg(ImageIO.read(new File("src/main/java/display/static/wires.png")).getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
+            setChainsawImg(ImageIO.read(new File("src/main/java/display/static/chainsaw.png")).getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
 
 
         } catch (IOException ex) {
@@ -98,6 +98,7 @@ public class VisualizationTool extends JPanel {
         this.mapWidth = this.map[0].length;
         this.dispatchAreaLocation= warehouse.getDispatchedArea();
         this.chargingAreaLocation= warehouse.getChargingArea();
+
 
     }
     public void paintComponent(Graphics g){
@@ -170,22 +171,7 @@ public class VisualizationTool extends JPanel {
                 getSpacing() + getPath().get(this.curY).getPath().get(this.curX).getY() * getBoxSize(),
                 this);
 
-        setHammerImg(getHammerImg().getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
-        setScrewImg(getScrewImg().getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
-        setHardHatImg(getHardHatImg().getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
-        setAxeImg(getAxeImg().getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
-        setWrenchImg(getWrenchImg().getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
-        setTorchImg(getTorchImg().getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
-        setNailsImg(getNailsImg().getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
-        setBrickImg(getBrickImg().getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
-        setBatteryImg(getBatteryImg().getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
-        setDrillImg(getDrillImg().getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
-        setScrewdriverImg(getScrewdriverImg().getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
-        setSawImg(getSawImg().getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
-        setCrowbarImg(getCrowbarImg().getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
-        setPickaxeImg(getPickaxeImg().getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
-        setWiresImg(getWiresImg().getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
-        setChainsawImg(getChainsawImg().getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
+
 
 
         //Hammer image (14,5)
@@ -205,7 +191,7 @@ public class VisualizationTool extends JPanel {
                 getSpacing() + 23 * getBoxSize(),
                 this);
         // Wrench (1,4)
-        g.drawImage(getWrenchImg(),getSpacing() + 1 * getBoxSize(),
+        g.drawImage(getWrenchImg(),getSpacing() + getBoxSize(),
                 getSpacing() + 4 * getBoxSize(),
                 this);
         // Torch (35,19)
@@ -221,7 +207,7 @@ public class VisualizationTool extends JPanel {
                 getSpacing() + 20 * getBoxSize(),
                 this);
         // Battery (1,29)
-        g.drawImage(getBatteryImg(),getSpacing() + 1 * getBoxSize(),
+        g.drawImage(getBatteryImg(),getSpacing() + getBoxSize(),
                 getSpacing() + 29 * getBoxSize(),
                 this);
         // Drill (31,4)
@@ -287,8 +273,8 @@ public class VisualizationTool extends JPanel {
         return boxSize;
     }
 
-    public void setBoxSize(int boxSize) {
-        this.boxSize = boxSize;
+    public void setBoxSize(int newSize) {
+        boxSize = newSize;
     }
 
     public Timer getTimer() {
