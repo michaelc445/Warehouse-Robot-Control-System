@@ -2,158 +2,299 @@ package graph;
 
 import main.Warehouse;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.DynamicTest;
+import org.junit.jupiter.api.TestFactory;
+import stock.ItemOrder;
 import util.Parser;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class PathFinderTest {
     private  static WarehouseGraph graph;
+    private static List<Point> shelves;
     private static final Point START_POINT = new Point(0, 0);
     private static final Point END_POINT = new Point(0, 6);
     private  static final PathFinder pathFinder = new PathFinder();
     private static final Parser parser =  new Parser();
     private static final String MAP_FILE = "warehouse_map.csv";
-
-    @Test
-    void correctlyInitializedGraphAndListOfItems_findShortestPath_thenReturnShortestPathList() throws IOException {
-        int[][] map = parser.parseMapLayout(MAP_FILE);
+    private static int[][] map;
+    @BeforeAll
+    static void setUp() {
+        map = parser.parseMapLayout(MAP_FILE);
         graph =  new WarehouseGraph(map,START_POINT,END_POINT);
-        List<Point> shelves  = new Warehouse(graph).getShelveLocations();
+        shelves  = new Warehouse(graph).getShelveLocations();
+    }
+    @TestFactory
+    Stream<DynamicTest> findShortestPathTest(){
+        record TestCase(String name, Class<IllegalArgumentException> e, WarehouseGraph g, List<ItemOrder> items, List<Path> expected){
+            public void check(){
+                if (e != null) {
+                    assertThrows(e, () -> pathFinder.findShortestPath(g, items));
+                }else {
+                    assertArrayEquals(expected.toArray(), pathFinder.findShortestPath(g, items).toArray(), name);
+                }
+            }
+        }
+        Stream<TestCase> testCases = Stream.of(
+                new TestCase(
+                        "no vertices in graph",
+                        IllegalArgumentException.class,
+                        new WarehouseGraph(new int[0][0], START_POINT, END_POINT),
+                        List.of(
+                                new ItemOrder("itemA",new Point(2,2),1,1),
+                                new ItemOrder("itemB",new Point(3,4),1,1)
+                        ),
+                        null
+                ),
+                new TestCase(
+                        "end point is null",
+                        IllegalArgumentException.class,
+                        new WarehouseGraph(map, START_POINT, null),
+                        List.of(
+                                new ItemOrder("itemA",new Point(2,2),1,1),
+                                new ItemOrder("itemB",new Point(3,4),1,1)
+                        ),
+                        null
+                ),
+                new TestCase(
+                        "start point is null",
+                        IllegalArgumentException.class,
+                        new WarehouseGraph(map, null, END_POINT),
+                        List.of(
+                                new ItemOrder("itemA",new Point(2,2),1,1),
+                                new ItemOrder("itemB",new Point(3,4),1,1)
+                        ),
+                        null
+                ),
+                new TestCase(
+                        "warehouse graph null",
+                        IllegalArgumentException.class,
+                        null,
+                        List.of(
+                                new ItemOrder("itemA",new Point(2,2),1,1),
+                                new ItemOrder("itemB",new Point(3,4),1,1)
+                        ),
+                        null
+                ),
+                new TestCase(
+                        "item list is null",
+                        IllegalArgumentException.class,
+                        graph,
+                        null,
+                        null
+                ),
+                new TestCase(
+                        "success",
+                        null,
+                        graph,
+                        List.of(
+                                new ItemOrder("itemA",shelves.get(5),1,1),
+                                new ItemOrder("itemB",shelves.get(10),1,1)
+                        ),
 
-        ArrayList<Point> items = new ArrayList<>();
-        items.add(shelves.get(5));
-        items.add(shelves.get(10));
+                        List.of(
+                            new Path(List.of(
+                                    new Point(0, 0),
+                                    new Point(0,1),
+                                    new Point(0,2),
+                                    new Point(0, 3),
+                                    new Point(1, 3),
+                                    new Point(2,3),
+                                    new Point(2, 2)
+                                )
+                            ),
+                            new Path(List.of(
+                                    new Point(2, 2),
+                                    new Point(2,3),
+                                    new Point(3,3),
+                                    new Point(4,3),
+                                    new Point(4,4)
+                                )
+                            ),
+                            new Path(List.of(
+                                    new Point(4,4),
+                                    new Point(4,3),
+                                    new Point(3,3),
+                                    new Point(3,4),
+                                    new Point(3,5),
+                                    new Point(3,6),
+                                    new Point(2,6),
+                                    new Point(1,6),
+                                    new Point(0,6)
+                                )
+                            )
+                        )
+                )
 
-        List<Path> expected = List.of(
-                new Path(List.of(
-                        new Point(0, 0),
-                        new Point(0,1),
-                        new Point(0,2),
-                        new Point(0, 3),
-                        new Point(1, 3),
-                        new Point(2,3),
-                        new Point(2, 2))),
-                new Path(List.of(
-                        new Point(2, 2),
-                        new Point(2,3),
-                        new Point(3,3),
-                        new Point(4,3),
-                        new Point(4,4))),
-                new Path(List.of(
-                        new Point(4,4),
-                        new Point(4,3),
-                        new Point(3,3),
-                        new Point(3,4),
-                        new Point(3,5),
-                        new Point(3,6),
-                        new Point(2,6),
-                        new Point(1,6),
-                        new Point(0,6)
-                ))
+
         );
-        List<Path> actual = pathFinder.findShortestPath(graph ,items);
+        return DynamicTest.stream(testCases.iterator(), TestCase::name, TestCase::check);
 
-        assertEquals(expected, actual);
     }
 
-    @Test
-    void warehouseGraphIsNull_findShortestPath_thenThrowIllegalArgumentException() {
-        WarehouseGraph graph = null;
-
-        ArrayList<Point> items = new ArrayList<>();
-        items.add(new Point(2, 2));
-        items.add(new Point(4, 4));
-        items.add(new Point(4, 2));
-        items.add(new Point(5, 5));
-        items.add(new Point (1, 4));
-
-        assertThrows(IllegalArgumentException.class, () -> {
-            pathFinder.findShortestPath(graph, items);
-        });
+    @TestFactory
+    Stream<DynamicTest> dijkstraTest(){
+        record TestCase(String name, WarehouseGraph g,Point start, Point end, Path expected){
+            public void check(){
+                assertEquals(expected, pathFinder.dijkstra(g.getNodeByLocation(start),g.getNodeByLocation(end)));
+            }
+        }
+        Stream<TestCase> testCases = Stream.of(
+                new TestCase(
+                        "start node not in graph",
+                        graph,
+                        new Point(-1,-3),
+                        new Point(1,1),
+                        null
+                ),
+                new TestCase(
+                        "end node not in graph",
+                        graph,
+                        new Point(0,0),
+                        new Point(-1,-5),
+                        null
+                ),
+                new TestCase(
+                        "success",
+                        graph,
+                        new Point(0,0),
+                        new Point(5,4),
+                        new Path(List.of(
+                                new   Point(0,0),
+                                new   Point(1,0),
+                                new   Point(2,0),
+                                new   Point(3,0),
+                                new   Point(3,1),
+                                new   Point(3,2),
+                                new   Point(3,3),
+                                new   Point(4,3),
+                                new   Point(5,3),
+                                new   Point(5,4)
+                        ))
+                )
+        );
+        return DynamicTest.stream(testCases.iterator(), TestCase::name, TestCase::check);
     }
 
-    @Test
-    void noVerticesInWarehouseGraph_findShortestPath_thenThrowIllegalArgumentException() {
-        WarehouseGraph graph = new WarehouseGraph(new int[0][0], START_POINT, END_POINT);
+    @TestFactory
+    Stream<DynamicTest> accountForWeight() {
+        record TestCase(String name,List<Point>optimalOrder,List<ItemOrder> orders,int maxWeight,Point endPoint,List<Point>expected){
+            public void check(){
+                List<Point> got = pathFinder.accountForWeight(optimalOrder,orders,maxWeight,endPoint);
 
-        ArrayList<Point> items = new ArrayList<>();
-        items.add(new Point(2, 2));
-        items.add(new Point(4, 4));
-        items.add(new Point(4, 2));
-        items.add(new Point(5, 5));
-        items.add(new Point (1, 4));
+                assertArrayEquals(expected.toArray(),got.toArray(),String.format("got: %s\nexpected: %s",new Path(got),new Path(expected)));
+            }
+        }
+        Stream<TestCase> testCases = Stream.of(
+                new TestCase(
+                        "No change",
+                        List.of(
+                                new Point(1,1),
+                                new Point(2,2)
+                        ),
+                        List.of(
+                          new ItemOrder("itemA",new Point(1,1),1,1),
+                                new ItemOrder("itemA",new Point(2,2),1,1)
+                        ),
+                        10,
+                        graph.getEndNode().getLocation(),
+                        List.of(
+                                new Point(1,1),
+                                new Point(2,2)
+                        )
 
-        assertThrows(IllegalArgumentException.class, () -> {
-            pathFinder.findShortestPath(graph, items);
-        });
-    }
+                ),
+                new TestCase(
+                        "full order weight - no change",
+                        List.of(
+                                new Point(1,1),
+                                new Point(2,2)
+                        ),
+                        List.of(
+                                new ItemOrder("itemA",new Point(1,1),9,1),
+                                new ItemOrder("itemA",new Point(2,2),1,1)
+                        ),
+                        10,
+                        graph.getEndNode().getLocation(),
+                        List.of(
+                                new Point(1,1),
+                                new Point(2,2)
+                        )
 
-    @Test
-    void itemLocationListIsNULL_findShortestPath_thenThrowIllegalArgumentException() {
-        ArrayList<Point> items = null;
+                ),
+                new TestCase(
+                        "1 extra item",
+                        List.of(
+                                new Point(1,1),
+                                new Point(2,2)
+                        ),
+                        List.of(
+                                new ItemOrder("itemA",new Point(1,1),10,1),
+                                new ItemOrder("itemB",new Point(2,2),1,1)
+                        ),
+                        10,
+                        graph.getEndNode().getLocation(),
+                        List.of(
+                                new Point(1,1),
+                                graph.getEndNode().getLocation(),
+                                new Point(2,2)
+                        )
 
-        assertThrows(IllegalArgumentException.class, () -> {
-            pathFinder.findShortestPath(graph, items);
-        });
-    }
+                ),
+                new TestCase(
+                        "multiple trips",
+                        List.of(
+                                new Point(1,1),
+                                new Point(2,2)
+                        ),
+                        List.of(
+                                new ItemOrder("itemA",new Point(1,1),10,3),
+                                new ItemOrder("itemB",new Point(2,2),1,7)
+                        ),
+                        10,
+                        graph.getEndNode().getLocation(),
+                        List.of(
+                                new Point(1,1),
+                                graph.getEndNode().getLocation(),
+                                new Point(1,1),
+                                graph.getEndNode().getLocation(),
+                                new Point(1,1),
+                                graph.getEndNode().getLocation(),
+                                new Point(1,1),
+                                new Point(2,2)
+                        )
 
-    @Test
-    void itemLocationListIsEmpty_findShortestPath_thenThrowIllegalArgumentException() {
-        ArrayList<Point> items = new ArrayList<>();
+                ),
+                new TestCase(
+                        "multiple trips with extra",
+                        List.of(
+                                new Point(1,1),
+                                new Point(2,2)
+                        ),
+                        List.of(
+                                new ItemOrder("itemA",new Point(1,1),10,3),
+                                new ItemOrder("itemB",new Point(2,2),1,9)
+                        ),
+                        10,
+                        graph.getEndNode().getLocation(),
+                        List.of(
+                                new Point(1,1),
+                                graph.getEndNode().getLocation(),
+                                new Point(1,1),
+                                graph.getEndNode().getLocation(),
+                                new Point(1,1),
+                                graph.getEndNode().getLocation(),
+                                new Point(1,1),
+                                new Point(2,2),
+                                graph.getEndNode().getLocation(),
+                                new Point(2,2)
+                        )
 
-        assertThrows(IllegalArgumentException.class, () -> {
-            pathFinder.findShortestPath(graph, items);
-        });
-    }
+                )
 
-    @Test
-    void noStartingLocationInDistancePairMap_findShortestPath_thenThrowIllegalArgumentException() throws IOException {
-        Point start = null;
-        WarehouseGraph graph = new WarehouseGraph(new int[0][0], start, END_POINT);
-
-        ArrayList<Point> items = new ArrayList<>();
-        items.add(new Point(2, 2));
-        items.add(new Point(4, 4));
-        items.add(new Point(4, 2));
-        items.add(new Point(5, 5));
-        items.add(new Point (1, 4));
-
-        assertThrows(IllegalArgumentException.class, () -> {
-            pathFinder.findShortestPath(graph, items);
-        });
-    }
-
-    @Test
-    void dijkstra() throws IOException {
-        int[][] map = parser.parseMapLayout(MAP_FILE);
-        graph =  new WarehouseGraph(map,START_POINT,END_POINT);
-
-        PathFinder   p = new PathFinder();
-        Point p1 = new Point(0,0);
-        Point p2 = new Point(5,4);
-        Node node1 = graph.getNodeByLocation(p1);
-        Node node2 =  graph.getNodeByLocation(p2);
-        Path  got  = p.dijkstra(node1,node2);
-        ArrayList<Point> ex  =  new ArrayList<>();
-        ex.add(new   Point(0,0));
-        ex.add(new   Point(1,0));
-        ex.add(new   Point(2,0));
-        ex.add(new   Point(3,0));
-        ex.add(new   Point(3,1));
-        ex.add(new   Point(3,2));
-        ex.add(new   Point(3,3));
-        ex.add(new   Point(4,3));
-        ex.add(new   Point(5,3));
-        ex.add(new   Point(5,4));
-        Path expected = new Path(ex);
-        assertEquals(expected,got);
-        //node not in graph
-        Node node3 = graph.getNodeByLocation(new Point(-2,-3));
-        got = p.dijkstra(node1,node3);
-        assertNull(got);
+        );
+        return DynamicTest.stream(testCases.iterator(), TestCase::name, TestCase::check);
     }
 }

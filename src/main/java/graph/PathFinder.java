@@ -1,35 +1,83 @@
 package graph;
 
 import org.paukov.combinatorics3.Generator;
-
+import stock.ItemOrder;
 import java.util.*;
 import java.util.stream.Stream;
 
 public class PathFinder {
 
-    public List<Path> findShortestPath(WarehouseGraph warehouseGraph, List<Point> orderedItemLocations) {
-        checkArguments(warehouseGraph, orderedItemLocations);
-
-        Stream<List<Point>> permutationStream = Generator.permutation(orderedItemLocations).simple().stream();
-
+    public List<Path> findShortestPath(WarehouseGraph warehouseGraph, List<ItemOrder> orderedItems) {
+        checkArguments(warehouseGraph, orderedItems);
+        if(warehouseGraph.getStartNode()==null ){
+            throw new IllegalArgumentException("startPoint is null");
+        }
+        if(warehouseGraph.getEndNode()==null ){
+            throw new IllegalArgumentException("endPoint is null");
+        }
+        List<Point> orderedItemLocations = new ArrayList<>();
+        for (ItemOrder item : orderedItems){
+            orderedItemLocations.add(item.location());
+        }
         List<Point> locations = new ArrayList<>(List.copyOf(orderedItemLocations));
         Node start = warehouseGraph.getStartNode();
         Node end = warehouseGraph.getEndNode();
         locations.add(start.getLocation());
         locations.add(end.getLocation());
+        HashMap<Point, HashMap<Point, Path>> distancePairMap = createItemPairDistanceMap(warehouseGraph, locations);
+        List<Point> optimalOrder = findOptimalOrder(distancePairMap,orderedItemLocations,warehouseGraph);
+        List<Point> orderExtendedForWeight = accountForWeight(optimalOrder,orderedItems,10,end.getLocation());
+        return extractPaths(warehouseGraph, distancePairMap, orderExtendedForWeight);
 
-        HashMap<Point, HashMap<Point, Path>> distancePairMap
-                = createItemPairDistanceMap(warehouseGraph, locations);
+    }
 
-        List<Point> shortestPath = permutationStream.min((path, pathToCompare) -> {
+    /**
+     * @param optimalOrder optimal order to collect items in
+     * @param orders list of ItemOrder
+     * @param maxWeight robots max carry Weight
+     * @return new optimal path with trips back to drop off point
+     */
+    public List<Point> accountForWeight(List<Point>optimalOrder,List<ItemOrder> orders,int maxWeight,Point endPoint){
+        HashMap<Point,ItemOrder> locationMap= new HashMap<>();
+        for (ItemOrder item : orders){
+            locationMap.put(item.location(),item);
+        }
+        int currentWeight = 0;
+        List<Point> newPath = new ArrayList<>();
+        for(int j=0; j < optimalOrder.size();j++){
+            Point item = optimalOrder.get(j);
+            ItemOrder  order = locationMap.get(item);
+            newPath.add(item);
+            for (int i =0; i < order.quantity();i++){
+                if (currentWeight + order.weight()>maxWeight){
+                    newPath.add(endPoint);
+                    newPath.add(item);
+                    currentWeight = 0;
+                }
+                currentWeight += order.weight();
+                if (currentWeight==maxWeight && j!=optimalOrder.size()-1){
+                    currentWeight=0;
+                    newPath.add(endPoint);
+                    if (i+1!=order.quantity()){
+                        newPath.add(item);
+                    }
+                }
+            }
+        }
+        if (newPath.get(newPath.size()-1).equals(endPoint)){
+            newPath.remove(newPath.size()-1);
+        }
+        return newPath;
+    }
+    private List<Point> findOptimalOrder(HashMap<Point, HashMap<Point, Path>> distancePairMap, List<Point> orderedItemLocations,WarehouseGraph graph){
+        Node start = graph.getStartNode();
+        Node end = graph.getEndNode();
+        Stream<List<Point>> permutationStream = Generator.permutation(orderedItemLocations).simple().stream();
+        return permutationStream.min((path, pathToCompare) -> {
             int cost = pathCost(start, end, path, distancePairMap);
             int costToCompare = pathCost(start, end, pathToCompare, distancePairMap);
             return Integer.compare(cost, costToCompare);
         }).orElse(new ArrayList<>());
-
-        List<Path> shortestPaths = extractPaths(warehouseGraph, distancePairMap, shortestPath);
-
-        return shortestPaths;
     }
 
     private List<Path> extractPaths(WarehouseGraph warehouseGraph, HashMap<Point, HashMap<Point, Path>> distancePairMap, List<Point> path) {
@@ -160,7 +208,7 @@ public class PathFinder {
 
     }
 
-    private void checkArguments(WarehouseGraph warehouseGraph, List<Point> itemLocations) {
+    private void checkArguments(WarehouseGraph warehouseGraph, List<ItemOrder> itemLocations) {
         if (warehouseGraph == null)
             throw new IllegalArgumentException("Warehouse graph is null");
 

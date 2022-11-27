@@ -23,17 +23,17 @@ public class Main {
         warehouse = new Warehouse(warehouseGraph);
 
         List<Point> shelves = warehouse.getShelveLocations();
-        String[] items = parser.parseItems(ITEM_FILE);
+        String[][] items = parser.parseItems(ITEM_FILE);
 
         Random rand = new Random();
         HashMap<Point, Boolean> explored = new HashMap<>();
-        for (String item : items) {
+        for (String[] item : items) {
             Point randomPoint = shelves.get(rand.nextInt(shelves.size()));
             while (explored.containsKey(randomPoint)) {
                 randomPoint = shelves.get(rand.nextInt(shelves.size()));
             }
             explored.put(randomPoint, true);
-            warehouse.addItem(item, randomPoint);
+            warehouse.addItem(item[0], randomPoint,Integer.parseInt(item[1]));
         }
         launchUI();
     }

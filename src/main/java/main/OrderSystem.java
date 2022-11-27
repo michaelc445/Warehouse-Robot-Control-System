@@ -1,13 +1,11 @@
 package main;
 
-import graph.WarehouseGraph;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashSet;
-import java.util.List;
 
 public class OrderSystem extends JFrame implements ActionListener {
     JComboBox<Object> comboBox;
@@ -75,7 +73,7 @@ public class OrderSystem extends JFrame implements ActionListener {
             }
             else {
                 //send the order to the WRCS!!
-                new Controller(temporaryFieldWarehouse, order);
+                new Controller(temporaryFieldWarehouse, new HashSet<>());
             }
         }
     }

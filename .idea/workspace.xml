@@ -4,18 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5dafaf29-34b9-46fd-8806-9e9da26dcb83" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" afterDir="false" />
+    <list default="true" id="5dafaf29-34b9-46fd-8806-9e9da26dcb83" name="Changes" comment="added tests for accountForWeight method">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/items.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/items.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/TestMaps/testMapMedium.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/testMapMedium.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/display/VisualizationTool$StepListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/display/VisualizationTool$StepListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/display/VisualizationTool.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/display/VisualizationTool.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/graph/Graph.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/OrderSystem.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/OrderSystem.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/Warehouse.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/Warehouse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/graph/PathFinderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/graph/PathFinderTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,6 +31,7 @@
       <list>
         <option value="JUnit5 Test Class" />
         <option value="Class" />
+        <option value="Record" />
       </list>
     </option>
   </component>
@@ -49,7 +41,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="order-system" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -98,11 +90,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Michael/IdeaProjects/team_software_project/src/main/resources&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "WebServerToolWindowFactoryState": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "last_opened_file_path": "C:/Users/Michael/IdeaProjects/assignment3",
+    "nodejs_package_manager_path": "npm"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Michael\IdeaProjects\team_software\src\test" />
@@ -119,8 +115,8 @@
       <recent name="graph" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
-      <recent name="display" />
       <recent name="graph" />
+      <recent name="display" />
       <recent name="" />
     </key>
   </component>
@@ -128,22 +124,13 @@
     <option name="myCommands">
       <command value="mvn test" />
       <command value="mvn idea:idea" />
+      <command value="mvn clean" />
+      <command value="mvn clean install" />
+      <command value="mvn clean assembly:single" />
+      <command value="mvn clean install assembly:single" />
     </option>
   </component>
-  <component name="RunManager" selected="Application.runMain">
-    <configuration name="RunVT" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="display.RunVT" />
-      <module name="team_software" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="display.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.PathFinderTest.accountForWeight">
     <configuration name="runMain" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="main.Main" />
       <module name="team_software" />
@@ -151,7 +138,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GraphTest.getPathMultipleNodes" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="All in team_software" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="team_software" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PathFinderTest.accountForWeight" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="team_software" />
       <extension name="coverage">
         <pattern>
@@ -160,14 +155,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="graph" />
-      <option name="MAIN_CLASS_NAME" value="graph.GraphTest" />
-      <option name="METHOD_NAME" value="getPathMultipleNodes" />
+      <option name="MAIN_CLASS_NAME" value="graph.PathFinderTest" />
+      <option name="METHOD_NAME" value="accountForWeight" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PathTest.getPath" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="PathFinderTest.findShortestPathTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="team_software" />
       <extension name="coverage">
         <pattern>
@@ -176,40 +171,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="graph" />
-      <option name="MAIN_CLASS_NAME" value="graph.PathTest" />
-      <option name="METHOD_NAME" value="getPath" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="PathTest.reversed" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="team_software" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="graph.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="graph" />
-      <option name="MAIN_CLASS_NAME" value="graph.PathTest" />
-      <option name="METHOD_NAME" value="reversed" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="PathTest.testEquals" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="team_software" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="graph.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="graph" />
-      <option name="MAIN_CLASS_NAME" value="graph.PathTest" />
-      <option name="METHOD_NAME" value="testEquals" />
+      <option name="MAIN_CLASS_NAME" value="graph.PathFinderTest" />
+      <option name="METHOD_NAME" value="findShortestPathTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -234,6 +197,41 @@
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
+    </configuration>
+    <configuration name="team.software-1.0-SNAPSHOT-jar-with-dependencies.jar" type="JarApplication" temporary="true">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/target/team.software-1.0-SNAPSHOT-jar-with-dependencies.jar" />
+      <method v="2" />
+    </configuration>
+    <configuration name="team.software-1.0-SNAPSHOT.jar" type="JarApplication" temporary="true">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/target/team.software-1.0-SNAPSHOT.jar" />
+      <method v="2" />
+    </configuration>
+    <configuration name="build jar" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="clean" />
+                <option value="install" />
+                <option value="assembly:single" />
+              </list>
+            </option>
+            <option name="pomFileName" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
     </configuration>
     <configuration name="team_software [test]" type="MavenRunConfiguration" factoryName="Maven" nameIsGenerated="true">
       <MavenSettings>
@@ -277,23 +275,24 @@
     </configuration>
     <list>
       <item itemvalue="Application.runMain" />
-      <item itemvalue="Application.RunVT" />
+      <item itemvalue="JAR Application.team.software-1.0-SNAPSHOT-jar-with-dependencies.jar" />
+      <item itemvalue="JAR Application.team.software-1.0-SNAPSHOT.jar" />
       <item itemvalue="JUnit.all_main" />
       <item itemvalue="JUnit.t" />
       <item itemvalue="JUnit.all_packages" />
-      <item itemvalue="JUnit.GraphTest.getPathMultipleNodes" />
-      <item itemvalue="JUnit.PathTest.getPath" />
-      <item itemvalue="JUnit.PathTest.reversed" />
-      <item itemvalue="JUnit.PathTest.testEquals" />
+      <item itemvalue="JUnit.PathFinderTest.accountForWeight" />
+      <item itemvalue="JUnit.All in team_software" />
+      <item itemvalue="JUnit.PathFinderTest.findShortestPathTest" />
+      <item itemvalue="Maven.build jar" />
       <item itemvalue="Maven.team_software [test]" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.RunVT" />
-        <item itemvalue="JUnit.GraphTest.getPathMultipleNodes" />
-        <item itemvalue="JUnit.PathTest.testEquals" />
-        <item itemvalue="JUnit.PathTest.reversed" />
-        <item itemvalue="JUnit.PathTest.getPath" />
+        <item itemvalue="JUnit.PathFinderTest.accountForWeight" />
+        <item itemvalue="JAR Application.team.software-1.0-SNAPSHOT-jar-with-dependencies.jar" />
+        <item itemvalue="JAR Application.team.software-1.0-SNAPSHOT.jar" />
+        <item itemvalue="JUnit.PathFinderTest.findShortestPathTest" />
+        <item itemvalue="JUnit.All in team_software" />
       </list>
     </recent_temporary>
   </component>
@@ -317,6 +316,8 @@
       <workItem from="1667703105275" duration="20172000" />
       <workItem from="1667829459822" duration="17291000" />
       <workItem from="1668102067594" duration="7047000" />
+      <workItem from="1669467875214" duration="38521000" />
+      <workItem from="1669515004061" duration="3399000" />
     </task>
     <task id="LOCAL-00001" summary="create project">
       <created>1665164156632</created>
@@ -451,7 +452,84 @@
       <option name="project" value="LOCAL" />
       <updated>1668547815055</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="added testcases for findShortestPath in table form">
+      <created>1669474788071</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1669474788071</updated>
+    </task>
+    <task id="LOCAL-00021" summary="added DynamicTests for dijkstra">
+      <created>1669477244178</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1669477244178</updated>
+    </task>
+    <task id="LOCAL-00022" summary="removed old tests from PathFinderTest">
+      <created>1669478504529</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1669478504529</updated>
+    </task>
+    <task id="LOCAL-00023" summary="changed item file to contain item weights, changed parser for new format of item file. added weight to Item record">
+      <created>1669481657074</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1669481657074</updated>
+    </task>
+    <task id="LOCAL-00024" summary="added weights to order path">
+      <created>1669495841507</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1669495841507</updated>
+    </task>
+    <task id="LOCAL-00025" summary="fixed bug in pathFinder.accountForWeight">
+      <created>1669498331221</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1669498331221</updated>
+    </task>
+    <task id="LOCAL-00026" summary="changed pom file to create executable jar. mvn clean install assembly:single">
+      <created>1669501052529</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1669501052529</updated>
+    </task>
+    <task id="LOCAL-00027" summary="fixed? bug in pathfinder.accountForWeight">
+      <created>1669501479463</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1669501479463</updated>
+    </task>
+    <task id="LOCAL-00028" summary="fixed? bug in pathfinder.accountForWeight">
+      <created>1669502601051</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1669502601051</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Merge remote-tracking branch 'origin/michael' into michael&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/main/java/graph/PathFinder.java">
+      <created>1669505554643</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1669505554643</updated>
+    </task>
+    <task id="LOCAL-00030" summary="added tests for accountForWeight method">
+      <created>1669517197756</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1669517197756</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -473,7 +551,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/michael_test" />
+                        <option value="michael" />
                       </list>
                     </value>
                   </entry>
@@ -491,6 +569,11 @@
             <list>
               <RecentGroup>
                 <option name="FILTER_VALUES">
+                  <option value="michael" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
                   <option value="origin/master" />
                 </option>
               </RecentGroup>
@@ -506,8 +589,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="create project" />
-    <MESSAGE value="Added dijkstra and fixed some things." />
     <MESSAGE value="Added config to run all tests" />
     <MESSAGE value="fixed tests in graph" />
     <MESSAGE value="Added point class and reworked graph package to use points" />
@@ -523,7 +604,17 @@
     <MESSAGE value="fixed the empty order bug" />
     <MESSAGE value="added display message indicating which item was added or removed from order" />
     <MESSAGE value="Added controller class which has the functionality of our WRCS" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added controller class which has the functionality of our WRCS" />
+    <MESSAGE value="added testcases for findShortestPath in table form" />
+    <MESSAGE value="added DynamicTests for dijkstra" />
+    <MESSAGE value="removed old tests from PathFinderTest" />
+    <MESSAGE value="changed item file to contain item weights, changed parser for new format of item file. added weight to Item record" />
+    <MESSAGE value="added weights to order path" />
+    <MESSAGE value="fixed bug in pathFinder.accountForWeight" />
+    <MESSAGE value="changed pom file to create executable jar. mvn clean install assembly:single" />
+    <MESSAGE value="fixed? bug in pathfinder.accountForWeight" />
+    <MESSAGE value="Merge remote-tracking branch 'origin/michael' into michael&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/main/java/graph/PathFinder.java" />
+    <MESSAGE value="added tests for accountForWeight method" />
+    <option name="LAST_COMMIT_MESSAGE" value="added tests for accountForWeight method" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

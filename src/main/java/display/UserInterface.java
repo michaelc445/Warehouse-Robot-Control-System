@@ -12,11 +12,10 @@ import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.util.*;
 import javax.swing.DefaultListModel;
-import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import static main.Main.warehouse;
 import main.Warehouse;
-import util.Parser;
+import stock.ItemOrder;
 
 /**
  *
@@ -26,7 +25,7 @@ public class UserInterface extends javax.swing.JFrame {
 
     String[] items = warehouse.getItemNames().toArray(String[]::new);
 
-    Set<String> order = new HashSet<>();
+    Set<ItemOrder> order = new HashSet<>();
 
     String selectedItem = "";
 
@@ -481,8 +480,8 @@ public class UserInterface extends javax.swing.JFrame {
     private void updateOrderScrollPanel() {
         orderList.removeAll();
         DefaultListModel<String> listModel = new DefaultListModel<>();
-        for (String item : order) {
-            listModel.addElement(item);
+        for (ItemOrder item : order) {
+            listModel.addElement(item.name());
         }
         orderList.setModel(listModel);
     }
@@ -521,16 +520,15 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JPanel visualisationPanel;
 
     private void launchController() {
-        ArrayList<Point> locationsToVisit;
 
-        locationsToVisit = new ArrayList<>();
+        ArrayList<Point> locationsToVisit = new ArrayList<>();
 
-        for (String item : order){
-            locationsToVisit.add(warehouse.getItemLocation(item));
+        for (ItemOrder item : order){
+            locationsToVisit.add(item.location());
         }
 
         PathFinder pathFinder = new PathFinder();
-        List<Path> shortestPath = pathFinder.findShortestPath(warehouse.getWarehouseGraph(), locationsToVisit);
+        List<Path> shortestPath = pathFinder.findShortestPath(warehouse.getWarehouseGraph(), order.stream().toList());
 
         showVisualisation(warehouse, shortestPath, locationsToVisit);
     }
@@ -565,7 +563,7 @@ public class UserInterface extends javax.swing.JFrame {
         } else {
             if (!order.contains(selectedItem)) {
                 if (Arrays.stream(items).toList().contains(selectedItem)) {
-                    order.add(selectedItem);
+                    order.add(new ItemOrder(selectedItem,warehouse.getItemLocation(selectedItem),10,warehouse.getItem(selectedItem).weight()));
                     addToLogger("Item  " + selectedItem + " added to order");
                     updateOrderScrollPanel();
                 } else {

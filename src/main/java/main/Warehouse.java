@@ -38,8 +38,11 @@ public class Warehouse {
         return shelveList;
     }
 
-    public void addItem(String name, Point location){
-        items.put(name,new Item(name,location));
+    public void addItem(String name, Point location,int weight){
+        items.put(name,new Item(name,location,weight));
+    }
+    public Item getItem(String name){
+        return items.get(name);
     }
     public void removeItemByName(String name){
         items.remove(name);
