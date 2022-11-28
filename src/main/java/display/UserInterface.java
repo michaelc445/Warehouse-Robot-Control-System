@@ -9,6 +9,8 @@ import graph.PathFinder;
 import graph.Point;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.*;
 import javax.swing.DefaultListModel;
@@ -31,7 +33,7 @@ public class UserInterface extends javax.swing.JFrame {
 
     boolean isOrderListFocused = false;
 
-    VisualizationTool visualisation;
+    private static VisualizationTool visualisation;
 
     int emulationSpeed = 500;
 
@@ -62,6 +64,7 @@ public class UserInterface extends javax.swing.JFrame {
 
         this.setSize(new Dimension(frameWidth, frameHeight));
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -446,9 +449,13 @@ public class UserInterface extends javax.swing.JFrame {
     private void processOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {
         if (order.isEmpty()){
             addToLogger("Empty order. Cannot process the order!");
-        }
-        else {
+        } else if (visualisation == null) {
             launchController();
+        }
+        else if (visualisation.isOrderFinished()){
+            launchController();
+        } else {
+            addToLogger("Waiting for robot to finish the last order");
         }
     }
 
@@ -518,6 +525,8 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JLabel selectItemHintLabel;
     private javax.swing.JPanel uesrControlPanel;
     private javax.swing.JPanel visualisationPanel;
+    // End of variables declaration
+
 
     private void launchController() {
 
@@ -530,6 +539,7 @@ public class UserInterface extends javax.swing.JFrame {
         PathFinder pathFinder = new PathFinder();
         List<Path> shortestPath = pathFinder.findShortestPath(warehouse.getWarehouseGraph(), order.stream().toList());
 
+
         showVisualisation(warehouse, shortestPath, locationsToVisit);
     }
 
@@ -540,8 +550,7 @@ public class UserInterface extends javax.swing.JFrame {
                 this.remove(visualisation);
             }
             visualisation = new VisualizationTool(warehouse, shortestPath, locationsToVisit);
-            visualisation.setLocation(visualisationPanel.getWidth() / 2, visualisationPanel.getHeight() / 2 );
-            changeEmulationSpeedBySliderVal();
+            changeEmulationSpeedBySliderVal(); // to instantiate initial Speed value, if it was changed before Processing order
             this.add(visualisation);
             this.invalidate();
             this.revalidate();
@@ -602,4 +611,22 @@ public class UserInterface extends javax.swing.JFrame {
             visualisation.getTimer().setDelay(emulationSpeedSlider.getMaximum() - emulationSpeed);
         }
     }
+
+    static class StepListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(!visualisation.isOrderFinished()){
+                visualisation.setStep(visualisation.getStep() + 1);
+                visualisation.setCurx(visualisation.getCurX() + 1);
+                visualisation.repaint();
+            }
+            else{
+                visualisation.getTimer().stop();
+            }
+
+        }
+    }
+
+
+
 }

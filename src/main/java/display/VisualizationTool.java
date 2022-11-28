@@ -29,7 +29,7 @@ public class VisualizationTool extends JPanel {
 
     public VisualizationTool(Warehouse warehouse, List<Path> path, List<Point> locationsToVisit){
         //timer for each update of the paths progression
-        setTimer(new Timer(500, new StepListener()));
+        setTimer(new Timer(500, new UserInterface.StepListener()));
         getTimer().start();
         this.shelves = warehouse.getShelveLocations();
 
@@ -110,6 +110,11 @@ public class VisualizationTool extends JPanel {
                 getBoxSize() - spacing);
 
     }
+
+    public boolean isOrderFinished() {
+        return step >= pathSize - 1;
+    }
+
     // getters and setters
     public int getStep() {
         return step;
@@ -200,23 +205,4 @@ public class VisualizationTool extends JPanel {
     public void setDispatchAreaLocation(Point dispatchAreaLocation) {
         this.dispatchAreaLocation = dispatchAreaLocation;
     }
-
-
-    private class StepListener implements ActionListener{
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if(getStep() < pathSize-1){
-                setStep(getStep() + 1);
-                setCurx(getCurX()+1);
-                repaint();
-            }
-            else{
-                //step = 0;
-                getTimer().stop();
-            }
-
-        }
-    }
-
-
 }
