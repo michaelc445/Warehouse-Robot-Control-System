@@ -25,7 +25,7 @@ import stock.ItemOrder;
  */
 public class UserInterface extends javax.swing.JFrame {
 
-    String[] items = warehouse.getItemNames().toArray(String[]::new);
+    List<String> items = warehouse.getItemNames();
 
     Set<ItemOrder> order = new HashSet<>();
 
@@ -259,7 +259,7 @@ public class UserInterface extends javax.swing.JFrame {
         itemListLabel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         itemList.setFont(new java.awt.Font("Fira Sans", 0, 18)); // NOI18N
-        itemList.setModel(new javax.swing.DefaultComboBoxModel<>(items));
+        itemList.setModel(new javax.swing.DefaultComboBoxModel<>(items.toArray(String[]::new)));
         itemList.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 itemListKeyPressed(evt);
@@ -570,8 +570,8 @@ public class UserInterface extends javax.swing.JFrame {
             maxSizeDialog.setVisible(true);
             addToLogger("Maximum Order list size is reached");
         } else {
-            if (!order.contains(selectedItem)) {
-                if (Arrays.stream(items).toList().contains(selectedItem)) {
+            if (isOrderListContainItem()) {
+                if (items.contains(selectedItem)) {
                     order.add(new ItemOrder(selectedItem,warehouse.getItemLocation(selectedItem),10,warehouse.getItem(selectedItem).weight()));
                     addToLogger("Item  " + selectedItem + " added to order");
                     updateOrderScrollPanel();
@@ -584,13 +584,20 @@ public class UserInterface extends javax.swing.JFrame {
         }
     }
 
+    private boolean isOrderListContainItem() {
+        return order.stream().map(ItemOrder::name).noneMatch(name -> name.equals(selectedItem));
+    }
+
     private void removeSelectedItemFromOrderList() {
         if (isOrderListFocused) {
             if (order.isEmpty()) {
                 addToLogger("Remove pressed, but the order list is empty");
             } else if (selectedItem != null){
-                if (Arrays.stream(items).toList().contains(selectedItem)) {
-                    order.remove(selectedItem);
+                if (items.contains(selectedItem)) {
+                    ItemOrder itemToRemove = order.stream()
+                            .filter(itemOrder -> itemOrder.name().equals(selectedItem))
+                            .findAny().get();
+                    order.remove(itemToRemove);
                     addToLogger("Item  " + selectedItem + " removed from order");
                     updateOrderScrollPanel();
                 } else {
