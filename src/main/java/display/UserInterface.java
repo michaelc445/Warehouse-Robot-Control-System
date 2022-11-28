@@ -570,7 +570,7 @@ public class UserInterface extends javax.swing.JFrame {
             maxSizeDialog.setVisible(true);
             addToLogger("Maximum Order list size is reached");
         } else {
-            if (isOrderListContainItem()) {
+            if (!isOrderListContainItem()) {
                 if (items.contains(selectedItem)) {
                     order.add(new ItemOrder(selectedItem,warehouse.getItemLocation(selectedItem),10,warehouse.getItem(selectedItem).weight()));
                     addToLogger("Item  " + selectedItem + " added to order");
@@ -585,7 +585,7 @@ public class UserInterface extends javax.swing.JFrame {
     }
 
     private boolean isOrderListContainItem() {
-        return order.stream().map(ItemOrder::name).noneMatch(name -> name.equals(selectedItem));
+        return order.stream().map(ItemOrder::name).anyMatch(name -> name.equals(selectedItem));
     }
 
     private void removeSelectedItemFromOrderList() {
