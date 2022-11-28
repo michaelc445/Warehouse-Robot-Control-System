@@ -62,7 +62,7 @@ public class UserInterface extends javax.swing.JFrame {
         int frameWidth = (this.getWidth() - visualisationPanel.getWidth() - orderProcessingSidePanel.getWidth()) + visualisationPanelWidth;
         int frameHeight = (this.getHeight() - visualisationPanel.getHeight()) + visualisationPanelHeight;
 
-        this.setSize(new Dimension(frameWidth + 65, frameHeight + 3));
+        this.setSize(new Dimension(frameWidth + 88, frameHeight + 3));
     }
 
 
