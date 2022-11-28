@@ -62,7 +62,7 @@ public class UserInterface extends javax.swing.JFrame {
         int frameWidth = (this.getWidth() - visualisationPanel.getWidth() - orderProcessingSidePanel.getWidth()) + visualisationPanelWidth;
         int frameHeight = (this.getHeight() - visualisationPanel.getHeight()) + visualisationPanelHeight;
 
-        this.setSize(new Dimension(frameWidth + 88, frameHeight + 3));
+        this.setSize(new Dimension(frameWidth + 65, frameHeight + 3));
     }
 
 
@@ -87,10 +87,10 @@ public class UserInterface extends javax.swing.JFrame {
         orderList = new javax.swing.JList<>();
         clearOrderButton = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JSeparator();
-        orderProgressLabel = new javax.swing.JLabel();
-        orderProgressBar = new javax.swing.JProgressBar();
         jSeparator4 = new javax.swing.JSeparator();
         processOrderButton = new javax.swing.JButton();
+        qtySpinner = new javax.swing.JSpinner();
+        qtyLabel = new javax.swing.JLabel();
         itemListPanel = new javax.swing.JPanel();
         itemListLabel = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -106,9 +106,9 @@ public class UserInterface extends javax.swing.JFrame {
         emulationSpeedLabel = new javax.swing.JLabel();
         orderProcessingSidePanel = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        orderQueueList = new javax.swing.JList<>();
+        orderQueue1Label = new javax.swing.JLabel();
+        orderQueue2Label = new javax.swing.JLabel();
         jSeparator5 = new javax.swing.JSeparator();
         visualisationPanel = new javax.swing.JPanel();
 
@@ -192,6 +192,7 @@ public class UserInterface extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(orderList);
 
+        clearOrderButton.setBackground(new java.awt.Color(255, 255, 204));
         clearOrderButton.setFont(new java.awt.Font("Fira Sans", 0, 15)); // NOI18N
         clearOrderButton.setText("Clear Order");
         clearOrderButton.addActionListener(new java.awt.event.ActionListener() {
@@ -200,10 +201,8 @@ public class UserInterface extends javax.swing.JFrame {
             }
         });
 
-        orderProgressLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        orderProgressLabel.setText("Order Progress");
-
-        processOrderButton.setBackground(new java.awt.Color(228, 255, 250));
+        processOrderButton.setBackground(new java.awt.Color(204, 255, 204));
+        processOrderButton.setFont(new java.awt.Font("Fira Sans", 1, 18)); // NOI18N
         processOrderButton.setText("Process");
         processOrderButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -211,23 +210,29 @@ public class UserInterface extends javax.swing.JFrame {
             }
         });
 
+        qtyLabel.setText("QTY:");
+
         javax.swing.GroupLayout orderSystemPanelLayout = new javax.swing.GroupLayout(orderSystemPanel);
         orderSystemPanel.setLayout(orderSystemPanelLayout);
         orderSystemPanelLayout.setHorizontalGroup(
                 orderSystemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(orderSystemPanelLayout.createSequentialGroup()
                                 .addContainerGap()
-                                .addGroup(orderSystemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(orderProgressLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
-                                        .addComponent(jSeparator4, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(clearOrderButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(processOrderButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(removeItemButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(addItemButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                        .addComponent(orderSystemLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(orderProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                                .addGroup(orderSystemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(orderSystemPanelLayout.createSequentialGroup()
+                                                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 1, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(qtyLabel)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(qtySpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(orderSystemLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(clearOrderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(orderSystemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                .addComponent(removeItemButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
+                                                .addComponent(addItemButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(processOrderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         orderSystemPanelLayout.setVerticalGroup(
@@ -236,23 +241,23 @@ public class UserInterface extends javax.swing.JFrame {
                                 .addContainerGap()
                                 .addComponent(orderSystemLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(addItemButton)
+                                .addGroup(orderSystemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(orderSystemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addComponent(qtyLabel)
+                                                .addComponent(qtySpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(addItemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(removeItemButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(processOrderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(removeItemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(clearOrderButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(8, 8, 8)
-                                .addComponent(orderProgressLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(orderProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(processOrderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())
         );
 
@@ -315,7 +320,7 @@ public class UserInterface extends javax.swing.JFrame {
                                         .addGroup(uesrControlPanelLayout.createSequentialGroup()
                                                 .addComponent(orderSystemPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(itemListPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE))
+                                                .addComponent(itemListPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addComponent(maxItemsHintLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addContainerGap())
         );
@@ -325,7 +330,7 @@ public class UserInterface extends javax.swing.JFrame {
                                 .addContainerGap()
                                 .addGroup(uesrControlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(orderSystemPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(itemListPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE))
+                                        .addComponent(itemListPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -375,20 +380,20 @@ public class UserInterface extends javax.swing.JFrame {
                                 .addContainerGap()
                                 .addGroup(devLogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(emulationSpeedLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(emulationSpeedSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE))
+                                        .addComponent(emulationSpeedSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 892, Short.MAX_VALUE)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 910, Short.MAX_VALUE)
                                 .addContainerGap())
         );
         devLogPanelLayout.setVerticalGroup(
                 devLogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, devLogPanelLayout.createSequentialGroup()
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(devLogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(devLogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGroup(devLogPanelLayout.createSequentialGroup()
                                                 .addComponent(emulationSpeedLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addComponent(emulationSpeedSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(38, 38, 38))
         );
@@ -400,20 +405,20 @@ public class UserInterface extends javax.swing.JFrame {
         orderProcessingSidePanel.setMinimumSize(new java.awt.Dimension(100, 0));
         orderProcessingSidePanel.setPreferredSize(new java.awt.Dimension(100, 624));
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+        orderQueueList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane4.setViewportView(jList1);
+        jScrollPane4.setViewportView(orderQueueList);
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Order");
-        jLabel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        orderQueue1Label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        orderQueue1Label.setText("Order");
+        orderQueue1Label.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Queue");
-        jLabel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        orderQueue2Label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        orderQueue2Label.setText("Queue");
+        orderQueue2Label.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         javax.swing.GroupLayout orderProcessingSidePanelLayout = new javax.swing.GroupLayout(orderProcessingSidePanel);
         orderProcessingSidePanel.setLayout(orderProcessingSidePanelLayout);
@@ -423,18 +428,18 @@ public class UserInterface extends javax.swing.JFrame {
                                 .addContainerGap()
                                 .addGroup(orderProcessingSidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
-                                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(orderQueue2Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jSeparator5)
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(orderQueue1Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addContainerGap())
         );
         orderProcessingSidePanelLayout.setVerticalGroup(
                 orderProcessingSidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, orderProcessingSidePanelLayout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(jLabel1)
+                                .addComponent(orderQueue1Label)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel2)
+                                .addComponent(orderQueue2Label)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -539,9 +544,6 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JList<String> itemList;
     private javax.swing.JLabel itemListLabel;
     private javax.swing.JPanel itemListPanel;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -557,11 +559,14 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JLabel maximumOrderLimitLabel;
     private javax.swing.JList<String> orderList;
     private javax.swing.JPanel orderProcessingSidePanel;
-    private javax.swing.JProgressBar orderProgressBar;
-    private javax.swing.JLabel orderProgressLabel;
+    private javax.swing.JLabel orderQueue1Label;
+    private javax.swing.JLabel orderQueue2Label;
+    private javax.swing.JList<String> orderQueueList;
     private javax.swing.JLabel orderSystemLabel;
     private javax.swing.JPanel orderSystemPanel;
     private javax.swing.JButton processOrderButton;
+    private javax.swing.JLabel qtyLabel;
+    private javax.swing.JSpinner qtySpinner;
     private javax.swing.JButton removeItemButton;
     private javax.swing.JLabel selectItemHintLabel;
     private javax.swing.JPanel uesrControlPanel;
