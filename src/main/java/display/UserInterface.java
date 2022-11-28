@@ -596,7 +596,7 @@ public class UserInterface extends javax.swing.JFrame {
                 if (items.contains(selectedItem)) {
                     ItemOrder itemToRemove = order.stream()
                             .filter(itemOrder -> itemOrder.name().equals(selectedItem))
-                            .findAny().get();
+                            .findAny().orElseThrow(() -> new IllegalArgumentException("Item" + selectedItem + " is not in the order list"));
                     order.remove(itemToRemove);
                     addToLogger("Item  " + selectedItem + " removed from order");
                     updateOrderScrollPanel();
@@ -633,7 +633,4 @@ public class UserInterface extends javax.swing.JFrame {
 
         }
     }
-
-
-
 }
