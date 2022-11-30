@@ -9,6 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+
+
 public class VisualizationTool extends JPanel {
     private List<Path> path;
     private final List<Point> shelves;
@@ -27,7 +29,47 @@ public class VisualizationTool extends JPanel {
     private Timer timer;
     private final List<graph.Point> order;
 
-    public VisualizationTool(Warehouse warehouse, List<Path> path, List<Point> locationsToVisit){
+
+    private Image robotImg;
+    private Image axeImg;
+    private Image hammerImg;
+    private Image hardHatImg;
+    private Image screwImg;
+    private Image wrenchImg;
+    private Image torchImg;
+    private Image nailsImg;
+    private Image brickImg;
+    private Image batteryImg;
+    private Image drillImg;
+    private Image screwdriverImg;
+    private Image sawImg;
+    private Image crowbarImg;
+    private Image pickaxeImg;
+    private Image wiresImg;
+    private Image chainsawImg;
+
+
+
+
+    public VisualizationTool(Warehouse warehouse, List<Path> path, List<Point> locationsToVisit, List<Image> images){
+        setRobotImg(images.get(0));
+        setHammerImg(images.get(1));
+        setScrewImg(images.get(2));
+        setHardHatImg(images.get(3));
+        setAxeImg(images.get(4));
+        setWrenchImg(images.get(5));
+        setTorchImg(images.get(6));
+        setNailsImg(images.get(7));
+        setBrickImg(images.get(8));
+        setBatteryImg(images.get(9));
+        setDrillImg(images.get(10));
+        setScrewdriverImg(images.get(11));
+        setSawImg(images.get(12));
+        setCrowbarImg(images.get(13));
+        setPickaxeImg(images.get(14));
+        setWiresImg(images.get(15));
+        setChainsawImg(images.get(16));
+
         //timer for each update of the paths progression
         setTimer(new Timer(500, new UserInterface.StepListener()));
         getTimer().start();
@@ -45,6 +87,7 @@ public class VisualizationTool extends JPanel {
         this.mapWidth = this.map[0].length;
         this.dispatchAreaLocation= warehouse.getDispatchedArea();
         this.chargingAreaLocation= warehouse.getChargingArea();
+
 
     }
     public void paintComponent(Graphics g){
@@ -101,13 +144,89 @@ public class VisualizationTool extends JPanel {
                     spacing + item.getY() * getBoxSize(),
                     getBoxSize() - spacing,
                     getBoxSize() - spacing);
+
+
         }
+
+
         // creates red space to represent the robot's current location
+        setRobotImg(getRobotImg().getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
         g.setColor(Color.RED);
         g.fillRect(spacing + getPath().get(this.curY).getPath().get(this.curX).getX() * getBoxSize(),
                 spacing + getPath().get(this.curY).getPath().get(this.curX).getY() * getBoxSize(),
                 getBoxSize() - spacing,
                 getBoxSize() - spacing);
+        g.drawImage(getRobotImg(),getSpacing() + getPath().get(this.curY).getPath().get(this.curX).getX() * getBoxSize(),
+                getSpacing() + getPath().get(this.curY).getPath().get(this.curX).getY() * getBoxSize(),
+                this);
+
+
+
+
+        //Hammer image (14,5)
+        g.drawImage(getHammerImg(),getSpacing() + 14 * getBoxSize(),
+                getSpacing() + 5 * getBoxSize(),
+                this);
+        // Screw image (3,19)
+        g.drawImage(getScrewImg(),getSpacing() + 3 * getBoxSize(),
+                getSpacing() + 19 * getBoxSize(),
+                this);
+        // Helmet (12,17)
+        g.drawImage(getHardHatImg(),getSpacing() + 12 * getBoxSize(),
+                getSpacing() + 17 * getBoxSize(),
+                this);
+        // Axe (13,23)
+        g.drawImage(getAxeImg(),getSpacing() + 13 * getBoxSize(),
+                getSpacing() + 23 * getBoxSize(),
+                this);
+        // Wrench (1,4)
+        g.drawImage(getWrenchImg(),getSpacing() + getBoxSize(),
+                getSpacing() + 4 * getBoxSize(),
+                this);
+        // Torch (35,19)
+        g.drawImage(getTorchImg(),getSpacing() + 35 * getBoxSize(),
+                getSpacing() + 19 * getBoxSize(),
+                this);
+        // Nails (7,16)
+        g.drawImage(getNailsImg(),getSpacing() + 7 * getBoxSize(),
+                getSpacing() + 16 * getBoxSize(),
+                this);
+        // Brick (15,20)
+        g.drawImage(getBrickImg(),getSpacing() + 15 * getBoxSize(),
+                getSpacing() + 20 * getBoxSize(),
+                this);
+        // Battery (1,29)
+        g.drawImage(getBatteryImg(),getSpacing() + getBoxSize(),
+                getSpacing() + 29 * getBoxSize(),
+                this);
+        // Drill (31,4)
+        g.drawImage(getDrillImg(),getSpacing() + 31 * getBoxSize(),
+                getSpacing() + 4 * getBoxSize(),
+                this);
+        // Screwdriver (25,26)
+        g.drawImage(getScrewdriverImg(),getSpacing() + 25 * getBoxSize(),
+                getSpacing() + 26 * getBoxSize(),
+                this);
+        // Saw (11,4)
+        g.drawImage(getSawImg(),getSpacing() + 11 * getBoxSize(),
+                getSpacing() + 4 * getBoxSize(),
+                this);
+        // Crowbar (32,11)
+        g.drawImage(getCrowbarImg(),getSpacing() + 32 * getBoxSize(),
+                getSpacing() + 11 * getBoxSize(),
+                this);
+        // Pickaxe (26,4)
+        g.drawImage(getPickaxeImg(),getSpacing() + 26 * getBoxSize(),
+                getSpacing() + 4 * getBoxSize(),
+                this);
+        // Wires (21,29)
+        g.drawImage(getWiresImg(),getSpacing() + 21 * getBoxSize(),
+                getSpacing() + 29 * getBoxSize(),
+                this);
+        // Chainsaw ()
+        g.drawImage(getChainsawImg(),getSpacing() + 36 * getBoxSize(),
+                getSpacing() + 2 * getBoxSize(),
+                this);
 
     }
 
@@ -156,8 +275,8 @@ public class VisualizationTool extends JPanel {
         return boxSize;
     }
 
-    public void setBoxSize(int boxSize) {
-        this.boxSize = boxSize;
+    public void setBoxSize(int newSize) {
+        boxSize = newSize;
     }
 
     public Timer getTimer() {
@@ -213,4 +332,159 @@ public class VisualizationTool extends JPanel {
     public void setDispatchAreaLocation(Point dispatchAreaLocation) {
         this.dispatchAreaLocation = dispatchAreaLocation;
     }
+
+    public Image getHammerImg() {
+        return hammerImg;
+    }
+
+    public void setHammerImg(Image hammerImg) {
+        this.hammerImg = hammerImg;
+    }
+
+    public Image getScrewImg() {
+        return screwImg;
+    }
+
+    public void setScrewImg(Image screwImg) {
+        this.screwImg = screwImg;
+    }
+
+    public Image getHardHatImg() {
+        return hardHatImg;
+    }
+
+    public void setHardHatImg(Image hardHatImg) {
+        this.hardHatImg = hardHatImg;
+    }
+
+    public Image getAxeImg() {
+        return axeImg;
+    }
+
+    public void setAxeImg(Image axeImg) {
+        this.axeImg = axeImg;
+    }
+
+    public Image getWrenchImg() {
+        return wrenchImg;
+    }
+
+    public void setWrenchImg(Image wrenchImg) {
+        this.wrenchImg = wrenchImg;
+    }
+
+    public Image getRobotImg() {
+        return robotImg;
+    }
+
+    public void setRobotImg(Image robotImg) {
+        this.robotImg = robotImg;
+    }
+
+    public Image getTorchImg() {
+        return torchImg;
+    }
+
+    public void setTorchImg(Image torchImg) {
+        this.torchImg = torchImg;
+    }
+
+    public Image getNailsImg() {
+        return nailsImg;
+    }
+
+    public void setNailsImg(Image nailsImg) {
+        this.nailsImg = nailsImg;
+    }
+
+    public Image getBrickImg() {
+        return brickImg;
+    }
+
+    public void setBrickImg(Image brickImg) {
+        this.brickImg = brickImg;
+    }
+
+    public Image getBatteryImg() {
+        return batteryImg;
+    }
+
+    public void setBatteryImg(Image batteryImg) {
+        this.batteryImg = batteryImg;
+    }
+
+    public Image getDrillImg() {
+        return drillImg;
+    }
+
+    public void setDrillImg(Image drillImg) {
+        this.drillImg = drillImg;
+    }
+
+    public Image getScrewdriverImg() {
+        return screwdriverImg;
+    }
+
+    public void setScrewdriverImg(Image screwdriverImg) {
+        this.screwdriverImg = screwdriverImg;
+    }
+
+    public Image getSawImg() {
+        return sawImg;
+    }
+
+    public void setSawImg(Image sawImg) {
+        this.sawImg = sawImg;
+    }
+
+    public Image getCrowbarImg() {
+        return crowbarImg;
+    }
+
+    public void setCrowbarImg(Image crowbarImg) {
+        this.crowbarImg = crowbarImg;
+    }
+
+    public Image getPickaxeImg() {
+        return pickaxeImg;
+    }
+
+    public void setPickaxeImg(Image pickaxeImg) {
+        this.pickaxeImg = pickaxeImg;
+    }
+
+    public Image getChainsawImg() {
+        return chainsawImg;
+    }
+
+    public void setChainsawImg(Image chainsawImg) {
+        this.chainsawImg = chainsawImg;
+    }
+
+    public Image getWiresImg() {
+        return wiresImg;
+    }
+
+    public void setWiresImg(Image wiresImg) {
+        this.wiresImg = wiresImg;
+    }
+
+
+    private class StepListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(getStep() < pathSize-1){
+                setStep(getStep() + 1);
+                setCurx(getCurX()+1);
+                repaint();
+            }
+            else{
+                //step = 0;
+                getTimer().stop();
+            }
+
+        }
+    }
+
+
 }

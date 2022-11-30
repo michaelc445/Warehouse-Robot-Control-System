@@ -7,12 +7,17 @@ package display;
 import graph.Path;
 import graph.PathFinder;
 import graph.Point;
+
+import java.awt.*;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.util.*;
+import java.util.List;
+import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 import javax.swing.SwingUtilities;
 import static main.Main.warehouse;
@@ -583,6 +588,9 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JLabel selectItemHintLabel;
     private javax.swing.JPanel uesrControlPanel;
     private javax.swing.JPanel visualisationPanel;
+    private List<Image> images;
+    private int boxSize;
+    private int spacing;
     // End of variables declaration
 
 
@@ -594,16 +602,46 @@ public class UserInterface extends javax.swing.JFrame {
         robotLoggerTextArea.setText("");
 
         ArrayList<Point> locationsToVisit = new ArrayList<>();
-
         for (ItemOrder item : order){
             locationsToVisit.add(item.location());
         }
-
+        this.boxSize= 24;
+        this.spacing =1;
         PathFinder pathFinder = new PathFinder();
         List<Path> shortestPath = pathFinder.findShortestPath(warehouse.getWarehouseGraph(), order.stream().toList());
+        if (this.images == null) {
+            try {
+                this.images = List.of(
+                        ImageIO.read(new File("src/main/java/display/static/robot.png")).getScaledInstance(getBoxSize() - getSpacing(), getBoxSize() - getSpacing(), Image.SCALE_SMOOTH),
+                        ImageIO.read(new File("src/main/java/display/static/hammer.png")).getScaledInstance(getBoxSize() - getSpacing(), getBoxSize() - getSpacing(), Image.SCALE_SMOOTH),
+                        ImageIO.read(new File("src/main/java/display/static/screw.png")).getScaledInstance(getBoxSize() - getSpacing(), getBoxSize() - getSpacing(), Image.SCALE_SMOOTH),
+                        ImageIO.read(new File("src/main/java/display/static/hardHat.png")).getScaledInstance(getBoxSize() - getSpacing(), getBoxSize() - getSpacing(), Image.SCALE_SMOOTH),
+                        ImageIO.read(new File("src/main/java/display/static/axe.png")).getScaledInstance(getBoxSize() - getSpacing(), getBoxSize() - getSpacing(), Image.SCALE_SMOOTH),
+                        ImageIO.read(new File("src/main/java/display/static/wrench.png")).getScaledInstance(getBoxSize() - getSpacing(), getBoxSize() - getSpacing(), Image.SCALE_SMOOTH),
+                        ImageIO.read(new File("src/main/java/display/static/torch.png")).getScaledInstance(getBoxSize() - getSpacing(), getBoxSize() - getSpacing(), Image.SCALE_SMOOTH),
+                        ImageIO.read(new File("src/main/java/display/static/nails.png")).getScaledInstance(getBoxSize() - getSpacing(), getBoxSize() - getSpacing(), Image.SCALE_SMOOTH),
+                        ImageIO.read(new File("src/main/java/display/static/brick.png")).getScaledInstance(getBoxSize() - getSpacing(), getBoxSize() - getSpacing(), Image.SCALE_SMOOTH),
+                        ImageIO.read(new File("src/main/java/display/static/battery.png")).getScaledInstance(getBoxSize() - getSpacing(), getBoxSize() - getSpacing(), Image.SCALE_SMOOTH),
+                        ImageIO.read(new File("src/main/java/display/static/drill.png")).getScaledInstance(getBoxSize() - getSpacing(), getBoxSize() - getSpacing(), Image.SCALE_SMOOTH),
+                        ImageIO.read(new File("src/main/java/display/static/screwdriver.png")).getScaledInstance(getBoxSize() - getSpacing(), getBoxSize() - getSpacing(), Image.SCALE_SMOOTH),
+                        ImageIO.read(new File("src/main/java/display/static/saw.png")).getScaledInstance(getBoxSize() - getSpacing(), getBoxSize() - getSpacing(), Image.SCALE_SMOOTH),
+                        ImageIO.read(new File("src/main/java/display/static/crowbar.png")).getScaledInstance(getBoxSize() - getSpacing(), getBoxSize() - getSpacing(), Image.SCALE_SMOOTH),
+                        ImageIO.read(new File("src/main/java/display/static/pickaxe.png")).getScaledInstance(getBoxSize() - getSpacing(), getBoxSize() - getSpacing(), Image.SCALE_SMOOTH),
+                        ImageIO.read(new File("src/main/java/display/static/wires.png")).getScaledInstance(getBoxSize() - getSpacing(), getBoxSize() - getSpacing(), Image.SCALE_SMOOTH),
+                        ImageIO.read(new File("src/main/java/display/static/chainsaw.png")).getScaledInstance(getBoxSize() - getSpacing(), getBoxSize() - getSpacing(), Image.SCALE_SMOOTH)
+                );
+            } catch(Exception e){
 
 
+            }
+        }
         showVisualisation(warehouse, shortestPath, locationsToVisit);
+    }
+    public int getBoxSize(){
+        return this.boxSize;
+    }
+    public int getSpacing(){
+        return this.spacing;
     }
 
     protected void showVisualisation(Warehouse warehouse, List<Path> shortestPath, ArrayList<Point> locationsToVisit) {
@@ -612,8 +650,10 @@ public class UserInterface extends javax.swing.JFrame {
             if (visualisation != null) {
                 this.remove(visualisation);
             }
-            visualisation = new VisualizationTool(warehouse, shortestPath, locationsToVisit);
             changeEmulationSpeedBySliderVal(); // to instantiate initial Speed value, if it was changed before Processing order
+            visualisation = new VisualizationTool(warehouse, shortestPath, locationsToVisit,this.images);
+            visualisation.setLocation(visualisationPanel.getWidth() / 2, visualisationPanel.getHeight() / 2 );
+            changeEmulationSpeedBySliderVal();
             this.add(visualisation);
             this.invalidate();
             this.revalidate();
