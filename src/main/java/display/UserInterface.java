@@ -177,7 +177,7 @@ public class UserInterface extends javax.swing.JFrame {
             }
         });
 
-        addItemButton.setText("Add");
+        addItemButton.setText("Add/Update");
         addItemButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addItemButtonActionPerformed(evt);
@@ -211,7 +211,7 @@ public class UserInterface extends javax.swing.JFrame {
             }
         });
 
-        qtySpinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, 10, 1));
+        qtySpinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, 50, 1));
         qtySpinner.setValue(1);
 
         qtyLabel.setText("QTY:");
@@ -632,11 +632,15 @@ public class UserInterface extends javax.swing.JFrame {
                 }
             } else {
                 ItemOrder previousItem = optionalItem.get();
-                order.remove(previousItem);
-                order.add(new ItemOrder(selectedItem, warehouse.getItemLocation(selectedItem), quantity, warehouse.getItem(selectedItem).weight()));
-                String UPDATE_MESSAGE_MASK = "The quantity of item '%s' was updated (%d) -> (%d)";
-                String updateMessage = String.format(UPDATE_MESSAGE_MASK, previousItem.name(), previousItem.quantity(), quantity);
-                addToLogger(updateMessage);
+                if (previousItem.quantity() == quantity) {
+                    addToLogger("The quantity of selected item hasn't been changed in the order. Nothing to update.");
+                } else {
+                    order.remove(previousItem);
+                    order.add(new ItemOrder(selectedItem, warehouse.getItemLocation(selectedItem), quantity, warehouse.getItem(selectedItem).weight()));
+                    String UPDATE_MESSAGE_MASK = "The quantity of item '%s' was updated (%d) -> (%d)";
+                    String updateMessage = String.format(UPDATE_MESSAGE_MASK, previousItem.name(), previousItem.quantity(), quantity);
+                    addToLogger(updateMessage);
+                }
             }
         }
     }
