@@ -650,9 +650,7 @@ public class UserInterface extends javax.swing.JFrame {
             if (visualisation != null) {
                 this.remove(visualisation);
             }
-            visualisation = new VisualizationTool(warehouse, shortestPath, locationsToVisit);
             changeEmulationSpeedBySliderVal(); // to instantiate initial Speed value, if it was changed before Processing order
-
             visualisation = new VisualizationTool(warehouse, shortestPath, locationsToVisit,this.images);
             visualisation.setLocation(visualisationPanel.getWidth() / 2, visualisationPanel.getHeight() / 2 );
             changeEmulationSpeedBySliderVal();

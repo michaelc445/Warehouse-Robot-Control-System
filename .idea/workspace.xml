@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5dafaf29-34b9-46fd-8806-9e9da26dcb83" name="Changes" comment="fixed weight printing in console log">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/graph/PathFinder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/graph/PathFinder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/graph/PathFinderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/graph/PathFinderTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/display/UserInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/display/UserInterface.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,7 +129,7 @@
       <command value="mvn clean install assembly:single" />
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.PathFinderTest.accountForWeight">
+  <component name="RunManager" selected="Application.runMain">
     <configuration name="runMain" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="main.Main" />
       <module name="team_software" />
@@ -669,6 +667,14 @@
       <FILTER>stock.*</FILTER>
       <FILTER>display.*</FILTER>
     </SUITE>
+    <SUITE FILE_PATH="coverage/team_software_project$RunVT.ic" NAME="RunVT Coverage Results" MODIFIED="1668103228213" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>display.*</FILTER>
+    </SUITE>
     <SUITE FILE_PATH="coverage/team_software$All_in_team_software.ic" NAME="All in team_software Coverage Results" MODIFIED="1667671790243" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/Warehouse_Robot_Control_System$all_packages.ic" NAME="all_packages Coverage Results" MODIFIED="1669521511527" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>graph.*</FILTER>
+      <FILTER>stock.*</FILTER>
+      <FILTER>display.*</FILTER>
+    </SUITE>
   </component>
 </project>
