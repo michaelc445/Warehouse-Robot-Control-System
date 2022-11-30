@@ -3,14 +3,10 @@ package display;
 import graph.Path;
 import graph.Point;
 import main.Warehouse;
-
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 
@@ -55,31 +51,24 @@ public class VisualizationTool extends JPanel {
 
 
 
-    public VisualizationTool(Warehouse warehouse, List<Path> path, List<Point> locationsToVisit){
-
-        try {
-            setRobotImg(ImageIO.read(new File("src/main/java/display/static/robot.png")).getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
-            setHammerImg(ImageIO.read(new File("src/main/java/display/static/hammer.png")).getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
-            setScrewImg(ImageIO.read(new File("src/main/java/display/static/screw.png")).getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
-            setHardHatImg(ImageIO.read(new File("src/main/java/display/static/hardHat.png")).getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
-            setAxeImg(ImageIO.read(new File("src/main/java/display/static/axe.png")).getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
-            setWrenchImg(ImageIO.read(new File("src/main/java/display/static/wrench.png")).getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
-            setTorchImg(ImageIO.read(new File("src/main/java/display/static/torch.png")).getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
-            setNailsImg(ImageIO.read(new File("src/main/java/display/static/nails.png")).getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
-            setBrickImg(ImageIO.read(new File("src/main/java/display/static/brick.png")).getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
-            setBatteryImg(ImageIO.read(new File("src/main/java/display/static/battery.png")).getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
-            setDrillImg(ImageIO.read(new File("src/main/java/display/static/drill.png")).getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
-            setScrewdriverImg(ImageIO.read(new File("src/main/java/display/static/screwdriver.png")).getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
-            setSawImg(ImageIO.read(new File("src/main/java/display/static/saw.png")).getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
-            setCrowbarImg(ImageIO.read(new File("src/main/java/display/static/crowbar.png")).getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
-            setPickaxeImg(ImageIO.read(new File("src/main/java/display/static/pickaxe.png")).getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
-            setWiresImg(ImageIO.read(new File("src/main/java/display/static/wires.png")).getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
-            setChainsawImg(ImageIO.read(new File("src/main/java/display/static/chainsaw.png")).getScaledInstance(getBoxSize()-getSpacing(), getBoxSize()-getSpacing(), Image.SCALE_SMOOTH));
-
-
-        } catch (IOException ex) {
-            // handle exception...
-        }
+    public VisualizationTool(Warehouse warehouse, List<Path> path, List<Point> locationsToVisit, List<Image> images){
+        setRobotImg(images.get(0));
+        setHammerImg(images.get(1));
+        setScrewImg(images.get(2));
+        setHardHatImg(images.get(3));
+        setAxeImg(images.get(4));
+        setWrenchImg(images.get(5));
+        setTorchImg(images.get(6));
+        setNailsImg(images.get(7));
+        setBrickImg(images.get(8));
+        setBatteryImg(images.get(9));
+        setDrillImg(images.get(10));
+        setScrewdriverImg(images.get(11));
+        setSawImg(images.get(12));
+        setCrowbarImg(images.get(13));
+        setPickaxeImg(images.get(14));
+        setWiresImg(images.get(15));
+        setChainsawImg(images.get(16));
 
         //timer for each update of the paths progression
         setTimer(new Timer(500, new StepListener()));
