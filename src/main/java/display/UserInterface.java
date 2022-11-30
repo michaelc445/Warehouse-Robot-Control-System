@@ -25,9 +25,9 @@ import stock.ItemOrder;
  */
 public class UserInterface extends javax.swing.JFrame {
 
-    List<String> items = warehouse.getItemNames();
+    private List<String> items = warehouse.getItemNames();
 
-    Set<ItemOrder> order = new HashSet<>();
+    private static Set<ItemOrder> order = new HashSet<>();
 
     String selectedItem = "";
 
@@ -79,6 +79,7 @@ public class UserInterface extends javax.swing.JFrame {
         maxSizeDialog = new javax.swing.JDialog();
         maximumOrderLimitLabel = new javax.swing.JLabel();
         grandButton = new javax.swing.JButton();
+        jMenu1 = new javax.swing.JMenu();
         uesrControlPanel = new javax.swing.JPanel();
         orderSystemPanel = new javax.swing.JPanel();
         orderSystemLabel = new javax.swing.JLabel();
@@ -152,6 +153,8 @@ public class UserInterface extends javax.swing.JFrame {
                                 .addComponent(grandButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(18, 18, 18))
         );
+
+        jMenu1.setText("jMenu1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Warehouse Robotic Control System");
@@ -354,6 +357,7 @@ public class UserInterface extends javax.swing.JFrame {
         logTextArea.setEditable(false);
         logTextArea.setBackground(new java.awt.Color(0, 0, 0));
         logTextArea.setColumns(20);
+        logTextArea.setFont(new java.awt.Font("Fira Sans", 0, 13)); // NOI18N
         logTextArea.setForeground(new java.awt.Color(153, 255, 204));
         logTextArea.setRows(5);
         jScrollPane1.setViewportView(logTextArea);
@@ -505,9 +509,7 @@ public class UserInterface extends javax.swing.JFrame {
     }
 
     private void clearOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        order.clear();
-        updateOrderScrollPanel();
-        addToLogger("Order list was cleared");
+        clearOrderList();
     }
 
     private void orderListValueChanged(javax.swing.event.ListSelectionEvent evt) {
@@ -529,7 +531,7 @@ public class UserInterface extends javax.swing.JFrame {
         changeEmulationSpeedBySliderVal();
     }
 
-    private void updateOrderScrollPanel() {
+    private static void updateOrderScrollPanel() {
         orderList.removeAll();
         DefaultListModel<String> listModel = new DefaultListModel<>();
         for (ItemOrder item : order) {
@@ -548,6 +550,7 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JList<String> itemList;
     private javax.swing.JLabel itemListLabel;
     private javax.swing.JPanel itemListPanel;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -561,7 +564,7 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JLabel maxItemsHintLabel;
     private javax.swing.JDialog maxSizeDialog;
     private javax.swing.JLabel maximumOrderLimitLabel;
-    private javax.swing.JList<String> orderList;
+    private static javax.swing.JList<String> orderList;
     private javax.swing.JPanel orderProcessingSidePanel;
     private javax.swing.JLabel orderQueue1Label;
     private javax.swing.JLabel orderQueue2Label;
@@ -607,7 +610,7 @@ public class UserInterface extends javax.swing.JFrame {
         });
     }
 
-    private void addToLogger(String newMessage) {
+    private static void addToLogger(String newMessage) {
         StringBuilder loggerMessageBuilder = new StringBuilder();
         loggerMessageBuilder.append(logTextArea.getText())
                 .append(System.lineSeparator())
@@ -680,6 +683,12 @@ public class UserInterface extends javax.swing.JFrame {
         }
     }
 
+    private static void clearOrderList() {
+        order.clear();
+        updateOrderScrollPanel();
+        addToLogger("Order list was cleared");
+    }
+
     static class StepListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -690,8 +699,9 @@ public class UserInterface extends javax.swing.JFrame {
             }
             else{
                 visualisation.getTimer().stop();
+                clearOrderList();
+                addToLogger("Order is completed!");
             }
-
         }
     }
 }
