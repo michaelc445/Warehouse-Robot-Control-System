@@ -544,8 +544,8 @@ public class UserInterface extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify
-    private javax.swing.JButton addItemButton;
-    private javax.swing.JButton clearOrderButton;
+    private static javax.swing.JButton addItemButton;
+    private static javax.swing.JButton clearOrderButton;
     private javax.swing.JPanel devLogPanel;
     private javax.swing.JLabel emulationSpeedLabel;
     private javax.swing.JSlider emulationSpeedSlider;
@@ -576,7 +576,7 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JButton processOrderButton;
     private javax.swing.JLabel qtyLabel;
     private javax.swing.JSpinner qtySpinner;
-    private javax.swing.JButton removeItemButton;
+    private static javax.swing.JButton removeItemButton;
     private static javax.swing.JTextArea robotLoggerTextArea;
     private javax.swing.JLabel selectItemHintLabel;
     private javax.swing.JPanel uesrControlPanel;
@@ -585,6 +585,9 @@ public class UserInterface extends javax.swing.JFrame {
 
 
     private void launchController() {
+        addItemButton.setEnabled(false);
+        removeItemButton.setEnabled(false);
+        clearOrderButton.setEnabled(false);
 
         ArrayList<Point> locationsToVisit = new ArrayList<>();
 
@@ -729,6 +732,9 @@ public class UserInterface extends javax.swing.JFrame {
                 visualisation.getTimer().stop();
                 clearOrderList();
                 addToLogger("Order is completed!");
+                addItemButton.setEnabled(true);
+                removeItemButton.setEnabled(true);
+                clearOrderButton.setEnabled(true);
             }
         }
 
