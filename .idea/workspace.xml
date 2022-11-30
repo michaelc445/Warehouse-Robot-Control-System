@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5dafaf29-34b9-46fd-8806-9e9da26dcb83" name="Changes" comment="fixed removing item from order/updating quantity">
+    <list default="true" id="5dafaf29-34b9-46fd-8806-9e9da26dcb83" name="Changes" comment="fixed weight printing in console log">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/display/UserInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/display/UserInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/graph/PathFinder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/graph/PathFinder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/graph/PathFinderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/graph/PathFinderTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,7 +131,7 @@
       <command value="mvn clean install assembly:single" />
     </option>
   </component>
-  <component name="RunManager" selected="Application.runMain">
+  <component name="RunManager" selected="JUnit.PathFinderTest.accountForWeight">
     <configuration name="runMain" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="main.Main" />
       <module name="team_software" />
@@ -288,8 +289,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JAR Application.team.software-1.0-SNAPSHOT-jar-with-dependencies.jar" />
         <item itemvalue="JUnit.PathFinderTest.accountForWeight" />
+        <item itemvalue="JAR Application.team.software-1.0-SNAPSHOT-jar-with-dependencies.jar" />
         <item itemvalue="JAR Application.team.software-1.0-SNAPSHOT.jar" />
         <item itemvalue="JUnit.PathFinderTest.findShortestPathTest" />
         <item itemvalue="JUnit.All in team_software" />
@@ -319,7 +320,7 @@
       <workItem from="1669467875214" duration="38521000" />
       <workItem from="1669515004061" duration="3399000" />
       <workItem from="1669823234987" duration="3937000" />
-      <workItem from="1669832590842" duration="3938000" />
+      <workItem from="1669832590842" duration="6454000" />
     </task>
     <task id="LOCAL-00001" summary="create project">
       <created>1665164156632</created>
@@ -559,7 +560,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669836465144</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="fixed weight printing in console log">
+      <created>1669836713608</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1669836713608</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -624,7 +632,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="changed  project to use maven" />
     <MESSAGE value="changed  project to use maven, added shortest path between shelves and it works, but too slow for large maps, will have to change to floyd warshall" />
     <MESSAGE value="added testfiles" />
     <MESSAGE value="no longer calculate distance  between all shelves.  added path  class" />
@@ -649,7 +656,8 @@
     <MESSAGE value="fixed weight displaying in order system panel and console" />
     <MESSAGE value="fixed updating quantity of an order" />
     <MESSAGE value="fixed removing item from order/updating quantity" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed removing item from order/updating quantity" />
+    <MESSAGE value="fixed weight printing in console log" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed weight printing in console log" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
