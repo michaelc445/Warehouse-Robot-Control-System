@@ -37,6 +37,7 @@ public class UserInterface extends javax.swing.JFrame {
 
     int emulationSpeed = 500;
 
+    private static final int ORDER_SIZE_MAX = 5;
     /**
      * Creates new form UserInterface
      */
@@ -209,6 +210,9 @@ public class UserInterface extends javax.swing.JFrame {
                 processOrderButtonActionPerformed(evt);
             }
         });
+
+        qtySpinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, 10, 1));
+        qtySpinner.setValue(1);
 
         qtyLabel.setText("QTY:");
 
@@ -612,26 +616,33 @@ public class UserInterface extends javax.swing.JFrame {
     }
 
     private void addSelectedItemToOrderList() {
-        if (order.size() == 5) {
+        if (order.size() == ORDER_SIZE_MAX) {
             maxSizeDialog.setVisible(true);
             addToLogger("Maximum Order list size is reached");
         } else {
-            if (!isOrderListContainItem()) {
+            Optional<ItemOrder> optionalItem = getItemIfPresentInOrderList();
+            int quantity = (int) qtySpinner.getValue();
+            if (optionalItem.isEmpty()) {
                 if (items.contains(selectedItem)) {
-                    order.add(new ItemOrder(selectedItem,warehouse.getItemLocation(selectedItem),10,warehouse.getItem(selectedItem).weight()));
-                    addToLogger("Item  " + selectedItem + " added to order");
+                    order.add(new ItemOrder(selectedItem, warehouse.getItemLocation(selectedItem), quantity, warehouse.getItem(selectedItem).weight()));
+                    addToLogger("Item  " + selectedItem + " of quantity (" + quantity + ") added to order");
                     updateOrderScrollPanel();
                 } else {
                     addToLogger("Item is not present in the Item DB or wasn't selected");
                 }
             } else {
-                addToLogger("Item  " + selectedItem + " is already in the order list");
+                ItemOrder previousItem = optionalItem.get();
+                order.remove(previousItem);
+                order.add(new ItemOrder(selectedItem, warehouse.getItemLocation(selectedItem), quantity, warehouse.getItem(selectedItem).weight()));
+                String UPDATE_MESSAGE_MASK = "The quantity of item '%s' was updated (%d) -> (%d)";
+                String updateMessage = String.format(UPDATE_MESSAGE_MASK, previousItem.name(), previousItem.quantity(), quantity);
+                addToLogger(updateMessage);
             }
         }
     }
 
-    private boolean isOrderListContainItem() {
-        return order.stream().map(ItemOrder::name).anyMatch(name -> name.equals(selectedItem));
+    private Optional<ItemOrder> getItemIfPresentInOrderList() {
+        return order.stream().filter(itemOrder -> itemOrder.name().equals(selectedItem)).findFirst();
     }
 
     private void removeSelectedItemFromOrderList() {
