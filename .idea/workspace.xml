@@ -4,17 +4,47 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5dafaf29-34b9-46fd-8806-9e9da26dcb83" name="Changes" comment="hardcoded item locations">
+    <list default="true" id="5dafaf29-34b9-46fd-8806-9e9da26dcb83" name="Changes" comment="fixed weight printing in console log">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/display/UserInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/display/UserInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/display/VisualizationTool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/display/VisualizationTool.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/graph/PathFinder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/graph/PathFinder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/graph/PathFinderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/graph/PathFinderTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="CoverageOptionsProvider">
+    <option name="myAddOrReplace" value="0" />
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="Main">
+          <activation />
+        </task>
+        <projects_view />
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JUnit5 Test Class" />
+        <option value="Class" />
+        <option value="Record" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Rebase.Settings">
+    <option name="NEW_BASE" value="origin/master" />
+  </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GithubProjectSettings">
@@ -24,13 +54,38 @@
       </list>
     </option>
   </component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="recentNewPullRequestHead">
+      <RepoCoordinatesHolder>
+        <option name="owner" value="michaelc445" />
+        <option name="repository" value="Warehouse-Robot-Control-System" />
+      </RepoCoordinatesHolder>
+    </option>
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="35758c0f-1102-45f4-af92-9012bb36c897" />
+        <option name="url" value="git@github.com:michaelc445/Warehouse-Robot-Control-System.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="jar://$MAVEN_REPOSITORY$/com/github/dpaukov/combinatoricslib3/3.3.3/combinatoricslib3-3.3.3.jar!/org/paukov/combinatorics3/Generator.class" root0="SKIP_INSPECTION" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="2IBZIeeqOZoPqnno7EEVWx0hZWS" />
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="downloadDocsAutomatically" value="true" />
+        <option name="downloadSourcesAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectId" id="2FogtvWBYOnGY3HmC0UwO8ABxDY" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -38,61 +93,481 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Michael/IdeaProjects/Warehouse-Robot-Control-System9&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;
   }
 }</component>
-  <component name="RunManager" selected="Application.Main">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Michael\IdeaProjects\team_software\src\test" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Michael\IdeaProjects\team_software_project\src\main\resources" />
+      <recent name="C:\Users\Michael\IdeaProjects\team_software\src\test\java" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="main" />
+      <recent name="graph" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="graph" />
+      <recent name="display" />
+      <recent name="" />
+    </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="mvn test" />
+      <command value="mvn idea:idea" />
+      <command value="mvn clean" />
+      <command value="mvn clean install" />
+      <command value="mvn clean assembly:single" />
+      <command value="mvn clean install assembly:single" />
+    </option>
+  </component>
+  <component name="RunManager" selected="JUnit.PathFinderTest.accountForWeight">
+    <configuration name="runMain" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="main.Main" />
       <module name="team_software" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="main.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="All in team_software" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="team_software" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PathFinderTest.accountForWeight" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="team_software" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="graph.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="graph" />
+      <option name="MAIN_CLASS_NAME" value="graph.PathFinderTest" />
+      <option name="METHOD_NAME" value="accountForWeight" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PathFinderTest.findShortestPathTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="team_software" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="graph.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="graph" />
+      <option name="MAIN_CLASS_NAME" value="graph.PathFinderTest" />
+      <option name="METHOD_NAME" value="findShortestPathTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="all_main" type="JUnit" factoryName="JUnit">
+      <module name="team_software" />
+      <option name="PACKAGE_NAME" value="main" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="t" type="JUnit" factoryName="JUnit">
+      <module name="team_software" />
+      <option name="PACKAGE_NAME" value="graph" />
+      <option name="MAIN_CLASS_NAME" value="graph.GraphTest" />
+      <option name="METHOD_NAME" value="shortestOrderPath" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="team.software-1.0-SNAPSHOT-jar-with-dependencies.jar" type="JarApplication" temporary="true">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/target/team.software-1.0-SNAPSHOT-jar-with-dependencies.jar" />
+      <method v="2" />
+    </configuration>
+    <configuration name="team.software-1.0-SNAPSHOT.jar" type="JarApplication" temporary="true">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/target/team.software-1.0-SNAPSHOT.jar" />
+      <method v="2" />
+    </configuration>
+    <configuration name="build jar" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="clean" />
+                <option value="install" />
+                <option value="assembly:single" />
+              </list>
+            </option>
+            <option name="pomFileName" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <configuration name="team_software [test]" type="MavenRunConfiguration" factoryName="Maven" nameIsGenerated="true">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings">
+          <MavenRunnerSettings>
+            <option name="delegateBuildToMaven" value="false" />
+            <option name="environmentProperties">
+              <map />
+            </option>
+            <option name="jreName" value="#USE_PROJECT_JDK" />
+            <option name="mavenProperties">
+              <map />
+            </option>
+            <option name="passParentEnv" value="true" />
+            <option name="runMavenInBackground" value="true" />
+            <option name="skipTests" value="false" />
+            <option name="vmOptions" value="" />
+          </MavenRunnerSettings>
+        </option>
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="test" />
+              </list>
+            </option>
+            <option name="pomFileName" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="true" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
     <list>
-      <item itemvalue="Application.Main" />
+      <item itemvalue="Application.runMain" />
+      <item itemvalue="JAR Application.team.software-1.0-SNAPSHOT-jar-with-dependencies.jar" />
+      <item itemvalue="JAR Application.team.software-1.0-SNAPSHOT.jar" />
+      <item itemvalue="JUnit.all_main" />
+      <item itemvalue="JUnit.t" />
       <item itemvalue="JUnit.all_packages" />
+      <item itemvalue="JUnit.PathFinderTest.accountForWeight" />
+      <item itemvalue="JUnit.All in team_software" />
+      <item itemvalue="JUnit.PathFinderTest.findShortestPathTest" />
+      <item itemvalue="Maven.build jar" />
+      <item itemvalue="Maven.team_software [test]" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.PathFinderTest.accountForWeight" />
+        <item itemvalue="JAR Application.team.software-1.0-SNAPSHOT-jar-with-dependencies.jar" />
+        <item itemvalue="JAR Application.team.software-1.0-SNAPSHOT.jar" />
+        <item itemvalue="JUnit.PathFinderTest.findShortestPathTest" />
+        <item itemvalue="JUnit.All in team_software" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
-    <task id="LOCAL-00001" summary="changed construction items file to add weights">
-      <created>1669573720948</created>
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5dafaf29-34b9-46fd-8806-9e9da26dcb83" name="Changes" comment="" />
+      <created>1665164072760</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1665164072760</updated>
+      <workItem from="1665164073946" duration="1360000" />
+      <workItem from="1665235423279" duration="9424000" />
+      <workItem from="1667426126381" duration="10481000" />
+      <workItem from="1667656502449" duration="41915000" />
+      <workItem from="1667700454292" duration="797000" />
+      <workItem from="1667701286865" duration="701000" />
+      <workItem from="1667701998080" duration="870000" />
+      <workItem from="1667702879390" duration="171000" />
+      <workItem from="1667703051540" duration="43000" />
+      <workItem from="1667703105275" duration="20172000" />
+      <workItem from="1667829459822" duration="17291000" />
+      <workItem from="1668102067594" duration="7047000" />
+      <workItem from="1669467875214" duration="38521000" />
+      <workItem from="1669515004061" duration="3399000" />
+      <workItem from="1669823234987" duration="3937000" />
+      <workItem from="1669832590842" duration="6454000" />
+    </task>
+    <task id="LOCAL-00001" summary="create project">
+      <created>1665164156632</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1669573720948</updated>
+      <updated>1665164156632</updated>
     </task>
-    <task id="LOCAL-00002" summary="set image in constructor of visualisation tool instead of in paint component">
-      <created>1669574700628</created>
+    <task id="LOCAL-00002" summary="create project">
+      <created>1665247563017</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1669574700628</updated>
+      <updated>1665247563017</updated>
     </task>
-    <task active="true" id="Default" summary="Default task">
-      <changelist id="5dafaf29-34b9-46fd-8806-9e9da26dcb83" name="Changes" comment="set image in constructor of visualisation tool instead of in paint component" />
-      <created>1669656861132</created>
-      <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
-      <updated>1669656861132</updated>
-      <workItem from="1669656862857" duration="952000" />
-      <workItem from="1669819814112" duration="2056000" />
+    <task id="LOCAL-00003" summary="create project">
+      <created>1667657337591</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1667657337591</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00004" summary="Added dijkstra and fixed some things.">
+      <created>1667672607395</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1667672607395</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Added dijkstra and fixed some things.">
+      <created>1667672638201</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1667672638201</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Added config to run all tests">
+      <created>1667672677414</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1667672677414</updated>
+    </task>
+    <task id="LOCAL-00007" summary="fixed tests in graph">
+      <created>1667676619928</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1667676619928</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Added point class and reworked graph package to use points">
+      <created>1667685907423</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1667685907423</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Added point class and reworked graph package to use points">
+      <created>1667685923580</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1667685923580</updated>
+    </task>
+    <task id="LOCAL-00010" summary=".">
+      <created>1667685969291</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1667685969291</updated>
+    </task>
+    <task id="LOCAL-00011" summary="changed  project to use maven, added shortest path between shelves and it works, but too slow for large maps, will have to change to floyd warshall">
+      <created>1667716282086</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1667716282086</updated>
+    </task>
+    <task id="LOCAL-00012" summary="added testfiles">
+      <created>1667759671727</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1667759671727</updated>
+    </task>
+    <task id="LOCAL-00013" summary="added runMain configuration.&#10;&#10;added a Warehouse class.&#10;&#10;added an OrderSystem class.">
+      <created>1668366050588</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1668366050588</updated>
+    </task>
+    <task id="LOCAL-00014" summary="added tests for warehouse">
+      <created>1668369287564</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1668369287564</updated>
+    </task>
+    <task id="LOCAL-00015" summary="added buttons to order system">
+      <created>1668371101798</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1668371101798</updated>
+    </task>
+    <task id="LOCAL-00016" summary="visualization tool now takes orders from order system">
+      <created>1668382194558</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1668382194558</updated>
+    </task>
+    <task id="LOCAL-00017" summary="fixed the empty order bug">
+      <created>1668382727522</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1668382727522</updated>
+    </task>
+    <task id="LOCAL-00018" summary="added display message indicating which item was added or removed from order">
+      <created>1668383362897</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1668383362897</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Added controller class which has the functionality of our WRCS">
+      <created>1668547815055</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1668547815055</updated>
+    </task>
+    <task id="LOCAL-00020" summary="added testcases for findShortestPath in table form">
+      <created>1669474788071</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1669474788071</updated>
+    </task>
+    <task id="LOCAL-00021" summary="added DynamicTests for dijkstra">
+      <created>1669477244178</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1669477244178</updated>
+    </task>
+    <task id="LOCAL-00022" summary="removed old tests from PathFinderTest">
+      <created>1669478504529</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1669478504529</updated>
+    </task>
+    <task id="LOCAL-00023" summary="changed item file to contain item weights, changed parser for new format of item file. added weight to Item record">
+      <created>1669481657074</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1669481657074</updated>
+    </task>
+    <task id="LOCAL-00024" summary="added weights to order path">
+      <created>1669495841507</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1669495841507</updated>
+    </task>
+    <task id="LOCAL-00025" summary="fixed bug in pathFinder.accountForWeight">
+      <created>1669498331221</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1669498331221</updated>
+    </task>
+    <task id="LOCAL-00026" summary="changed pom file to create executable jar. mvn clean install assembly:single">
+      <created>1669501052529</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1669501052529</updated>
+    </task>
+    <task id="LOCAL-00027" summary="fixed? bug in pathfinder.accountForWeight">
+      <created>1669501479463</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1669501479463</updated>
+    </task>
+    <task id="LOCAL-00028" summary="fixed? bug in pathfinder.accountForWeight">
+      <created>1669502601051</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1669502601051</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Merge remote-tracking branch 'origin/michael' into michael&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/main/java/graph/PathFinder.java">
+      <created>1669505554643</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1669505554643</updated>
+    </task>
+    <task id="LOCAL-00030" summary="added tests for accountForWeight method">
+      <created>1669517197756</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1669517197756</updated>
+    </task>
+    <task id="LOCAL-00031" summary="added item weights to order menu">
+      <created>1669834014810</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1669834014810</updated>
+    </task>
+    <task id="LOCAL-00032" summary="fixed weight displaying in order system panel and console">
+      <created>1669835445138</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1669835445138</updated>
+    </task>
+    <task id="LOCAL-00033" summary="fixed updating quantity of an order">
+      <created>1669835752678</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1669835752678</updated>
+    </task>
+    <task id="LOCAL-00034" summary="fixed removing item from order/updating quantity">
+      <created>1669836465144</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1669836465144</updated>
+    </task>
+    <task id="LOCAL-00035" summary="fixed weight printing in console log">
+      <created>1669836713608</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1669836713608</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -101,6 +576,11 @@
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
+        <entry key="0fa7fbe2-fd5f-4557-a1e5-cb3e0e5e71b9">
+          <value>
+            <State />
+          </value>
+        </entry>
         <entry key="MAIN">
           <value>
             <State>
@@ -109,7 +589,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="vt_d4" />
+                        <option value="artem.d4.exctractin_control_flow_from_vt" />
                       </list>
                     </value>
                   </entry>
@@ -127,7 +607,22 @@
             <list>
               <RecentGroup>
                 <option name="FILTER_VALUES">
-                  <option value="vt_d4" />
+                  <option value="artem.d4.exctractin_control_flow_from_vt" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="michael" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="origin/master" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="michael_test" />
                 </option>
               </RecentGroup>
             </list>
@@ -137,9 +632,36 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="changed construction items file to add weights" />
-    <MESSAGE value="set image in constructor of visualisation tool instead of in paint component" />
-    <option name="LAST_COMMIT_MESSAGE" value="set image in constructor of visualisation tool instead of in paint component" />
+    <MESSAGE value="changed  project to use maven, added shortest path between shelves and it works, but too slow for large maps, will have to change to floyd warshall" />
+    <MESSAGE value="added testfiles" />
+    <MESSAGE value="no longer calculate distance  between all shelves.  added path  class" />
+    <MESSAGE value="added runMain configuration.&#10;&#10;added a Warehouse class.&#10;&#10;added an OrderSystem class." />
+    <MESSAGE value="added tests for warehouse" />
+    <MESSAGE value="added buttons to order system" />
+    <MESSAGE value="visualization tool now takes orders from order system" />
+    <MESSAGE value="fixed the empty order bug" />
+    <MESSAGE value="added display message indicating which item was added or removed from order" />
+    <MESSAGE value="Added controller class which has the functionality of our WRCS" />
+    <MESSAGE value="added testcases for findShortestPath in table form" />
+    <MESSAGE value="added DynamicTests for dijkstra" />
+    <MESSAGE value="removed old tests from PathFinderTest" />
+    <MESSAGE value="changed item file to contain item weights, changed parser for new format of item file. added weight to Item record" />
+    <MESSAGE value="added weights to order path" />
+    <MESSAGE value="fixed bug in pathFinder.accountForWeight" />
+    <MESSAGE value="changed pom file to create executable jar. mvn clean install assembly:single" />
+    <MESSAGE value="fixed? bug in pathfinder.accountForWeight" />
+    <MESSAGE value="Merge remote-tracking branch 'origin/michael' into michael&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/main/java/graph/PathFinder.java" />
+    <MESSAGE value="added tests for accountForWeight method" />
+    <MESSAGE value="added item weights to order menu" />
+    <MESSAGE value="fixed weight displaying in order system panel and console" />
+    <MESSAGE value="fixed updating quantity of an order" />
+    <MESSAGE value="fixed removing item from order/updating quantity" />
+    <MESSAGE value="fixed weight printing in console log" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed weight printing in console log" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/team_software$all_packages.ic" NAME="all_packages Coverage Results" MODIFIED="1667686531236" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
@@ -147,14 +669,6 @@
       <FILTER>stock.*</FILTER>
       <FILTER>display.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/team_software_project$RunVT.ic" NAME="RunVT Coverage Results" MODIFIED="1668103228213" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>display.*</FILTER>
-    </SUITE>
     <SUITE FILE_PATH="coverage/team_software$All_in_team_software.ic" NAME="All in team_software Coverage Results" MODIFIED="1667671790243" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/Warehouse_Robot_Control_System$all_packages.ic" NAME="all_packages Coverage Results" MODIFIED="1669521511527" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>graph.*</FILTER>
-      <FILTER>stock.*</FILTER>
-      <FILTER>display.*</FILTER>
-    </SUITE>
   </component>
 </project>

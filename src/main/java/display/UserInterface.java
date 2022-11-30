@@ -9,6 +9,10 @@ import graph.PathFinder;
 import graph.Point;
 
 import java.awt.*;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.util.*;
@@ -26,18 +30,23 @@ import stock.ItemOrder;
  */
 public class UserInterface extends javax.swing.JFrame {
 
-    String[] items = warehouse.getItemNames().toArray(String[]::new);
+    private List<String> items = warehouse.getItemNames();
 
-    Set<ItemOrder> order = new HashSet<>();
+    private static Set<ItemOrder> order = new HashSet<>();
+
+    private static int itemsTaken = 0;
+
+    private static int remainingCapacity = PathFinder.ROBOT_MAX_CAPACITY;
 
     String selectedItem = "";
 
     boolean isOrderListFocused = false;
 
-    VisualizationTool visualisation;
+    private static VisualizationTool visualisation;
 
     int emulationSpeed = 500;
 
+    private static final int ORDER_SIZE_MAX = 5;
     /**
      * Creates new form UserInterface
      */
@@ -51,8 +60,8 @@ public class UserInterface extends javax.swing.JFrame {
 
         int mapHeight  =  mapLayout.length;
         int mapWidth = mapLayout[0].length;
-        int visualisationPanelWidth = mapWidth * VisualizationTool.boxSize - 10;
-        int visualisationPanelHeight = mapHeight * VisualizationTool.boxSize + 2;
+        int visualisationPanelWidth = mapWidth * VisualizationTool.boxSize;
+        int visualisationPanelHeight = mapHeight * VisualizationTool.boxSize;
 
         if (visualisationPanelWidth < visualisationPanel.getMinimumSize().width
                 || visualisationPanelHeight < visualisationPanel.getMinimumSize().height) {
@@ -60,11 +69,12 @@ public class UserInterface extends javax.swing.JFrame {
             visualisationPanelHeight = (int) visualisationPanel.getMinimumSize().getHeight();
             orderList.setFont(new Font("Arial",Font.PLAIN,12));
         }
-        int frameWidth = (this.getWidth() - visualisationPanel.getWidth()) + visualisationPanelWidth;
+        int frameWidth = (this.getWidth() - visualisationPanel.getWidth() - orderProcessingSidePanel.getWidth()) + visualisationPanelWidth;
         int frameHeight = (this.getHeight() - visualisationPanel.getHeight()) + visualisationPanelHeight;
 
-        this.setSize(new Dimension(frameWidth, frameHeight));
+        this.setSize(new Dimension(frameWidth + 88, frameHeight + 3));
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -78,6 +88,7 @@ public class UserInterface extends javax.swing.JFrame {
         maxSizeDialog = new javax.swing.JDialog();
         maximumOrderLimitLabel = new javax.swing.JLabel();
         grandButton = new javax.swing.JButton();
+        jMenu1 = new javax.swing.JMenu();
         uesrControlPanel = new javax.swing.JPanel();
         orderSystemPanel = new javax.swing.JPanel();
         orderSystemLabel = new javax.swing.JLabel();
@@ -87,10 +98,10 @@ public class UserInterface extends javax.swing.JFrame {
         orderList = new javax.swing.JList<>();
         clearOrderButton = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JSeparator();
-        orderProgressLabel = new javax.swing.JLabel();
-        orderProgressBar = new javax.swing.JProgressBar();
         jSeparator4 = new javax.swing.JSeparator();
         processOrderButton = new javax.swing.JButton();
+        qtySpinner = new javax.swing.JSpinner();
+        qtyLabel = new javax.swing.JLabel();
         itemListPanel = new javax.swing.JPanel();
         itemListLabel = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -104,7 +115,12 @@ public class UserInterface extends javax.swing.JFrame {
         logTextArea = new javax.swing.JTextArea();
         emulationSpeedSlider = new javax.swing.JSlider();
         emulationSpeedLabel = new javax.swing.JLabel();
-        fillingPanelForNewFeatures = new javax.swing.JPanel();
+        orderProcessingSidePanel = new javax.swing.JPanel();
+        orderQueue1Label = new javax.swing.JLabel();
+        orderQueue2Label = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        robotLoggerTextArea = new javax.swing.JTextArea();
+        jSeparator6 = new javax.swing.JSeparator();
         visualisationPanel = new javax.swing.JPanel();
 
         maxSizeDialog.setTitle("Order List Is Full");
@@ -147,6 +163,8 @@ public class UserInterface extends javax.swing.JFrame {
                                 .addGap(18, 18, 18))
         );
 
+        jMenu1.setText("jMenu1");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Warehouse Robotic Control System");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -155,9 +173,10 @@ public class UserInterface extends javax.swing.JFrame {
 
         uesrControlPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         uesrControlPanel.setMinimumSize(new java.awt.Dimension(250, 100));
-        uesrControlPanel.setPreferredSize(new java.awt.Dimension(350, 624));
+        uesrControlPanel.setPreferredSize(new java.awt.Dimension(300, 624));
 
         orderSystemPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        orderSystemPanel.setPreferredSize(new java.awt.Dimension(140, 530));
 
         orderSystemLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         orderSystemLabel.setText("Order System");
@@ -170,14 +189,14 @@ public class UserInterface extends javax.swing.JFrame {
             }
         });
 
-        addItemButton.setText("Add");
+        addItemButton.setText("Add/Update");
         addItemButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addItemButtonActionPerformed(evt);
             }
         });
 
-        orderList.setFont(new java.awt.Font("Fira Sans", 0, 24)); // NOI18N
+        orderList.setFont(new java.awt.Font("Fira Sans", 0, 18)); // NOI18N
         orderList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         orderList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
@@ -186,24 +205,28 @@ public class UserInterface extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(orderList);
 
+        clearOrderButton.setBackground(new java.awt.Color(255, 255, 204));
         clearOrderButton.setFont(new java.awt.Font("Fira Sans", 0, 15)); // NOI18N
-        clearOrderButton.setText("Clear/Next Order");
+        clearOrderButton.setText("Clear Order");
         clearOrderButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 clearOrderButtonActionPerformed(evt);
             }
         });
 
-        orderProgressLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        orderProgressLabel.setText("Order Progress");
-
-        processOrderButton.setBackground(new java.awt.Color(228, 255, 250));
-        processOrderButton.setText("Process Order");
+        processOrderButton.setBackground(new java.awt.Color(204, 255, 204));
+        processOrderButton.setFont(new java.awt.Font("Fira Sans", 1, 18)); // NOI18N
+        processOrderButton.setText("Process");
         processOrderButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 processOrderButtonActionPerformed(evt);
             }
         });
+
+        qtySpinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, 50, 1));
+        qtySpinner.setValue(1);
+
+        qtyLabel.setText("QTY:");
 
         javax.swing.GroupLayout orderSystemPanelLayout = new javax.swing.GroupLayout(orderSystemPanel);
         orderSystemPanel.setLayout(orderSystemPanelLayout);
@@ -212,19 +235,21 @@ public class UserInterface extends javax.swing.JFrame {
                         .addGroup(orderSystemPanelLayout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(orderSystemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jSeparator4)
-                                        .addComponent(removeItemButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(addItemButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jSeparator3)
-                                        .addComponent(orderSystemLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(clearOrderButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(orderProgressLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                                         .addGroup(orderSystemPanelLayout.createSequentialGroup()
-                                                .addComponent(orderProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(0, 0, Short.MAX_VALUE))
-                                        .addComponent(processOrderButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addContainerGap())
+                                                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 1, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(qtyLabel)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(qtySpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(orderSystemLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(clearOrderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(orderSystemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                .addComponent(removeItemButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
+                                                .addComponent(addItemButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(processOrderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         orderSystemPanelLayout.setVerticalGroup(
                 orderSystemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -232,23 +257,23 @@ public class UserInterface extends javax.swing.JFrame {
                                 .addContainerGap()
                                 .addComponent(orderSystemLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(addItemButton)
+                                .addGroup(orderSystemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(orderSystemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addComponent(qtyLabel)
+                                                .addComponent(qtySpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(addItemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(removeItemButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(processOrderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(removeItemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(clearOrderButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(8, 8, 8)
-                                .addComponent(orderProgressLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(orderProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(processOrderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())
         );
 
@@ -258,8 +283,8 @@ public class UserInterface extends javax.swing.JFrame {
         itemListLabel.setText("Item Database");
         itemListLabel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        itemList.setFont(new java.awt.Font("Fira Sans", 0, 18)); // NOI18N
-        itemList.setModel(new javax.swing.DefaultComboBoxModel<>(items));
+        itemList.setFont(new java.awt.Font("Fira Sans", 0, 16)); // NOI18N
+        itemList.setModel(new javax.swing.DefaultComboBoxModel<>(items.toArray(String[]::new)));
         itemList.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 itemListKeyPressed(evt);
@@ -278,10 +303,9 @@ public class UserInterface extends javax.swing.JFrame {
                 itemListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, itemListPanelLayout.createSequentialGroup()
                                 .addContainerGap()
-                                .addGroup(itemListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                        .addComponent(itemListLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(itemListLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
                                 .addContainerGap())
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         itemListPanelLayout.setVerticalGroup(
                 itemListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -294,7 +318,7 @@ public class UserInterface extends javax.swing.JFrame {
         );
 
         selectItemHintLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        selectItemHintLabel.setText("Select item by clicking on it or press Enter");
+        selectItemHintLabel.setText("Select item by clicking/pressing Enter");
 
         maxItemsHintLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         maxItemsHintLabel.setText("(Max. 5 items per order)");
@@ -306,14 +330,14 @@ public class UserInterface extends javax.swing.JFrame {
                         .addGroup(uesrControlPanelLayout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(uesrControlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(maxItemsHintLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(selectItemHintLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jSeparator2)
-                                        .addComponent(selectItemHintLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
                                         .addComponent(jSeparator1)
                                         .addGroup(uesrControlPanelLayout.createSequentialGroup()
                                                 .addComponent(orderSystemPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(itemListPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                                .addComponent(itemListPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(maxItemsHintLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addContainerGap())
         );
         uesrControlPanelLayout.setVerticalGroup(
@@ -337,10 +361,12 @@ public class UserInterface extends javax.swing.JFrame {
         getContentPane().add(uesrControlPanel, java.awt.BorderLayout.LINE_START);
 
         devLogPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        devLogPanel.setPreferredSize(new java.awt.Dimension(852, 70));
 
         logTextArea.setEditable(false);
         logTextArea.setBackground(new java.awt.Color(0, 0, 0));
         logTextArea.setColumns(20);
+        logTextArea.setFont(new java.awt.Font("Fira Sans", 0, 12)); // NOI18N
         logTextArea.setForeground(new java.awt.Color(153, 255, 204));
         logTextArea.setRows(5);
         jScrollPane1.setViewportView(logTextArea);
@@ -370,58 +396,91 @@ public class UserInterface extends javax.swing.JFrame {
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, devLogPanelLayout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(devLogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(emulationSpeedSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE)
-                                        .addComponent(emulationSpeedLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(emulationSpeedLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(emulationSpeedSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 910, Short.MAX_VALUE)
                                 .addContainerGap())
         );
         devLogPanelLayout.setVerticalGroup(
                 devLogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, devLogPanelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(devLogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(devLogPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGroup(devLogPanelLayout.createSequentialGroup()
-                                                .addComponent(emulationSpeedLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(emulationSpeedSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                                .addContainerGap())
+                                                .addComponent(emulationSpeedLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(emulationSpeedSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(38, 38, 38))
         );
 
         getContentPane().add(devLogPanel, java.awt.BorderLayout.PAGE_END);
 
-        fillingPanelForNewFeatures.setBackground(new java.awt.Color(255, 255, 255));
-        fillingPanelForNewFeatures.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        fillingPanelForNewFeatures.setMaximumSize(new java.awt.Dimension(2, 32767));
-        fillingPanelForNewFeatures.setPreferredSize(new java.awt.Dimension(1, 624));
+        orderProcessingSidePanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        orderProcessingSidePanel.setMaximumSize(new java.awt.Dimension(120, 32767));
+        orderProcessingSidePanel.setMinimumSize(new java.awt.Dimension(100, 0));
+        orderProcessingSidePanel.setPreferredSize(new java.awt.Dimension(100, 624));
 
-        javax.swing.GroupLayout fillingPanelForNewFeaturesLayout = new javax.swing.GroupLayout(fillingPanelForNewFeatures);
-        fillingPanelForNewFeatures.setLayout(fillingPanelForNewFeaturesLayout);
-        fillingPanelForNewFeaturesLayout.setHorizontalGroup(
-                fillingPanelForNewFeaturesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 0, Short.MAX_VALUE)
+        orderQueue1Label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        orderQueue1Label.setText("Robot");
+        orderQueue1Label.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        orderQueue2Label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        orderQueue2Label.setText("Operation");
+        orderQueue2Label.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        robotLoggerTextArea.setEditable(false);
+        robotLoggerTextArea.setBackground(new java.awt.Color(0, 0, 0));
+        robotLoggerTextArea.setColumns(8);
+        robotLoggerTextArea.setFont(new java.awt.Font("Fira Sans", 0, 12)); // NOI18N
+        robotLoggerTextArea.setForeground(new java.awt.Color(255, 255, 102));
+        robotLoggerTextArea.setRows(5);
+        jScrollPane5.setViewportView(robotLoggerTextArea);
+
+        javax.swing.GroupLayout orderProcessingSidePanelLayout = new javax.swing.GroupLayout(orderProcessingSidePanel);
+        orderProcessingSidePanel.setLayout(orderProcessingSidePanelLayout);
+        orderProcessingSidePanelLayout.setHorizontalGroup(
+                orderProcessingSidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, orderProcessingSidePanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(orderProcessingSidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(orderQueue2Label, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                                        .addComponent(orderQueue1Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jSeparator6))
+                                .addContainerGap())
+                        .addComponent(jScrollPane5)
         );
-        fillingPanelForNewFeaturesLayout.setVerticalGroup(
-                fillingPanelForNewFeaturesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 598, Short.MAX_VALUE)
+        orderProcessingSidePanelLayout.setVerticalGroup(
+                orderProcessingSidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, orderProcessingSidePanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(orderQueue1Label)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(orderQueue2Label)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())
         );
 
-        getContentPane().add(fillingPanelForNewFeatures, java.awt.BorderLayout.LINE_END);
+        getContentPane().add(orderProcessingSidePanel, java.awt.BorderLayout.LINE_END);
 
         visualisationPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        visualisationPanel.setMinimumSize(new java.awt.Dimension(300, 450));
-        visualisationPanel.setPreferredSize(new java.awt.Dimension(800, 600));
+        visualisationPanel.setMaximumSize(new java.awt.Dimension(1100, 32767));
+        visualisationPanel.setMinimumSize(new java.awt.Dimension(300, 300));
+        visualisationPanel.setPreferredSize(new java.awt.Dimension(1000, 600));
 
         javax.swing.GroupLayout visualisationPanelLayout = new javax.swing.GroupLayout(visualisationPanel);
         visualisationPanel.setLayout(visualisationPanelLayout);
         visualisationPanelLayout.setHorizontalGroup(
                 visualisationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 499, Short.MAX_VALUE)
+                        .addGap(0, 816, Short.MAX_VALUE)
         );
         visualisationPanelLayout.setVerticalGroup(
                 visualisationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 598, Short.MAX_VALUE)
+                        .addGap(0, 628, Short.MAX_VALUE)
         );
 
         getContentPane().add(visualisationPanel, java.awt.BorderLayout.CENTER);
@@ -449,16 +508,18 @@ public class UserInterface extends javax.swing.JFrame {
     private void processOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {
         if (order.isEmpty()){
             addToLogger("Empty order. Cannot process the order!");
-        }
-        else {
+        } else if (visualisation == null) {
             launchController();
+        }
+        else if (visualisation.isOrderFinished()){
+            launchController();
+        } else {
+            addToLogger("Waiting for robot to finish the last order");
         }
     }
 
     private void clearOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        order.clear();
-        updateOrderScrollPanel();
-        addToLogger("Order list was cleared");
+        clearOrderList();
     }
 
     private void orderListValueChanged(javax.swing.event.ListSelectionEvent evt) {
@@ -480,7 +541,7 @@ public class UserInterface extends javax.swing.JFrame {
         changeEmulationSpeedBySliderVal();
     }
 
-    private void updateOrderScrollPanel() {
+    private static void updateOrderScrollPanel() {
         orderList.removeAll();
         DefaultListModel<String> listModel = new DefaultListModel<>();
         for (ItemOrder item : order) {
@@ -490,42 +551,56 @@ public class UserInterface extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify
-    private javax.swing.JButton addItemButton;
-    private javax.swing.JButton clearOrderButton;
+    private static javax.swing.JButton addItemButton;
+    private static javax.swing.JButton clearOrderButton;
     private javax.swing.JPanel devLogPanel;
     private javax.swing.JLabel emulationSpeedLabel;
     private javax.swing.JSlider emulationSpeedSlider;
-    private javax.swing.JPanel fillingPanelForNewFeatures;
     private javax.swing.JButton grandButton;
     private javax.swing.JList<String> itemList;
     private javax.swing.JLabel itemListLabel;
     private javax.swing.JPanel itemListPanel;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator6;
     public static javax.swing.JTextArea logTextArea;
     private javax.swing.JLabel maxItemsHintLabel;
     private javax.swing.JDialog maxSizeDialog;
     private javax.swing.JLabel maximumOrderLimitLabel;
-    private javax.swing.JList<String> orderList;
-    private javax.swing.JProgressBar orderProgressBar;
-    private javax.swing.JLabel orderProgressLabel;
+    private static javax.swing.JList<String> orderList;
+    private javax.swing.JPanel orderProcessingSidePanel;
+    private javax.swing.JLabel orderQueue1Label;
+    private javax.swing.JLabel orderQueue2Label;
     private javax.swing.JLabel orderSystemLabel;
     private javax.swing.JPanel orderSystemPanel;
     private javax.swing.JButton processOrderButton;
-    private javax.swing.JButton removeItemButton;
+    private javax.swing.JLabel qtyLabel;
+    private javax.swing.JSpinner qtySpinner;
+    private static javax.swing.JButton removeItemButton;
+    private static javax.swing.JTextArea robotLoggerTextArea;
     private javax.swing.JLabel selectItemHintLabel;
     private javax.swing.JPanel uesrControlPanel;
     private javax.swing.JPanel visualisationPanel;
     private List<Image> images;
     private int boxSize;
     private int spacing;
+    // End of variables declaration
+
 
     private void launchController() {
+        addItemButton.setEnabled(false);
+        removeItemButton.setEnabled(false);
+        clearOrderButton.setEnabled(false);
+
+        robotLoggerTextArea.setText("");
+
         ArrayList<Point> locationsToVisit = new ArrayList<>();
         for (ItemOrder item : order){
             locationsToVisit.add(item.location());
@@ -557,6 +632,7 @@ public class UserInterface extends javax.swing.JFrame {
                 );
             } catch(Exception e){
 
+
             }
         }
         showVisualisation(warehouse, shortestPath, locationsToVisit);
@@ -574,6 +650,8 @@ public class UserInterface extends javax.swing.JFrame {
             if (visualisation != null) {
                 this.remove(visualisation);
             }
+            visualisation = new VisualizationTool(warehouse, shortestPath, locationsToVisit);
+            changeEmulationSpeedBySliderVal(); // to instantiate initial Speed value, if it was changed before Processing order
 
             visualisation = new VisualizationTool(warehouse, shortestPath, locationsToVisit,this.images);
             visualisation.setLocation(visualisationPanel.getWidth() / 2, visualisationPanel.getHeight() / 2 );
@@ -584,7 +662,7 @@ public class UserInterface extends javax.swing.JFrame {
         });
     }
 
-    private void addToLogger(String newMessage) {
+    private static void addToLogger(String newMessage) {
         StringBuilder loggerMessageBuilder = new StringBuilder();
         loggerMessageBuilder.append(logTextArea.getText())
                 .append(System.lineSeparator())
@@ -592,23 +670,66 @@ public class UserInterface extends javax.swing.JFrame {
         logTextArea.setText(loggerMessageBuilder.toString());
     }
 
+    private static void addToRobotLogger(String command, ItemOrder itemOrder) {
+        StringBuilder loggerMessageBuilder = new StringBuilder();
+        loggerMessageBuilder.append(robotLoggerTextArea.getText());
+        switch (command.toLowerCase()) {
+            case "taken" -> {
+                loggerMessageBuilder.append(System.lineSeparator())
+                        .append(command.toUpperCase())
+                        .append(System.lineSeparator())
+                        .append(itemOrder.name().split(" ")[0])
+                        .append(System.lineSeparator())
+                        .append("Weight: ").append(itemOrder.weight())
+                        .append(System.lineSeparator())
+                        .append("Qty: ").append(itemsTaken)
+                        .append(System.lineSeparator());
+                }
+            case "delivered" -> {
+                loggerMessageBuilder.append(System.lineSeparator())
+                        .append(command.toUpperCase())
+                        .append(System.lineSeparator());
+            }
+        }
+        robotLoggerTextArea.setText(loggerMessageBuilder.toString());
+    }
+
     private void addSelectedItemToOrderList() {
-        if (order.size() == 5) {
+        if (order.size() == ORDER_SIZE_MAX) {
             maxSizeDialog.setVisible(true);
             addToLogger("Maximum Order list size is reached");
         } else {
-            if (!order.contains(selectedItem)) {
-                if (Arrays.stream(items).toList().contains(selectedItem)) {
-                    order.add(new ItemOrder(selectedItem,warehouse.getItemLocation(selectedItem),10,warehouse.getItem(selectedItem).weight()));
-                    addToLogger("Item  " + selectedItem + " added to order");
+            Optional<ItemOrder> optionalItem = getItemIfPresentInOrderList();
+            int quantity = (int) qtySpinner.getValue();
+
+            if (optionalItem.isEmpty()) {
+                String name = selectedItem.split(" ")[0];
+                if (items.contains(selectedItem)) {
+                    order.add(new ItemOrder(selectedItem, warehouse.getItemLocation(name), quantity, warehouse.getItem(name).weight()));
+                    addToLogger("Item  " + selectedItem.split(" ")[0] + " of quantity (" + quantity + ") added to order");
                     updateOrderScrollPanel();
                 } else {
                     addToLogger("Item is not present in the Item DB or wasn't selected");
                 }
             } else {
-                addToLogger("Item  " + selectedItem + " is already in the order list");
+                ItemOrder previousItem = optionalItem.get();
+                if (previousItem.quantity() == quantity) {
+                    addToLogger("The quantity of selected item hasn't been changed in the order. Nothing to update.");
+                } else {
+                    String name = selectedItem.split(" ")[0];
+                    order.remove(previousItem);
+                    order.add(new ItemOrder(selectedItem, warehouse.getItemLocation(name), quantity, warehouse.getItem(name).weight()));
+                    String UPDATE_MESSAGE_MASK = "The quantity of item '%s' was updated (%d) -> (%d)";
+                    String updateMessage = String.format(UPDATE_MESSAGE_MASK, previousItem.name().split(" ")[0], previousItem.quantity(), quantity);
+                    addToLogger(updateMessage);
+                }
             }
         }
+    }
+
+    private Optional<ItemOrder> getItemIfPresentInOrderList() {
+
+        return order.stream().filter(itemOrder -> itemOrder.name().equals(selectedItem)).findFirst();
     }
 
     private void removeSelectedItemFromOrderList() {
@@ -616,9 +737,14 @@ public class UserInterface extends javax.swing.JFrame {
             if (order.isEmpty()) {
                 addToLogger("Remove pressed, but the order list is empty");
             } else if (selectedItem != null){
-                if (Arrays.stream(items).toList().contains(selectedItem)) {
-                    order.remove(selectedItem);
-                    addToLogger("Item  " + selectedItem + " removed from order");
+
+                if (items.contains(selectedItem)) {
+
+                    ItemOrder itemToRemove = order.stream()
+                            .filter(itemOrder -> itemOrder.name().equals(selectedItem))
+                            .findAny().orElseThrow(() -> new IllegalArgumentException("Item" + selectedItem + " is not in the order list"));
+                    order.remove(itemToRemove);
+                    addToLogger("Item  " + selectedItem.split(" ")[0] + " removed from order");
                     updateOrderScrollPanel();
                 } else {
                     addToLogger("Item is not present in the Item DB or wasn't selected");
@@ -636,6 +762,79 @@ public class UserInterface extends javax.swing.JFrame {
                 emulationSpeed -= emulationSpeedSlider.getMinimum();
             }
             visualisation.getTimer().setDelay(emulationSpeedSlider.getMaximum() - emulationSpeed);
+        }
+    }
+
+    private static void clearOrderList() {
+        order.clear();
+        updateOrderScrollPanel();
+        addToLogger("Order list was cleared");
+    }
+
+    private static Point getCurrentRobotLocation(Point indexes) {
+        return visualisation.getPath().get(indexes.getY()).getPath().get(indexes.getX());
+    }
+
+    static class StepListener implements ActionListener {
+        private Point previousRobotCoords = new Point(0, 0);
+
+        private static ItemOrder itemOrder = null;
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(!visualisation.isOrderFinished()){
+                previousRobotCoords = getCurrentRobotLocation(new Point(visualisation.getCurX(), visualisation.getCurY()));
+                visualisation.setStep(visualisation.getStep() + 1);
+                visualisation.setCurx(visualisation.getCurX() + 1);
+                visualisation.repaint();
+                Point currentRobotCoordinates = getCurrentRobotLocation(new Point(visualisation.getCurX(), visualisation.getCurY()));
+                if (previousRobotCoords != currentRobotCoordinates) {
+                    Point indexesOfLocation = new Point(visualisation.getCurX(), visualisation.getCurY());
+                    Point currRobotLocation = getCurrentRobotLocation(indexesOfLocation);
+                    monitorOrderCompletion(currRobotLocation);
+                    if (itemOrder != null)
+                        monitorDroppingItems(currRobotLocation);
+                }
+            }
+            else{
+                visualisation.getTimer().stop();
+                clearOrderList();
+                addToLogger("Order is completed!");
+
+                addItemButton.setEnabled(true);
+                removeItemButton.setEnabled(true);
+                clearOrderButton.setEnabled(true);
+
+                itemOrder = null;
+            }
+        }
+
+        private static void monitorDroppingItems(Point robotsCurrentPoint) {
+            Point dispatchedArea = visualisation.getDispatchAreaLocation();
+            if (dispatchedArea.equals(robotsCurrentPoint)) {
+                addToRobotLogger("Delivered", itemOrder);
+                remainingCapacity = 10;
+            }
+        }
+
+        private static void monitorOrderCompletion(Point currRobotLocation) {
+            List<Point> locationsToVisit = visualisation.getOrder();
+            if (locationsToVisit.contains(currRobotLocation)) { // if robot current location is the location of the item
+                // find item from the orderList
+                itemOrder = order.stream()
+                        .filter(item -> item.location().equals(currRobotLocation)).findFirst().get();
+
+                itemsTaken = Math.min(remainingCapacity / itemOrder.weight(), itemOrder.quantity());
+
+                order.remove(itemOrder);
+                order.add(new ItemOrder(itemOrder.name(), itemOrder.location(), itemOrder.quantity() - itemsTaken, itemOrder.weight()));
+
+                String message = String.format("Item taken. Name: %s, quantity: %d", itemOrder.name().split(" ")[0], itemsTaken);
+                addToLogger(message);
+
+                addToRobotLogger("Taken", itemOrder);
+
+                remainingCapacity -= itemsTaken * itemOrder.weight();
+            }
         }
     }
 }

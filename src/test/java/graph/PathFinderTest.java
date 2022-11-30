@@ -184,7 +184,7 @@ class PathFinderTest {
             public void check(){
                 List<Point> got = pathFinder.accountForWeight(optimalOrder,orders,maxWeight,endPoint);
 
-                assertArrayEquals(expected.toArray(),got.toArray(),String.format("got: %s\nexpected: %s",new Path(got),new Path(expected)));
+                assertArrayEquals(expected.toArray(),got.toArray(),String.format("\ngot: %s\nexpected: %s",new Path(got),new Path(expected)));
             }
         }
         Stream<TestCase> testCases = Stream.of(
@@ -196,24 +196,6 @@ class PathFinderTest {
                         ),
                         List.of(
                           new ItemOrder("itemA",new Point(1,1),1,1),
-                                new ItemOrder("itemA",new Point(2,2),1,1)
-                        ),
-                        10,
-                        graph.getEndNode().getLocation(),
-                        List.of(
-                                new Point(1,1),
-                                new Point(2,2)
-                        )
-
-                ),
-                new TestCase(
-                        "full order weight - no change",
-                        List.of(
-                                new Point(1,1),
-                                new Point(2,2)
-                        ),
-                        List.of(
-                                new ItemOrder("itemA",new Point(1,1),9,1),
                                 new ItemOrder("itemA",new Point(2,2),1,1)
                         ),
                         10,
@@ -244,6 +226,46 @@ class PathFinderTest {
 
                 ),
                 new TestCase(
+                        "full order weight - no change",
+                        List.of(
+                                new Point(1,1),
+                                new Point(2,2)
+                        ),
+                        List.of(
+                                new ItemOrder("itemA",new Point(1,1),9,1),
+                                new ItemOrder("itemA",new Point(2,2),1,1)
+                        ),
+                        10,
+                        graph.getEndNode().getLocation(),
+                        List.of(
+                                new Point(1,1),
+                                new Point(2,2)
+                        )
+
+                ),
+                new TestCase(
+                        "edge Case",
+                        List.of(
+                                new Point(1,1),
+                                new Point(2,2),
+                                new Point(3,3)
+                        ),
+                        List.of(
+                                new ItemOrder("itemA",new Point(1,1),3,1),
+                                new ItemOrder("itemB",new Point(2,2),3,2),
+                                new ItemOrder("itemC",new Point(3,3),3,2)
+                        ),
+                        10,
+                        graph.getEndNode().getLocation(),
+                        List.of(
+                                new Point(1,1),
+                                new Point(2,2),
+                                graph.getEndNode().getLocation(),
+                                new Point(3,3)
+                        )
+
+                ),
+                new TestCase(
                         "multiple trips",
                         List.of(
                                 new Point(1,1),
@@ -263,6 +285,7 @@ class PathFinderTest {
                                 new Point(1,1),
                                 graph.getEndNode().getLocation(),
                                 new Point(1,1),
+
                                 new Point(2,2)
                         )
 
@@ -287,7 +310,6 @@ class PathFinderTest {
                                 new Point(1,1),
                                 graph.getEndNode().getLocation(),
                                 new Point(1,1),
-                                new Point(2,2),
                                 graph.getEndNode().getLocation(),
                                 new Point(2,2)
                         )

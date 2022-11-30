@@ -71,7 +71,7 @@ public class VisualizationTool extends JPanel {
         setChainsawImg(images.get(16));
 
         //timer for each update of the paths progression
-        setTimer(new Timer(500, new StepListener()));
+        setTimer(new Timer(500, new UserInterface.StepListener()));
         getTimer().start();
         this.shelves = warehouse.getShelveLocations();
 
@@ -229,6 +229,11 @@ public class VisualizationTool extends JPanel {
                 this);
 
     }
+
+    public boolean isOrderFinished() {
+        return step >= pathSize - 1;
+    }
+
     // getters and setters
     public int getStep() {
         return step;
@@ -250,6 +255,14 @@ public class VisualizationTool extends JPanel {
     public int getCurX(){
 
         return this.curX;
+    }
+
+    public int getCurY() {
+        return curY;
+    }
+
+    public List<Point> getOrder() {
+        return this.order;
     }
 
     public int getSpacing() {
