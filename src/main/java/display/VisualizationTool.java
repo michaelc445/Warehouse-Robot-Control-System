@@ -138,6 +138,14 @@ public class VisualizationTool extends JPanel {
         return this.curX;
     }
 
+    public int getCurY() {
+        return curY;
+    }
+
+    public List<Point> getOrder() {
+        return this.order;
+    }
+
     public int getSpacing() {
         return spacing;
     }

@@ -689,19 +689,53 @@ public class UserInterface extends javax.swing.JFrame {
         addToLogger("Order list was cleared");
     }
 
+
+    private static void monitorOrderCompletion(Point indexes) {
+        Point currRobotLocation = getCurrentRobotLocation(indexes);
+        List<Point> locationsToVisit = visualisation.getOrder();
+        if (locationsToVisit.contains(currRobotLocation)) { // if robot current location is the location of the item
+            // find item from the orderList
+            ItemOrder itemOrder = order.stream()
+                    .filter(item -> item.location().equals(currRobotLocation)).findFirst().get();
+
+            int itemsTaken = itemOrder.weight() * itemOrder.quantity();
+            if (itemsTaken >= PathFinder.ROBOT_MAX_CAPACITY) {
+                itemsTaken = PathFinder.ROBOT_MAX_CAPACITY;
+            }
+
+            itemsTaken /= itemOrder.weight();
+
+            order.remove(itemOrder);
+            order.add(new ItemOrder(itemOrder.name(), itemOrder.location(), itemOrder.quantity() - itemsTaken, itemOrder.weight()));
+
+            String message = String.format("Item taken. Name: %s, quantity: %d", itemOrder.name(), itemsTaken);
+            addToLogger(message);
+        }
+    }
+
+    private static Point getCurrentRobotLocation(Point indexes) {
+        return visualisation.getPath().get(indexes.getY()).getPath().get(indexes.getX());
+    }
+
     static class StepListener implements ActionListener {
+        private Point previousRobotCoords = new Point(0, 0);
         @Override
         public void actionPerformed(ActionEvent e) {
             if(!visualisation.isOrderFinished()){
+                previousRobotCoords = getCurrentRobotLocation(new Point(visualisation.getCurX(), visualisation.getCurY()));
                 visualisation.setStep(visualisation.getStep() + 1);
                 visualisation.setCurx(visualisation.getCurX() + 1);
                 visualisation.repaint();
+                Point currentRobotCoordinates = getCurrentRobotLocation(new Point(visualisation.getCurX(), visualisation.getCurY()));
+                if (previousRobotCoords != currentRobotCoordinates)
+                    monitorOrderCompletion(new Point(visualisation.getCurX(), visualisation.getCurY()));
             }
             else{
                 visualisation.getTimer().stop();
                 clearOrderList();
                 addToLogger("Order is completed!");
             }
+
         }
     }
 }
