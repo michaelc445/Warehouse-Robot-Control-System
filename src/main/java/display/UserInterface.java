@@ -29,6 +29,8 @@ public class UserInterface extends javax.swing.JFrame {
 
     private static Set<ItemOrder> order = new HashSet<>();
 
+    private static int itemsTaken = 0;
+
     String selectedItem = "";
 
     boolean isOrderListFocused = false;
@@ -107,11 +109,11 @@ public class UserInterface extends javax.swing.JFrame {
         emulationSpeedSlider = new javax.swing.JSlider();
         emulationSpeedLabel = new javax.swing.JLabel();
         orderProcessingSidePanel = new javax.swing.JPanel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        orderQueueList = new javax.swing.JList<>();
         orderQueue1Label = new javax.swing.JLabel();
         orderQueue2Label = new javax.swing.JLabel();
-        jSeparator5 = new javax.swing.JSeparator();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        robotLoggerTextArea = new javax.swing.JTextArea();
+        jSeparator6 = new javax.swing.JSeparator();
         visualisationPanel = new javax.swing.JPanel();
 
         maxSizeDialog.setTitle("Order List Is Full");
@@ -357,7 +359,7 @@ public class UserInterface extends javax.swing.JFrame {
         logTextArea.setEditable(false);
         logTextArea.setBackground(new java.awt.Color(0, 0, 0));
         logTextArea.setColumns(20);
-        logTextArea.setFont(new java.awt.Font("Fira Sans", 0, 13)); // NOI18N
+        logTextArea.setFont(new java.awt.Font("Fira Sans", 0, 12)); // NOI18N
         logTextArea.setForeground(new java.awt.Color(153, 255, 204));
         logTextArea.setRows(5);
         jScrollPane1.setViewportView(logTextArea);
@@ -413,33 +415,34 @@ public class UserInterface extends javax.swing.JFrame {
         orderProcessingSidePanel.setMinimumSize(new java.awt.Dimension(100, 0));
         orderProcessingSidePanel.setPreferredSize(new java.awt.Dimension(100, 624));
 
-        orderQueueList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane4.setViewportView(orderQueueList);
-
         orderQueue1Label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        orderQueue1Label.setText("Order");
+        orderQueue1Label.setText("Robot");
         orderQueue1Label.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         orderQueue2Label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        orderQueue2Label.setText("Queue");
+        orderQueue2Label.setText("Operation");
         orderQueue2Label.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        robotLoggerTextArea.setEditable(false);
+        robotLoggerTextArea.setBackground(new java.awt.Color(0, 0, 0));
+        robotLoggerTextArea.setColumns(8);
+        robotLoggerTextArea.setFont(new java.awt.Font("Fira Sans", 0, 12)); // NOI18N
+        robotLoggerTextArea.setForeground(new java.awt.Color(255, 255, 102));
+        robotLoggerTextArea.setRows(5);
+        jScrollPane5.setViewportView(robotLoggerTextArea);
 
         javax.swing.GroupLayout orderProcessingSidePanelLayout = new javax.swing.GroupLayout(orderProcessingSidePanel);
         orderProcessingSidePanel.setLayout(orderProcessingSidePanelLayout);
         orderProcessingSidePanelLayout.setHorizontalGroup(
                 orderProcessingSidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(orderProcessingSidePanelLayout.createSequentialGroup()
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, orderProcessingSidePanelLayout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(orderProcessingSidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
-                                        .addComponent(orderQueue2Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jSeparator5)
-                                        .addComponent(orderQueue1Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(orderQueue2Label, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                                        .addComponent(orderQueue1Label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jSeparator6))
                                 .addContainerGap())
+                        .addComponent(jScrollPane5)
         );
         orderProcessingSidePanelLayout.setVerticalGroup(
                 orderProcessingSidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -449,9 +452,9 @@ public class UserInterface extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(orderQueue2Label)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE)
+                                .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())
         );
 
@@ -554,12 +557,12 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JSeparator jSeparator6;
     public static javax.swing.JTextArea logTextArea;
     private javax.swing.JLabel maxItemsHintLabel;
     private javax.swing.JDialog maxSizeDialog;
@@ -568,13 +571,13 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JPanel orderProcessingSidePanel;
     private javax.swing.JLabel orderQueue1Label;
     private javax.swing.JLabel orderQueue2Label;
-    private javax.swing.JList<String> orderQueueList;
     private javax.swing.JLabel orderSystemLabel;
     private javax.swing.JPanel orderSystemPanel;
     private javax.swing.JButton processOrderButton;
     private javax.swing.JLabel qtyLabel;
     private javax.swing.JSpinner qtySpinner;
     private javax.swing.JButton removeItemButton;
+    private static javax.swing.JTextArea robotLoggerTextArea;
     private javax.swing.JLabel selectItemHintLabel;
     private javax.swing.JPanel uesrControlPanel;
     private javax.swing.JPanel visualisationPanel;
@@ -616,6 +619,21 @@ public class UserInterface extends javax.swing.JFrame {
                 .append(System.lineSeparator())
                 .append(newMessage);
         logTextArea.setText(loggerMessageBuilder.toString());
+    }
+
+    private static void addToRobotLogger(String command, ItemOrder itemOrder) {
+        StringBuilder loggerMessageBuilder = new StringBuilder();
+        loggerMessageBuilder.append(robotLoggerTextArea.getText())
+                .append(System.lineSeparator())
+                .append(command.toUpperCase())
+                .append(System.lineSeparator())
+                .append(itemOrder.name())
+                .append(System.lineSeparator())
+                .append("Weight: ").append(itemOrder.weight())
+                .append(System.lineSeparator())
+                .append("Qty: ").append(itemsTaken)
+                .append(System.lineSeparator());
+        robotLoggerTextArea.setText(loggerMessageBuilder.toString());
     }
 
     private void addSelectedItemToOrderList() {
@@ -689,30 +707,6 @@ public class UserInterface extends javax.swing.JFrame {
         addToLogger("Order list was cleared");
     }
 
-
-    private static void monitorOrderCompletion(Point indexes) {
-        Point currRobotLocation = getCurrentRobotLocation(indexes);
-        List<Point> locationsToVisit = visualisation.getOrder();
-        if (locationsToVisit.contains(currRobotLocation)) { // if robot current location is the location of the item
-            // find item from the orderList
-            ItemOrder itemOrder = order.stream()
-                    .filter(item -> item.location().equals(currRobotLocation)).findFirst().get();
-
-            int itemsTaken = itemOrder.weight() * itemOrder.quantity();
-            if (itemsTaken >= PathFinder.ROBOT_MAX_CAPACITY) {
-                itemsTaken = PathFinder.ROBOT_MAX_CAPACITY;
-            }
-
-            itemsTaken /= itemOrder.weight();
-
-            order.remove(itemOrder);
-            order.add(new ItemOrder(itemOrder.name(), itemOrder.location(), itemOrder.quantity() - itemsTaken, itemOrder.weight()));
-
-            String message = String.format("Item taken. Name: %s, quantity: %d", itemOrder.name(), itemsTaken);
-            addToLogger(message);
-        }
-    }
-
     private static Point getCurrentRobotLocation(Point indexes) {
         return visualisation.getPath().get(indexes.getY()).getPath().get(indexes.getX());
     }
@@ -735,7 +729,31 @@ public class UserInterface extends javax.swing.JFrame {
                 clearOrderList();
                 addToLogger("Order is completed!");
             }
+        }
 
+        private static void monitorOrderCompletion(Point indexes) {
+            Point currRobotLocation = getCurrentRobotLocation(indexes);
+            List<Point> locationsToVisit = visualisation.getOrder();
+            if (locationsToVisit.contains(currRobotLocation)) { // if robot current location is the location of the item
+                // find item from the orderList
+                ItemOrder itemOrder = order.stream()
+                        .filter(item -> item.location().equals(currRobotLocation)).findFirst().get();
+
+                itemsTaken = itemOrder.weight() * itemOrder.quantity();
+                if (itemsTaken >= PathFinder.ROBOT_MAX_CAPACITY) {
+                    itemsTaken = PathFinder.ROBOT_MAX_CAPACITY;
+                }
+
+                itemsTaken /= itemOrder.weight();
+
+                order.remove(itemOrder);
+                order.add(new ItemOrder(itemOrder.name(), itemOrder.location(), itemOrder.quantity() - itemsTaken, itemOrder.weight()));
+
+                String message = String.format("Item taken. Name: %s, quantity: %d", itemOrder.name(), itemsTaken);
+                addToLogger(message);
+
+                addToRobotLogger("Taken: ", itemOrder);
+            }
         }
     }
 }
