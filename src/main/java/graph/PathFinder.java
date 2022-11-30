@@ -7,6 +7,8 @@ import java.util.stream.Stream;
 
 public class PathFinder {
 
+    public static final int ROBOT_MAX_CAPACITY = 10;
+
     public List<Path> findShortestPath(WarehouseGraph warehouseGraph, List<ItemOrder> orderedItems) {
         checkArguments(warehouseGraph, orderedItems);
         if(warehouseGraph.getStartNode()==null ){
@@ -26,7 +28,7 @@ public class PathFinder {
         locations.add(end.getLocation());
         HashMap<Point, HashMap<Point, Path>> distancePairMap = createItemPairDistanceMap(warehouseGraph, locations);
         List<Point> optimalOrder = findOptimalOrder(distancePairMap,orderedItemLocations,warehouseGraph);
-        List<Point> orderExtendedForWeight = accountForWeight(optimalOrder,orderedItems,10,end.getLocation());
+        List<Point> orderExtendedForWeight = accountForWeight(optimalOrder,orderedItems,ROBOT_MAX_CAPACITY,end.getLocation());
         return extractPaths(warehouseGraph, distancePairMap, orderExtendedForWeight);
 
     }
@@ -47,6 +49,10 @@ public class PathFinder {
         for(int j=0; j < optimalOrder.size();j++){
             Point item = optimalOrder.get(j);
             ItemOrder  order = locationMap.get(item);
+            if(currentWeight+order.weight() > maxWeight){
+                newPath.add(endPoint);
+                currentWeight=0;
+            }
             newPath.add(item);
             for (int i =0; i < order.quantity();i++){
                 if (currentWeight + order.weight()>maxWeight){

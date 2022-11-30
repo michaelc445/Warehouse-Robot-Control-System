@@ -23,7 +23,7 @@ public class WarehouseTest {
     @Test
     void addItem() {
         warehouse.addItem("test1", new Point(1,1),1);
-        assertEquals(warehouse.getItemLocation("test1"), new Point(1,1));
+        assertEquals(new Point(1,1),warehouse.getItemLocation("test1"));
     }
 
     @Test
@@ -32,18 +32,18 @@ public class WarehouseTest {
         warehouse.addItem("test1", new Point(1,1),1);
         warehouse.addItem("test2", new Point(2,2),1);
         List<String> expected =new ArrayList<>();
-        expected.add("test1");
-        expected.add("test2");
+        expected.add("test1 1kg");
+        expected.add("test2 1kg");
         List<String> got = warehouse.getItemNames();
         Collections.sort(got);
         Collections.sort(expected);
-        assertEquals(got,expected);
+        assertEquals(expected,got);
     }
 
     @Test
     void getItemLocation() {
         warehouse.addItem("test1", new Point(1,1),1);
-        assertEquals(warehouse.getItemLocation("test1"), new Point(1,1));
+        assertEquals( new Point(1,1),warehouse.getItemLocation("test1"));
     }
 
     @Test
@@ -52,7 +52,7 @@ public class WarehouseTest {
         warehouse.addItem("test2", new Point(2,2),1);
         warehouse.removeItemByName("test2");
         List<String> expected   = new ArrayList<>();
-        expected.add("test1");
-        assertEquals(warehouse.getItemNames(), expected);
+        expected.add("test1 1kg");
+        assertEquals(expected,warehouse.getItemNames());
     }
 }
