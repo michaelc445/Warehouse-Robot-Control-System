@@ -646,6 +646,7 @@ public class UserInterface extends javax.swing.JFrame {
         } else {
             Optional<ItemOrder> optionalItem = getItemIfPresentInOrderList();
             int quantity = (int) qtySpinner.getValue();
+
             if (optionalItem.isEmpty()) {
                 String name = selectedItem.split(" ")[0];
                 if (items.contains(selectedItem)) {
@@ -660,8 +661,9 @@ public class UserInterface extends javax.swing.JFrame {
                 if (previousItem.quantity() == quantity) {
                     addToLogger("The quantity of selected item hasn't been changed in the order. Nothing to update.");
                 } else {
+                    String name = selectedItem.split(" ")[0];
                     order.remove(previousItem);
-                    order.add(new ItemOrder(selectedItem, warehouse.getItemLocation(selectedItem), quantity, warehouse.getItem(selectedItem).weight()));
+                    order.add(new ItemOrder(name, warehouse.getItemLocation(name), quantity, warehouse.getItem(name).weight()));
                     String UPDATE_MESSAGE_MASK = "The quantity of item '%s' was updated (%d) -> (%d)";
                     String updateMessage = String.format(UPDATE_MESSAGE_MASK, previousItem.name(), previousItem.quantity(), quantity);
                     addToLogger(updateMessage);
@@ -671,7 +673,8 @@ public class UserInterface extends javax.swing.JFrame {
     }
 
     private Optional<ItemOrder> getItemIfPresentInOrderList() {
-        return order.stream().filter(itemOrder -> itemOrder.name().equals(selectedItem)).findFirst();
+
+        return order.stream().filter(itemOrder -> itemOrder.name().equals(selectedItem.split(" ")[0])).findFirst();
     }
 
     private void removeSelectedItemFromOrderList() {
