@@ -649,7 +649,7 @@ public class UserInterface extends javax.swing.JFrame {
             if (optionalItem.isEmpty()) {
                 String name = selectedItem.split(" ")[0];
                 if (items.contains(selectedItem)) {
-                    order.add(new ItemOrder(selectedItem, warehouse.getItemLocation(name), quantity, warehouse.getItem(name).weight()));
+                    order.add(new ItemOrder(name, warehouse.getItemLocation(name), quantity, warehouse.getItem(name).weight()));
                     addToLogger("Item  " + selectedItem + " of quantity (" + quantity + ") added to order");
                     updateOrderScrollPanel();
                 } else {

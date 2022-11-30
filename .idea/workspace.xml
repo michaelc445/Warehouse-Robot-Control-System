@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5dafaf29-34b9-46fd-8806-9e9da26dcb83" name="Changes" comment="added tests for accountForWeight method">
+    <list default="true" id="5dafaf29-34b9-46fd-8806-9e9da26dcb83" name="Changes" comment="added item weights to order menu">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/display/UserInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/display/UserInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/Warehouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/Warehouse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/main/WarehouseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/main/WarehouseTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/team_software.iml" beforeDir="false" afterPath="$PROJECT_DIR$/team_software.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -291,8 +288,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.PathFinderTest.accountForWeight" />
         <item itemvalue="JAR Application.team.software-1.0-SNAPSHOT-jar-with-dependencies.jar" />
+        <item itemvalue="JUnit.PathFinderTest.accountForWeight" />
         <item itemvalue="JAR Application.team.software-1.0-SNAPSHOT.jar" />
         <item itemvalue="JUnit.PathFinderTest.findShortestPathTest" />
         <item itemvalue="JUnit.All in team_software" />
@@ -322,7 +319,7 @@
       <workItem from="1669467875214" duration="38521000" />
       <workItem from="1669515004061" duration="3399000" />
       <workItem from="1669823234987" duration="3937000" />
-      <workItem from="1669832590842" duration="1287000" />
+      <workItem from="1669832590842" duration="2622000" />
     </task>
     <task id="LOCAL-00001" summary="create project">
       <created>1665164156632</created>
@@ -534,7 +531,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669517197756</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="added item weights to order menu">
+      <created>1669834014810</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1669834014810</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -599,7 +603,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Added config to run all tests" />
     <MESSAGE value="fixed tests in graph" />
     <MESSAGE value="Added point class and reworked graph package to use points" />
     <MESSAGE value="." />
@@ -624,7 +627,8 @@
     <MESSAGE value="fixed? bug in pathfinder.accountForWeight" />
     <MESSAGE value="Merge remote-tracking branch 'origin/michael' into michael&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/main/java/graph/PathFinder.java" />
     <MESSAGE value="added tests for accountForWeight method" />
-    <option name="LAST_COMMIT_MESSAGE" value="added tests for accountForWeight method" />
+    <MESSAGE value="added item weights to order menu" />
+    <option name="LAST_COMMIT_MESSAGE" value="added item weights to order menu" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
