@@ -191,7 +191,7 @@ public class UserInterface extends javax.swing.JFrame {
             }
         });
 
-        orderList.setFont(new java.awt.Font("Fira Sans", 0, 24)); // NOI18N
+        orderList.setFont(new java.awt.Font("Fira Sans", 0, 18)); // NOI18N
         orderList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         orderList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
@@ -278,7 +278,7 @@ public class UserInterface extends javax.swing.JFrame {
         itemListLabel.setText("Item Database");
         itemListLabel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        itemList.setFont(new java.awt.Font("Fira Sans", 0, 18)); // NOI18N
+        itemList.setFont(new java.awt.Font("Fira Sans", 0, 16)); // NOI18N
         itemList.setModel(new javax.swing.DefaultComboBoxModel<>(items.toArray(String[]::new)));
         itemList.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
