@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5dafaf29-34b9-46fd-8806-9e9da26dcb83" name="Changes" comment="fixed updating quantity of an order">
+    <list default="true" id="5dafaf29-34b9-46fd-8806-9e9da26dcb83" name="Changes" comment="fixed removing item from order/updating quantity">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/display/UserInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/display/UserInterface.java" afterDir="false" />
     </list>
@@ -319,7 +319,7 @@
       <workItem from="1669467875214" duration="38521000" />
       <workItem from="1669515004061" duration="3399000" />
       <workItem from="1669823234987" duration="3937000" />
-      <workItem from="1669832590842" duration="3650000" />
+      <workItem from="1669832590842" duration="3938000" />
     </task>
     <task id="LOCAL-00001" summary="create project">
       <created>1665164156632</created>
@@ -552,7 +552,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669835752678</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="fixed removing item from order/updating quantity">
+      <created>1669836465144</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1669836465144</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -617,7 +624,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="." />
     <MESSAGE value="changed  project to use maven" />
     <MESSAGE value="changed  project to use maven, added shortest path between shelves and it works, but too slow for large maps, will have to change to floyd warshall" />
     <MESSAGE value="added testfiles" />
@@ -642,7 +648,8 @@
     <MESSAGE value="added item weights to order menu" />
     <MESSAGE value="fixed weight displaying in order system panel and console" />
     <MESSAGE value="fixed updating quantity of an order" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed updating quantity of an order" />
+    <MESSAGE value="fixed removing item from order/updating quantity" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed removing item from order/updating quantity" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

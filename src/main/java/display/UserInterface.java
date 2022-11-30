@@ -651,7 +651,7 @@ public class UserInterface extends javax.swing.JFrame {
                 String name = selectedItem.split(" ")[0];
                 if (items.contains(selectedItem)) {
                     order.add(new ItemOrder(selectedItem, warehouse.getItemLocation(name), quantity, warehouse.getItem(name).weight()));
-                    addToLogger("Item  " + selectedItem + " of quantity (" + quantity + ") added to order");
+                    addToLogger("Item  " + selectedItem.split(" ")[0] + " of quantity (" + quantity + ") added to order");
                     updateOrderScrollPanel();
                 } else {
                     addToLogger("Item is not present in the Item DB or wasn't selected");
@@ -665,7 +665,7 @@ public class UserInterface extends javax.swing.JFrame {
                     order.remove(previousItem);
                     order.add(new ItemOrder(selectedItem, warehouse.getItemLocation(name), quantity, warehouse.getItem(name).weight()));
                     String UPDATE_MESSAGE_MASK = "The quantity of item '%s' was updated (%d) -> (%d)";
-                    String updateMessage = String.format(UPDATE_MESSAGE_MASK, previousItem.name(), previousItem.quantity(), quantity);
+                    String updateMessage = String.format(UPDATE_MESSAGE_MASK, previousItem.name().split(" ")[0], previousItem.quantity(), quantity);
                     addToLogger(updateMessage);
                 }
             }
@@ -689,7 +689,7 @@ public class UserInterface extends javax.swing.JFrame {
                             .filter(itemOrder -> itemOrder.name().equals(selectedItem))
                             .findAny().orElseThrow(() -> new IllegalArgumentException("Item" + selectedItem + " is not in the order list"));
                     order.remove(itemToRemove);
-                    addToLogger("Item  " + selectedItem + " removed from order");
+                    addToLogger("Item  " + selectedItem.split(" ")[0] + " removed from order");
                     updateOrderScrollPanel();
                 } else {
                     addToLogger("Item is not present in the Item DB or wasn't selected");
@@ -761,7 +761,7 @@ public class UserInterface extends javax.swing.JFrame {
                 order.remove(itemOrder);
                 order.add(new ItemOrder(itemOrder.name(), itemOrder.location(), itemOrder.quantity() - itemsTaken, itemOrder.weight()));
 
-                String message = String.format("Item taken. Name: %s, quantity: %d", itemOrder.name(), itemsTaken);
+                String message = String.format("Item taken. Name: %s, quantity: %d", itemOrder.name().split(" ")[0], itemsTaken);
                 addToLogger(message);
 
                 addToRobotLogger("Taken: ", itemOrder);
