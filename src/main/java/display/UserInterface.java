@@ -650,7 +650,7 @@ public class UserInterface extends javax.swing.JFrame {
             if (optionalItem.isEmpty()) {
                 String name = selectedItem.split(" ")[0];
                 if (items.contains(selectedItem)) {
-                    order.add(new ItemOrder(name, warehouse.getItemLocation(name), quantity, warehouse.getItem(name).weight()));
+                    order.add(new ItemOrder(selectedItem, warehouse.getItemLocation(name), quantity, warehouse.getItem(name).weight()));
                     addToLogger("Item  " + selectedItem + " of quantity (" + quantity + ") added to order");
                     updateOrderScrollPanel();
                 } else {
@@ -663,7 +663,7 @@ public class UserInterface extends javax.swing.JFrame {
                 } else {
                     String name = selectedItem.split(" ")[0];
                     order.remove(previousItem);
-                    order.add(new ItemOrder(name, warehouse.getItemLocation(name), quantity, warehouse.getItem(name).weight()));
+                    order.add(new ItemOrder(selectedItem, warehouse.getItemLocation(name), quantity, warehouse.getItem(name).weight()));
                     String UPDATE_MESSAGE_MASK = "The quantity of item '%s' was updated (%d) -> (%d)";
                     String updateMessage = String.format(UPDATE_MESSAGE_MASK, previousItem.name(), previousItem.quantity(), quantity);
                     addToLogger(updateMessage);
@@ -674,7 +674,7 @@ public class UserInterface extends javax.swing.JFrame {
 
     private Optional<ItemOrder> getItemIfPresentInOrderList() {
 
-        return order.stream().filter(itemOrder -> itemOrder.name().equals(selectedItem.split(" ")[0])).findFirst();
+        return order.stream().filter(itemOrder -> itemOrder.name().equals(selectedItem)).findFirst();
     }
 
     private void removeSelectedItemFromOrderList() {
@@ -682,7 +682,9 @@ public class UserInterface extends javax.swing.JFrame {
             if (order.isEmpty()) {
                 addToLogger("Remove pressed, but the order list is empty");
             } else if (selectedItem != null){
+
                 if (items.contains(selectedItem)) {
+
                     ItemOrder itemToRemove = order.stream()
                             .filter(itemOrder -> itemOrder.name().equals(selectedItem))
                             .findAny().orElseThrow(() -> new IllegalArgumentException("Item" + selectedItem + " is not in the order list"));
