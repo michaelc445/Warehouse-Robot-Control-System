@@ -56,7 +56,8 @@ public class Warehouse {
     public List<String> getItemNames(){
         List<String> result = new ArrayList<>();
         for (Map.Entry<String, Item> entry:  items.entrySet()){
-            result.add(entry.getKey());
+            String weight = String.format("%s %dkg",entry.getKey(),entry.getValue().weight());
+            result.add(weight);
         }
         return result;
     }

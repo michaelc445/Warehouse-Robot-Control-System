@@ -644,8 +644,9 @@ public class UserInterface extends javax.swing.JFrame {
             Optional<ItemOrder> optionalItem = getItemIfPresentInOrderList();
             int quantity = (int) qtySpinner.getValue();
             if (optionalItem.isEmpty()) {
+                String name = selectedItem.split(" ")[0];
                 if (items.contains(selectedItem)) {
-                    order.add(new ItemOrder(selectedItem, warehouse.getItemLocation(selectedItem), quantity, warehouse.getItem(selectedItem).weight()));
+                    order.add(new ItemOrder(selectedItem, warehouse.getItemLocation(name), quantity, warehouse.getItem(name).weight()));
                     addToLogger("Item  " + selectedItem + " of quantity (" + quantity + ") added to order");
                     updateOrderScrollPanel();
                 } else {
