@@ -31,6 +31,8 @@ public class UserInterface extends javax.swing.JFrame {
 
     private static int itemsTaken = 0;
 
+    private static int remainingCapacity = PathFinder.ROBOT_MAX_CAPACITY;
+
     String selectedItem = "";
 
     boolean isOrderListFocused = false;
@@ -589,6 +591,8 @@ public class UserInterface extends javax.swing.JFrame {
         removeItemButton.setEnabled(false);
         clearOrderButton.setEnabled(false);
 
+        robotLoggerTextArea.setText("");
+
         ArrayList<Point> locationsToVisit = new ArrayList<>();
 
         for (ItemOrder item : order){
@@ -626,16 +630,25 @@ public class UserInterface extends javax.swing.JFrame {
 
     private static void addToRobotLogger(String command, ItemOrder itemOrder) {
         StringBuilder loggerMessageBuilder = new StringBuilder();
-        loggerMessageBuilder.append(robotLoggerTextArea.getText())
-                .append(System.lineSeparator())
-                .append(command.toUpperCase())
-                .append(System.lineSeparator())
-                .append(itemOrder.name())
-                .append(System.lineSeparator())
-                .append("Weight: ").append(itemOrder.weight())
-                .append(System.lineSeparator())
-                .append("Qty: ").append(itemsTaken)
-                .append(System.lineSeparator());
+        loggerMessageBuilder.append(robotLoggerTextArea.getText());
+        switch (command.toLowerCase()) {
+            case "taken" -> {
+                loggerMessageBuilder.append(System.lineSeparator())
+                        .append(command.toUpperCase())
+                        .append(System.lineSeparator())
+                        .append(itemOrder.name().split(" ")[0])
+                        .append(System.lineSeparator())
+                        .append("Weight: ").append(itemOrder.weight())
+                        .append(System.lineSeparator())
+                        .append("Qty: ").append(itemsTaken)
+                        .append(System.lineSeparator());
+                }
+            case "delivered" -> {
+                loggerMessageBuilder.append(System.lineSeparator())
+                        .append(command.toUpperCase())
+                        .append(System.lineSeparator());
+            }
+        }
         robotLoggerTextArea.setText(loggerMessageBuilder.toString());
     }
 
@@ -722,6 +735,8 @@ public class UserInterface extends javax.swing.JFrame {
 
     static class StepListener implements ActionListener {
         private Point previousRobotCoords = new Point(0, 0);
+
+        private static ItemOrder itemOrder = null;
         @Override
         public void actionPerformed(ActionEvent e) {
             if(!visualisation.isOrderFinished()){
@@ -730,33 +745,43 @@ public class UserInterface extends javax.swing.JFrame {
                 visualisation.setCurx(visualisation.getCurX() + 1);
                 visualisation.repaint();
                 Point currentRobotCoordinates = getCurrentRobotLocation(new Point(visualisation.getCurX(), visualisation.getCurY()));
-                if (previousRobotCoords != currentRobotCoordinates)
-                    monitorOrderCompletion(new Point(visualisation.getCurX(), visualisation.getCurY()));
+                if (previousRobotCoords != currentRobotCoordinates) {
+                    Point indexesOfLocation = new Point(visualisation.getCurX(), visualisation.getCurY());
+                    Point currRobotLocation = getCurrentRobotLocation(indexesOfLocation);
+                    monitorOrderCompletion(currRobotLocation);
+                    if (itemOrder != null)
+                        monitorDroppingItems(currRobotLocation);
+                }
             }
             else{
                 visualisation.getTimer().stop();
                 clearOrderList();
                 addToLogger("Order is completed!");
+
                 addItemButton.setEnabled(true);
                 removeItemButton.setEnabled(true);
                 clearOrderButton.setEnabled(true);
+
+                itemOrder = null;
             }
         }
 
-        private static void monitorOrderCompletion(Point indexes) {
-            Point currRobotLocation = getCurrentRobotLocation(indexes);
+        private static void monitorDroppingItems(Point robotsCurrentPoint) {
+            Point dispatchedArea = visualisation.getDispatchAreaLocation();
+            if (dispatchedArea.equals(robotsCurrentPoint)) {
+                addToRobotLogger("Delivered", itemOrder);
+                remainingCapacity = 10;
+            }
+        }
+
+        private static void monitorOrderCompletion(Point currRobotLocation) {
             List<Point> locationsToVisit = visualisation.getOrder();
             if (locationsToVisit.contains(currRobotLocation)) { // if robot current location is the location of the item
                 // find item from the orderList
-                ItemOrder itemOrder = order.stream()
+                itemOrder = order.stream()
                         .filter(item -> item.location().equals(currRobotLocation)).findFirst().get();
 
-                itemsTaken = itemOrder.weight() * itemOrder.quantity();
-                if (itemsTaken >= PathFinder.ROBOT_MAX_CAPACITY) {
-                    itemsTaken = PathFinder.ROBOT_MAX_CAPACITY;
-                }
-
-                itemsTaken /= itemOrder.weight();
+                itemsTaken = Math.min(remainingCapacity / itemOrder.weight(), itemOrder.quantity());
 
                 order.remove(itemOrder);
                 order.add(new ItemOrder(itemOrder.name(), itemOrder.location(), itemOrder.quantity() - itemsTaken, itemOrder.weight()));
@@ -764,7 +789,9 @@ public class UserInterface extends javax.swing.JFrame {
                 String message = String.format("Item taken. Name: %s, quantity: %d", itemOrder.name().split(" ")[0], itemsTaken);
                 addToLogger(message);
 
-                addToRobotLogger("Taken: ", itemOrder);
+                addToRobotLogger("Taken", itemOrder);
+
+                remainingCapacity -= itemsTaken * itemOrder.weight();
             }
         }
     }
