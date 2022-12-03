@@ -15,8 +15,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.math.BigInteger;
 import java.util.*;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 import javax.swing.SwingUtilities;
@@ -36,6 +38,8 @@ public class UserInterface extends javax.swing.JFrame {
     private static Set<ItemOrder> order = new HashSet<>();
 
     private static int itemsTaken = 0;
+
+    private static String lastOrderDetails = "";
 
     private static int remainingCapacity = PathFinder.ROBOT_MAX_CAPACITY;
 
@@ -513,6 +517,11 @@ public class UserInterface extends javax.swing.JFrame {
         if (order.isEmpty()) {
             addToLogger("Empty order. Cannot process the order!");
         } else if (visualisation == null) {
+            lastOrderDetails = order + "; Total weight = "
+                    + order.stream()
+                    .mapToInt(item -> item.quantity() * item.weight())
+                    .sum()
+                    + " kg";
             launchController();
         } else if (visualisation.isOrderFinished()) {
             launchController();
@@ -807,6 +816,7 @@ public class UserInterface extends javax.swing.JFrame {
             } else {
                 visualisation.getTimer().stop();
                 clearOrderList();
+                addToLogger("Order info: " + lastOrderDetails);
                 addToLogger("Order is completed!");
                 addToRobotLogger("Completed", null);
 
