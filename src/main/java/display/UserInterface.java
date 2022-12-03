@@ -20,12 +20,13 @@ import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 import javax.swing.SwingUtilities;
+
 import static main.Main.warehouse;
+
 import main.Warehouse;
 import stock.ItemOrder;
 
 /**
- *
  * @author art
  */
 public class UserInterface extends javax.swing.JFrame {
@@ -47,6 +48,7 @@ public class UserInterface extends javax.swing.JFrame {
     int emulationSpeed = 500;
 
     private static final int ORDER_SIZE_MAX = 5;
+
     /**
      * Creates new form UserInterface
      */
@@ -60,7 +62,7 @@ public class UserInterface extends javax.swing.JFrame {
     private void setFrameDimensions() {
         int[][] mapLayout = warehouse.getMapLayout();
 
-        int mapHeight  =  mapLayout.length;
+        int mapHeight = mapLayout.length;
         int mapWidth = mapLayout[0].length;
         int visualisationPanelWidth = mapWidth * VisualizationTool.boxSize;
         int visualisationPanelHeight = mapHeight * VisualizationTool.boxSize;
@@ -69,7 +71,7 @@ public class UserInterface extends javax.swing.JFrame {
                 || visualisationPanelHeight < visualisationPanel.getMinimumSize().height) {
             visualisationPanelWidth = (int) visualisationPanel.getMinimumSize().getWidth();
             visualisationPanelHeight = (int) visualisationPanel.getMinimumSize().getHeight();
-            orderList.setFont(new Font("Arial",Font.PLAIN,12));
+            orderList.setFont(new Font("Arial", Font.PLAIN, 12));
         }
         int frameWidth = (this.getWidth() - visualisationPanel.getWidth() - orderProcessingSidePanel.getWidth()) + visualisationPanelWidth;
         int frameHeight = (this.getHeight() - visualisationPanel.getHeight()) + visualisationPanelHeight;
@@ -508,12 +510,11 @@ public class UserInterface extends javax.swing.JFrame {
     }
 
     private void processOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        if (order.isEmpty()){
+        if (order.isEmpty()) {
             addToLogger("Empty order. Cannot process the order!");
         } else if (visualisation == null) {
             launchController();
-        }
-        else if (visualisation.isOrderFinished()){
+        } else if (visualisation.isOrderFinished()) {
             launchController();
         } else {
             addToLogger("Waiting for robot to finish the last order");
@@ -605,11 +606,11 @@ public class UserInterface extends javax.swing.JFrame {
         addToRobotLogger("processing", null);
 
         ArrayList<Point> locationsToVisit = new ArrayList<>();
-        for (ItemOrder item : order){
+        for (ItemOrder item : order) {
             locationsToVisit.add(item.location());
         }
-        this.boxSize= 24;
-        this.spacing =1;
+        this.boxSize = 24;
+        this.spacing = 1;
         PathFinder pathFinder = new PathFinder();
         List<Path> shortestPath = pathFinder.findShortestPath(warehouse.getWarehouseGraph(), order.stream().toList());
         if (this.images == null) {
@@ -633,17 +634,19 @@ public class UserInterface extends javax.swing.JFrame {
                         ImageIO.read(new File("src/main/java/display/static/wires.png")).getScaledInstance(getBoxSize() - getSpacing(), getBoxSize() - getSpacing(), Image.SCALE_SMOOTH),
                         ImageIO.read(new File("src/main/java/display/static/chainsaw.png")).getScaledInstance(getBoxSize() - getSpacing(), getBoxSize() - getSpacing(), Image.SCALE_SMOOTH)
                 );
-            } catch(Exception e){
+            } catch (Exception e) {
 
 
             }
         }
         showVisualisation(warehouse, shortestPath, locationsToVisit);
     }
-    public int getBoxSize(){
+
+    public int getBoxSize() {
         return this.boxSize;
     }
-    public int getSpacing(){
+
+    public int getSpacing() {
         return this.spacing;
     }
 
@@ -654,8 +657,8 @@ public class UserInterface extends javax.swing.JFrame {
                 this.remove(visualisation);
             }
             changeEmulationSpeedBySliderVal(); // to instantiate initial Speed value, if it was changed before Processing order
-            visualisation = new VisualizationTool(warehouse, shortestPath, locationsToVisit,this.images);
-            visualisation.setLocation(visualisationPanel.getWidth() / 2, visualisationPanel.getHeight() / 2 );
+            visualisation = new VisualizationTool(warehouse, shortestPath, locationsToVisit, this.images);
+            visualisation.setLocation(visualisationPanel.getWidth() / 2, visualisationPanel.getHeight() / 2);
             changeEmulationSpeedBySliderVal();
             this.add(visualisation);
             this.invalidate();
@@ -684,7 +687,7 @@ public class UserInterface extends javax.swing.JFrame {
                         .append(System.lineSeparator())
                         .append("Qty: ").append(itemsTaken)
                         .append(System.lineSeparator());
-                }
+            }
             case "delivered", "processing", "completed" -> {
                 loggerMessageBuilder.append(System.lineSeparator())
                         .append(command.toUpperCase())
@@ -741,7 +744,7 @@ public class UserInterface extends javax.swing.JFrame {
         if (isOrderListFocused) {
             if (order.isEmpty()) {
                 addToLogger("'Remove' pressed, but the order list is empty");
-            } else if (selectedItem != null){
+            } else if (selectedItem != null) {
 
                 if (items.contains(selectedItem)) {
 
@@ -783,9 +786,10 @@ public class UserInterface extends javax.swing.JFrame {
     static class StepListener implements ActionListener {
 
         private static ItemOrder itemOrder = null;
+
         @Override
         public void actionPerformed(ActionEvent e) {
-            if(!visualisation.isOrderFinished()){
+            if (!visualisation.isOrderFinished()) {
                 Point previousRobotCoords = getCurrentRobotLocation(new Point(visualisation.getCurX(), visualisation.getCurY()));
 
                 visualisation.setStep(visualisation.getStep() + 1);
@@ -800,8 +804,7 @@ public class UserInterface extends javax.swing.JFrame {
                     if (itemOrder != null)
                         monitorDroppingItems(currRobotLocation);
                 }
-            }
-            else{
+            } else {
                 visualisation.getTimer().stop();
                 clearOrderList();
                 addToLogger("Order is completed!");
@@ -853,53 +856,53 @@ public class UserInterface extends javax.swing.JFrame {
 
 
 
-▒█▓▒
-    ▓
-   █████
- █████████
-█░▓░███░▓░█
-███████████
- ██▓▒▒▒▓██
-   ░░░░░
- ▒▒▓▓▓▓▓▒▒
- ▓▒█████▒▓
-▒▓ █████ ▓▒
-▒▓ ▓▓ ▓▓ ▓▒
-   ▓▓ ▓▓
+            ▒█▓▒
+                ▓
+               █████
+             █████████
+            █░▓░███░▓░█
+            ███████████
+             ██▓▒▒▒▓██
+               ░░░░░
+             ▒▒▓▓▓▓▓▒▒
+             ▓▒█████▒▓
+            ▒▓ █████ ▓▒
+            ▒▓ ▓▓ ▓▓ ▓▒
+               ▓▓ ▓▓
 
 
-  ╔════╗
-  ║╔╗╔╗║
-  ╚╝║║╚╝
-  ──║║──
-  ──║║──
-  ──╚╝──
-  ─╔═══╗
-  ─║╔══╝
-  ─║╚══╗
-  ─║╔══╝
-  ─║╚══╗
-  ─╚═══╝
-  ─╔═══╗
-  ─║╔═╗║
-  ─║║─║║
-  ─║╚═╝║
-  ─║╔═╗║
-  ─╚╝─╚╝
-  ─╔═╗╔═╗
-  ─║║╚╝║║
-  ─║╔╗╔╗║
-  ─║║║║║║
-  ─║║║║║║
-  ─╚╝╚╝╚╝
-  
-  ─╔═══╗─
-  ─║╔══╝─
-  ─║╚══╗─
-  ─╚══╗║─
-  ─╔══╝║─
-  ─╚═══╝─
+              ╔════╗
+              ║╔╗╔╗║
+              ╚╝║║╚╝
+              ──║║──
+              ──║║──
+              ──╚╝──
+              ─╔═══╗
+              ─║╔══╝
+              ─║╚══╗
+              ─║╔══╝
+              ─║╚══╗
+              ─╚═══╝
+              ─╔═══╗
+              ─║╔═╗║
+              ─║║─║║
+              ─║╚═╝║
+              ─║╔═╗║
+              ─╚╝─╚╝
+              ─╔═╗╔═╗
+              ─║║╚╝║║
+              ─║╔╗╔╗║
+              ─║║║║║║
+              ─║║║║║║
+              ─╚╝╚╝╚╝
+              
+              ─╔═══╗─
+              ─║╔══╝─
+              ─║╚══╗─
+              ─╚══╗║─
+              ─╔══╝║─
+              ─╚═══╝─
 
 
-            """;
+                        """;
 }
