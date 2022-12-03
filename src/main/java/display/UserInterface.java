@@ -315,7 +315,7 @@ public class UserInterface extends javax.swing.JFrame {
         selectItemHintLabel.setText("Select item by clicking/pressing Enter");
 
         maxItemsHintLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        maxItemsHintLabel.setText("(Max. 5 items per order)");
+        maxItemsHintLabel.setText("(Max. locations: 5, Carrying capacity: 10 kg)");
 
         javax.swing.GroupLayout uesrControlPanelLayout = new javax.swing.GroupLayout(uesrControlPanel);
         uesrControlPanel.setLayout(uesrControlPanelLayout);
