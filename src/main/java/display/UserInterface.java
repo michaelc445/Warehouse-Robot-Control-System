@@ -190,7 +190,7 @@ public class UserInterface extends javax.swing.JFrame {
             }
         });
 
-        orderList.setFont(new java.awt.Font("Fira Sans", 0, 15)); // NOI18N
+        orderList.setFont(new java.awt.Font("Fira Sans", 0, 13)); // NOI18N
         orderList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         orderList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
@@ -277,7 +277,7 @@ public class UserInterface extends javax.swing.JFrame {
         itemListLabel.setText("Item Database");
         itemListLabel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        itemList.setFont(new java.awt.Font("Fira Sans", 0, 16)); // NOI18N
+        itemList.setFont(new java.awt.Font("Fira Sans", 0, 15)); // NOI18N
         itemList.setModel(new javax.swing.DefaultComboBoxModel<>(items.toArray(String[]::new)));
         itemList.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -543,7 +543,7 @@ public class UserInterface extends javax.swing.JFrame {
         orderList.removeAll();
         DefaultListModel<String> listModel = new DefaultListModel<>();
         for (ItemOrder item : order) {
-            listModel.addElement(item.name());
+            listModel.addElement(item.name() + ", " + item.quantity());
         }
         orderList.setModel(listModel);
     }
@@ -698,7 +698,7 @@ public class UserInterface extends javax.swing.JFrame {
     }
 
     private void addSelectedItemToOrderList() {
-        if (order.size() == ORDER_SIZE_MAX) {
+        if (order.size() == ORDER_SIZE_MAX && order.stream().noneMatch(item -> item.name().equals(selectedItem.split(",")[0]))) {
             maxSizeDialog.setVisible(true);
             addToLogger("Maximum Order List size was reached");
         } else {
@@ -722,6 +722,7 @@ public class UserInterface extends javax.swing.JFrame {
                     String name = selectedItem.split(" ")[0];
                     order.remove(previousItem);
                     order.add(new ItemOrder(selectedItem, warehouse.getItemLocation(name), quantity, warehouse.getItem(name).weight()));
+                    updateOrderScrollPanel();
                     String updateMessageMask = "The quantity of item '%s' was updated (%d) -> (%d)";
                     String updateMessage = String.format(updateMessageMask, previousItem.name().split(" ")[0], previousItem.quantity(), quantity);
                     addToLogger(updateMessage);
@@ -740,14 +741,13 @@ public class UserInterface extends javax.swing.JFrame {
             if (order.isEmpty()) {
                 addToLogger("'Remove' pressed, but the order list is empty");
             } else if (selectedItem != null) {
-
-                if (items.contains(selectedItem)) {
-
+                String selectedItemName = selectedItem.split(",")[0];
+                if (items.contains(selectedItemName)) {
                     ItemOrder itemToRemove = order.stream()
-                            .filter(itemOrder -> itemOrder.name().equals(selectedItem))
-                            .findAny().orElseThrow(() -> new IllegalArgumentException("Item" + selectedItem + " is not in the order list"));
+                            .filter(itemOrder -> itemOrder.name().equals(selectedItemName))
+                            .findAny().orElseThrow(() -> new IllegalArgumentException("Item " + selectedItemName + " is not in the order list"));
                     order.remove(itemToRemove);
-                    addToLogger("Item  " + selectedItem.split(" ")[0] + " removed from order");
+                    addToLogger("Item  " + selectedItemName.split(" ")[0] + " removed from order");
                     updateOrderScrollPanel();
                 } else {
                     addToLogger("No such item in the Item DB or it wasn't selected");
