@@ -53,6 +53,8 @@ public class UserInterface extends javax.swing.JFrame {
     public UserInterface() {
         initComponents();
         setFrameDimensions();
+        addToLogger("Warehouse Robotic Control System launched successfully");
+        addToRobotLogger(robotASCIIEasterEgg, null);
     }
 
     private void setFrameDimensions() {
@@ -196,7 +198,7 @@ public class UserInterface extends javax.swing.JFrame {
             }
         });
 
-        orderList.setFont(new java.awt.Font("Fira Sans", 0, 18)); // NOI18N
+        orderList.setFont(new java.awt.Font("Fira Sans", 0, 15)); // NOI18N
         orderList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         orderList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
@@ -366,7 +368,7 @@ public class UserInterface extends javax.swing.JFrame {
         logTextArea.setEditable(false);
         logTextArea.setBackground(new java.awt.Color(0, 0, 0));
         logTextArea.setColumns(20);
-        logTextArea.setFont(new java.awt.Font("Fira Sans", 0, 12)); // NOI18N
+        logTextArea.setFont(new java.awt.Font("Fira Mono", 0, 11)); // NOI18N
         logTextArea.setForeground(new java.awt.Color(153, 255, 204));
         logTextArea.setRows(5);
         jScrollPane1.setViewportView(logTextArea);
@@ -433,7 +435,7 @@ public class UserInterface extends javax.swing.JFrame {
         robotLoggerTextArea.setEditable(false);
         robotLoggerTextArea.setBackground(new java.awt.Color(0, 0, 0));
         robotLoggerTextArea.setColumns(8);
-        robotLoggerTextArea.setFont(new java.awt.Font("Fira Sans", 0, 12)); // NOI18N
+        robotLoggerTextArea.setFont(new java.awt.Font("Fira Mono", 0, 11)); // NOI18N
         robotLoggerTextArea.setForeground(new java.awt.Color(255, 255, 102));
         robotLoggerTextArea.setRows(5);
         jScrollPane5.setViewportView(robotLoggerTextArea);
@@ -600,6 +602,7 @@ public class UserInterface extends javax.swing.JFrame {
         clearOrderButton.setEnabled(false);
 
         robotLoggerTextArea.setText("");
+        addToRobotLogger("processing", null);
 
         ArrayList<Point> locationsToVisit = new ArrayList<>();
         for (ItemOrder item : order){
@@ -661,11 +664,10 @@ public class UserInterface extends javax.swing.JFrame {
     }
 
     private static void addToLogger(String newMessage) {
-        StringBuilder loggerMessageBuilder = new StringBuilder();
-        loggerMessageBuilder.append(logTextArea.getText())
-                .append(System.lineSeparator())
-                .append(newMessage);
-        logTextArea.setText(loggerMessageBuilder.toString());
+        String loggerMessageBuilder = logTextArea.getText() +
+                System.lineSeparator() +
+                newMessage;
+        logTextArea.setText(loggerMessageBuilder);
     }
 
     private static void addToRobotLogger(String command, ItemOrder itemOrder) {
@@ -683,9 +685,14 @@ public class UserInterface extends javax.swing.JFrame {
                         .append("Qty: ").append(itemsTaken)
                         .append(System.lineSeparator());
                 }
-            case "delivered" -> {
+            case "delivered", "processing", "completed" -> {
                 loggerMessageBuilder.append(System.lineSeparator())
                         .append(command.toUpperCase())
+                        .append(System.lineSeparator());
+            }
+            default -> {
+                loggerMessageBuilder.append(System.lineSeparator())
+                        .append(command)
                         .append(System.lineSeparator());
             }
         }
@@ -695,7 +702,7 @@ public class UserInterface extends javax.swing.JFrame {
     private void addSelectedItemToOrderList() {
         if (order.size() == ORDER_SIZE_MAX) {
             maxSizeDialog.setVisible(true);
-            addToLogger("Maximum Order list size is reached");
+            addToLogger("Maximum Order List size was reached");
         } else {
             Optional<ItemOrder> optionalItem = getItemIfPresentInOrderList();
             int quantity = (int) qtySpinner.getValue();
@@ -704,10 +711,10 @@ public class UserInterface extends javax.swing.JFrame {
                 String name = selectedItem.split(" ")[0];
                 if (items.contains(selectedItem)) {
                     order.add(new ItemOrder(selectedItem, warehouse.getItemLocation(name), quantity, warehouse.getItem(name).weight()));
-                    addToLogger("Item  " + selectedItem.split(" ")[0] + " of quantity (" + quantity + ") added to order");
+                    addToLogger("Item  " + selectedItem.split(" ")[0] + " of quantity (" + quantity + ") was added to order");
                     updateOrderScrollPanel();
                 } else {
-                    addToLogger("Item is not present in the Item DB or wasn't selected");
+                    addToLogger("No such item in the Item DB or it wasn't selected");
                 }
             } else {
                 ItemOrder previousItem = optionalItem.get();
@@ -717,8 +724,8 @@ public class UserInterface extends javax.swing.JFrame {
                     String name = selectedItem.split(" ")[0];
                     order.remove(previousItem);
                     order.add(new ItemOrder(selectedItem, warehouse.getItemLocation(name), quantity, warehouse.getItem(name).weight()));
-                    String UPDATE_MESSAGE_MASK = "The quantity of item '%s' was updated (%d) -> (%d)";
-                    String updateMessage = String.format(UPDATE_MESSAGE_MASK, previousItem.name().split(" ")[0], previousItem.quantity(), quantity);
+                    String updateMessageMask = "The quantity of item '%s' was updated (%d) -> (%d)";
+                    String updateMessage = String.format(updateMessageMask, previousItem.name().split(" ")[0], previousItem.quantity(), quantity);
                     addToLogger(updateMessage);
                 }
             }
@@ -733,7 +740,7 @@ public class UserInterface extends javax.swing.JFrame {
     private void removeSelectedItemFromOrderList() {
         if (isOrderListFocused) {
             if (order.isEmpty()) {
-                addToLogger("Remove pressed, but the order list is empty");
+                addToLogger("'Remove' pressed, but the order list is empty");
             } else if (selectedItem != null){
 
                 if (items.contains(selectedItem)) {
@@ -745,7 +752,7 @@ public class UserInterface extends javax.swing.JFrame {
                     addToLogger("Item  " + selectedItem.split(" ")[0] + " removed from order");
                     updateOrderScrollPanel();
                 } else {
-                    addToLogger("Item is not present in the Item DB or wasn't selected");
+                    addToLogger("No such item in the Item DB or it wasn't selected");
                 }
             }
         } else {
@@ -766,7 +773,7 @@ public class UserInterface extends javax.swing.JFrame {
     private static void clearOrderList() {
         order.clear();
         updateOrderScrollPanel();
-        addToLogger("Order list was cleared");
+        addToLogger("Order List cleared");
     }
 
     private static Point getCurrentRobotLocation(Point indexes) {
@@ -774,16 +781,17 @@ public class UserInterface extends javax.swing.JFrame {
     }
 
     static class StepListener implements ActionListener {
-        private Point previousRobotCoords = new Point(0, 0);
 
         private static ItemOrder itemOrder = null;
         @Override
         public void actionPerformed(ActionEvent e) {
             if(!visualisation.isOrderFinished()){
-                previousRobotCoords = getCurrentRobotLocation(new Point(visualisation.getCurX(), visualisation.getCurY()));
+                Point previousRobotCoords = getCurrentRobotLocation(new Point(visualisation.getCurX(), visualisation.getCurY()));
+
                 visualisation.setStep(visualisation.getStep() + 1);
                 visualisation.setCurx(visualisation.getCurX() + 1);
                 visualisation.repaint();
+
                 Point currentRobotCoordinates = getCurrentRobotLocation(new Point(visualisation.getCurX(), visualisation.getCurY()));
                 if (previousRobotCoords != currentRobotCoordinates) {
                     Point indexesOfLocation = new Point(visualisation.getCurX(), visualisation.getCurY());
@@ -797,6 +805,7 @@ public class UserInterface extends javax.swing.JFrame {
                 visualisation.getTimer().stop();
                 clearOrderList();
                 addToLogger("Order is completed!");
+                addToRobotLogger("Completed", null);
 
                 addItemButton.setEnabled(true);
                 removeItemButton.setEnabled(true);
@@ -810,6 +819,7 @@ public class UserInterface extends javax.swing.JFrame {
             Point dispatchedArea = visualisation.getDispatchAreaLocation();
             if (dispatchedArea.equals(robotsCurrentPoint)) {
                 addToRobotLogger("Delivered", itemOrder);
+                addToLogger("Items delivered to Dispatched Area");
                 remainingCapacity = 10;
             }
         }
@@ -819,14 +829,16 @@ public class UserInterface extends javax.swing.JFrame {
             if (locationsToVisit.contains(currRobotLocation)) { // if robot current location is the location of the item
                 // find item from the orderList
                 itemOrder = order.stream()
-                        .filter(item -> item.location().equals(currRobotLocation)).findFirst().get();
+                        .filter(item -> item.location().equals(currRobotLocation))
+                        .findFirst()
+                        .orElse(new ItemOrder("No name", new Point(0, 0), 0, 0));
 
                 itemsTaken = Math.min(remainingCapacity / itemOrder.weight(), itemOrder.quantity());
 
                 order.remove(itemOrder);
                 order.add(new ItemOrder(itemOrder.name(), itemOrder.location(), itemOrder.quantity() - itemsTaken, itemOrder.weight()));
 
-                String message = String.format("Item taken. Name: %s, quantity: %d", itemOrder.name().split(" ")[0], itemsTaken);
+                String message = String.format("Item taken. Name: %s, Quantity: %d", itemOrder.name().split(" ")[0], itemsTaken);
                 addToLogger(message);
 
                 addToRobotLogger("Taken", itemOrder);
@@ -835,4 +847,59 @@ public class UserInterface extends javax.swing.JFrame {
             }
         }
     }
+
+    private static final String robotASCIIEasterEgg = """
+
+
+
+
+▒█▓▒
+    ▓
+   █████
+ █████████
+█░▓░███░▓░█
+███████████
+ ██▓▒▒▒▓██
+   ░░░░░
+ ▒▒▓▓▓▓▓▒▒
+ ▓▒█████▒▓
+▒▓ █████ ▓▒
+▒▓ ▓▓ ▓▓ ▓▒
+   ▓▓ ▓▓
+
+
+  ╔════╗
+  ║╔╗╔╗║
+  ╚╝║║╚╝
+  ──║║──
+  ──║║──
+  ──╚╝──
+  ─╔═══╗
+  ─║╔══╝
+  ─║╚══╗
+  ─║╔══╝
+  ─║╚══╗
+  ─╚═══╝
+  ─╔═══╗
+  ─║╔═╗║
+  ─║║─║║
+  ─║╚═╝║
+  ─║╔═╗║
+  ─╚╝─╚╝
+  ─╔═╗╔═╗
+  ─║║╚╝║║
+  ─║╔╗╔╗║
+  ─║║║║║║
+  ─║║║║║║
+  ─╚╝╚╝╚╝
+  
+  ─╔═══╗─
+  ─║╔══╝─
+  ─║╚══╗─
+  ─╚══╗║─
+  ─╔══╝║─
+  ─╚═══╝─
+
+
+            """;
 }
