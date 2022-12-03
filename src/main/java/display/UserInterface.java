@@ -598,6 +598,7 @@ public class UserInterface extends javax.swing.JFrame {
         clearOrderButton.setEnabled(false);
 
         robotLoggerTextArea.setText("");
+        addToLogger("Robot started processing order");
         addToRobotLogger("processing", null);
 
         ArrayList<Point> locationsToVisit = new ArrayList<>();
