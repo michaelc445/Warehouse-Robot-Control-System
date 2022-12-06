@@ -15,6 +15,7 @@ public class Main {
     private static final Point END_POINT = new Point(0, 6);
 
     public static Warehouse warehouse;
+    public static UserInterface UI;
 
     public static void main(String[] args) throws Exception {
         Parser parser = new Parser();
@@ -44,10 +45,10 @@ public class Main {
 
         warehouse.addItem("Chainsaw",new Point(36,2),4);
 
-        launchUI();
+        launchUI(args.length == 0);
     }
 
-    private static void launchUI() throws InstantiationException, IllegalAccessException, javax.swing.UnsupportedLookAndFeelException {
+    private static void launchUI(boolean isVisible) throws InstantiationException, IllegalAccessException, javax.swing.UnsupportedLookAndFeelException {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -65,7 +66,8 @@ public class Main {
         }
         //</editor-fold>
 
+        UI = new UserInterface();
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new UserInterface().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> UI.setVisible(isVisible));
     }
 }
