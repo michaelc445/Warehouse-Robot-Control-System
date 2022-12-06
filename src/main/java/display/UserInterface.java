@@ -41,7 +41,7 @@ public class UserInterface extends javax.swing.JFrame {
 
     boolean isOrderListFocused = false;
 
-    private static VisualizationTool visualisation;
+    private static volatile VisualizationTool visualisation;
 
     int emulationSpeed = 500;
 
@@ -500,6 +500,10 @@ public class UserInterface extends javax.swing.JFrame {
     }
 
     private void processOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        processOrder();
+    }
+
+    void processOrder() {
         if (order.isEmpty()) {
             addToLogger("Empty order. Cannot process the order!");
         } else if (visualisation == null) {
@@ -580,7 +584,7 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JPanel orderSystemPanel;
     private javax.swing.JButton processOrderButton;
     private javax.swing.JLabel qtyLabel;
-    private javax.swing.JSpinner qtySpinner;
+    private static javax.swing.JSpinner qtySpinner;
     private static javax.swing.JButton removeItemButton;
     private static javax.swing.JTextArea robotLoggerTextArea;
     private javax.swing.JLabel selectItemHintLabel;
@@ -698,7 +702,7 @@ public class UserInterface extends javax.swing.JFrame {
         robotLoggerTextArea.setText(loggerMessageBuilder.toString());
     }
 
-    private void addSelectedItemToOrderList() {
+    void addSelectedItemToOrderList() {
         if (order.size() == ORDER_SIZE_MAX && order.stream().noneMatch(item -> item.name().equals(selectedItem.split(",")[0]))) {
             maxSizeDialog.setVisible(true);
             addToLogger("Maximum Order List size was reached");
@@ -737,7 +741,7 @@ public class UserInterface extends javax.swing.JFrame {
         return order.stream().filter(itemOrder -> itemOrder.name().equals(selectedItem)).findFirst();
     }
 
-    private void removeSelectedItemFromOrderList() {
+    void removeSelectedItemFromOrderList() {
         if (isOrderListFocused) {
             if (order.isEmpty()) {
                 addToLogger("'Remove' pressed, but the order list is empty");
@@ -759,7 +763,7 @@ public class UserInterface extends javax.swing.JFrame {
         }
     }
 
-    private void changeEmulationSpeedBySliderVal() {
+    void changeEmulationSpeedBySliderVal() {
         emulationSpeed = emulationSpeedSlider.getValue();
         if (visualisation != null) {
             if (emulationSpeed == emulationSpeedSlider.getMaximum()) {
@@ -769,15 +773,12 @@ public class UserInterface extends javax.swing.JFrame {
         }
     }
 
-    private static void clearOrderList() {
+    static void clearOrderList() {
         order.clear();
         updateOrderScrollPanel();
         addToLogger("Order List cleared");
     }
 
-    private static Point getCurrentRobotLocation(Point indexes) {
-        return visualisation.getPath().get(indexes.getY()).getPath().get(indexes.getX());
-    }
 
     static class StepListener implements ActionListener {
 
@@ -810,9 +811,13 @@ public class UserInterface extends javax.swing.JFrame {
                 addItemButton.setEnabled(true);
                 removeItemButton.setEnabled(true);
                 clearOrderButton.setEnabled(true);
-
+                visualisation = null;
                 itemOrder = null;
             }
+        }
+
+        private static Point getCurrentRobotLocation(Point indexes) {
+            return visualisation.getPath().get(indexes.getY()).getPath().get(indexes.getX());
         }
 
         private static void monitorDroppingItems(Point robotsCurrentPoint) {
@@ -846,6 +851,43 @@ public class UserInterface extends javax.swing.JFrame {
                 remainingCapacity -= itemsTaken * itemOrder.weight();
             }
         }
+    }
+
+    public String getLoggerText() {
+        return logTextArea.getText();
+    }
+
+    public String getRobotLoggerText() {
+        return robotLoggerTextArea.getText();
+    }
+
+    public void setQuantity(int quantity) {
+        qtySpinner.setValue(quantity);
+    }
+
+    public int getQuantity() {
+        return (int) qtySpinner.getValue();
+    }
+
+    public Set<ItemOrder> getOrderList() {
+        return order;
+    }
+
+    public VisualizationTool getVisualisation() {
+        return visualisation;
+    }
+
+    public void setEmulationSpeedToMinimum() {
+        visualisation.getTimer().setDelay(0);
+    }
+
+    public void setMaxDialogInvisible() {
+        maxSizeDialog.setVisible(false);
+        this.remove(maxSizeDialog);
+    }
+
+    public void clearContentOfOrderList() {
+        order.clear();
     }
 
     private static final String robotASCIIEasterEgg = """
