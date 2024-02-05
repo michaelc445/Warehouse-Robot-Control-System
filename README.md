@@ -1,7 +1,7 @@
 # Warehouse Robotic Control System
 
 ## Demo (Click to View)
-[![Watch the video](https://filedn.eu/lfgrnWJ01yfHacQuQP84g4X/Team%20Software%20Project%20-%20Tema%205%20-%20WRCS/WRCS.png)]([https://youtu.be/vt5fpE0bzSY](https://filedn.eu/lfgrnWJ01yfHacQuQP84g4X/Team%20Software%20Project%20-%20Tema%205%20-%20WRCS/team5_demo_d4.mp4))
+[![Watch the video](https://filedn.eu/lfgrnWJ01yfHacQuQP84g4X/Team%20Software%20Project%20-%20Tema%205%20-%20WRCS/WRCS.png)](https://filedn.eu/lfgrnWJ01yfHacQuQP84g4X/Team%20Software%20Project%20-%20Tema%205%20-%20WRCS/team5_demo_d4.mp4)
 
 ## Introduction
 The Warehouse Robotic Control System (WRCS) is a software application that automates warehouse processes using a warehouse robot. In this README, we will focus on the technical implementation aspects of the WRCS.
